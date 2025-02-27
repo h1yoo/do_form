@@ -1,0 +1,61 @@
+var Integration = Backbone.View.extend({
+		initialize : function(options){
+			this.options = options || {};
+			this.docModel = this.options.docModel;
+			this.variables = this.options.variables;
+			this.infoData = this.options.infoData;
+		},
+
+		render : function(){
+		var self = this;
+		$(".startDate input").on("change",function(){self.calYear();});
+
+		},
+
+		calYear : function () {
+			var self = this;
+			var startDate = $(".startDate input").val();
+
+			var today = new Date();
+
+			var startYear = startDate.split('-')[0];
+			var startMonth = startDate.split('-')[1];
+			var startDay = startDate.split('-')[2].split('(')[0];
+
+			var endYear = today.getFullYear();
+			var endMonth = today.getMonth();
+			var endDay = today.getDate();
+
+			var da1 = new Date(startYear, startMonth-1, startDay);
+			var da2 = new Date(endYear, endMonth, endDay);
+
+			var dif = da2 - da1;
+			var cDay = 24 * 60 * 60 * 1000;
+
+			var calcYear = parseInt((dif/cDay)/365);
+			
+			$(".calcYear input").val(parseInt(calcYear+1)+"년");
+ 			
+ 		},
+
+		renderViewMode : function(){			
+		},
+		
+		onEditDocument : function(){
+			this.render();
+		},
+
+		beforeSave :function() {			
+			
+		},
+		afterSave :function() {
+			
+		},		
+		validate :function() {
+			return true;
+		},
+		getDocVariables : function(){
+			/* getDocVariables 사용 하려면 return 소스 코드 구현 */ 
+		}
+	});
+	return Integration;

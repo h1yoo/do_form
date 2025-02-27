@@ -1,0 +1,17 @@
+<tbody custom-official-id="tbody2">
+
+<p id="footerText> **발신공문에 추가
+
+<style type="text/css">
+#footerText span{
+font-size : 35px !important;
+font-weight: bold !important;
+}
+
+#footerText img{
+right : -55px !important;
+top : 55px !important;
+width : 110px !important;
+height : 110px !important;
+}
+</style>

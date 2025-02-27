@@ -1,0 +1,51 @@
+var $ = require("jquery");
+var app = require("app");
+var Backbone = require("backbone");
+var _ = require('underscore');
+
+
+/* ------------------------------------------ PlusMinusRow.js Start ------------------------------------------ */
+
+var Integration = Backbone.View.extend({
+	initialize : function(options){
+		this.options = options || {};
+		this.docModel = this.options.docModel;
+		this.variables = this.options.variables;
+		this.infoData = this.options.infoData;
+	},
+	
+	render : function() {
+		var self = this;
+		self.setSelect();
+		
+		$('.SelectZone input[name="editorForm_7"]').on('change', function(){
+				self.setSelect();
+		
+				console.log("AAA");
+		});
+			
+		$('.viewModeHiddenPart').show();
+		
+	},
+	
+	setSelect : function() {
+			var self = this;
+			var select = $('.SelectZone input:checked').val();
+			$('.SelectVal').eq(0).text(select);
+			$('.SelectVal').eq(1).text(select);
+			if(select =='복직'){
+			$('.regDate').show();
+			}
+			else{
+			$('.regDate').hide();
+			}
+		},
+		
+	renderViewMode : function(){$('.viewModeHiddenPart').hide();},
+	onEditDocument : function(){this.render();},
+	beforeSave :function() {$('.viewModeHiddenPart').hide();},
+	afterSave :function() {$('.viewModeHiddenPart').hide();},
+	validate :function() {return true;},
+	getDocVariables : function(){}
+});
+return Integration;

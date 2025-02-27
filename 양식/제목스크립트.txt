@@ -1,0 +1,44 @@
+var Integration = Backbone.View.extend({
+		initialize : function(options){
+			this.options = options || {};
+			this.docModel = this.options.docModel;
+			this.variables = this.options.variables;
+			this.infoData = this.options.infoData;
+		},
+		render : function(){			
+		},
+		renderViewMode : function(){			
+		},
+		
+		onEditDocument : function(){			
+		},
+		beforeSave :function() {			
+			var var1 = $("#subject").val();
+			var var2 = "기안용지_"+var1;
+			$('#var_title').text(var2);
+		},
+		afterSave :function() {
+			
+		},		
+		validate :function() {
+			return true;
+		},
+		getDocVariables : function(){
+			/* getDocVariables 사용 하려면 return 소스 코드 구현 */ 
+		}
+	});
+	return Integration;
+
+
+
+title은 div태그로 감싼뒤 display:none;
+
+
+=====휴가신청서 양식 제목 ======
+        beforeSave : function() {
+                var sDate = $('#startDate').val(),
+                     eDate = $('#endDate').val();
+
+                var title ="휴가계 (" + sDate + " ~ " + eDate + ")";
+                $("#subject").val(title);
+        },

@@ -1,0 +1,31 @@
+var Integration = Backbone.View.extend({
+		initialize : function(options){
+			this.options = options || {};
+			this.docModel = this.options.docModel;
+			this.variables = this.options.variables;
+			this.infoData = this.options.infoData;
+		},
+		render : function(){			
+		},
+		renderViewMode : function(){			
+		},
+		
+		onEditDocument : function(){			
+		},
+		beforeSave :function() {			
+			var var1 = $(".var1 select option:selected").val().split(' ')[0];
+			var var2 = $('#tmp_title').val();
+ 			var title = var1 + " " var2;
+			$("#subject").val(title);	
+		},
+		afterSave :function() {
+			
+		},		
+		validate :function() {
+			return true;
+		},
+		getDocVariables : function(){
+			/* getDocVariables 사용 하려면 return 소스 코드 구현 */ 
+		}
+	});
+	return Integration;

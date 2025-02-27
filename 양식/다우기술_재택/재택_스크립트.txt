@@ -1,0 +1,35 @@
+var Integration = Backbone.View.extend({
+		initialize : function(options){
+			this.options = options || {};
+			this.docModel = this.options.docModel;
+			this.variables = this.options.variables;
+			this.infoData = this.options.infoData;
+		},
+		render : function(){			
+		},
+		renderViewMode : function(){			
+		},
+		
+		onEditDocument : function(){			
+		},
+		beforeSave :function() {			
+			//재택근무 업무일지(날짜)_부서_사번_근무자(명)			
+			var formName = "업무일지",
+                            today= $('#editorForm_7').val(),
+				employeeNumber = $('#empNo').val(),
+				drafterDeptName = this.docModel.drafterDeptName,
+				drafterName = this.docModel.drafterName;						
+			var title = formName+"_"+today+"_"+drafterDeptName+"_"+employeeNumber+"_"+drafterName;
+			$("#subject").val(title);		
+		},
+		afterSave :function() {
+			
+		},		
+		validate :function() {
+			return true;
+		},
+		getDocVariables : function(){
+			/* getDocVariables 사용 하려면 return 소스 코드 구현 */ 
+		}
+	});
+	return Integration;
