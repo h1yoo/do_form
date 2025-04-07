@@ -36,6 +36,9 @@
     			
     			$('.minus1').off('click'+EVENT_NS);
     			$('.minus1').on('click'+EVENT_NS, $.proxy(this.minusDetailRow, this));
+				
+				self.addRow(); // 페이지 로딩 시 카드+내역 1세트 자동 추가
+				self.calculate();    // 바로 계산 실행!
             },
             /* 카드 추가 */
             addRow : function(){
@@ -60,7 +63,7 @@
             	$('#dynamic_table1_'+dataId).closest('.detailCopyRow').remove();
             	self.calculate();
             },
-            /* 상세 추가 */
+            /* 내역 추가 */
             addDetailRow : function(e){
             	var self = this;
     			var target = e.currentTarget;
@@ -69,7 +72,7 @@
     			var cloneTr1 = self.getTemplateByClone($('#dynamic_table1 .bodyRow'));
     			$('#dynamic_table1_'+rowNum+' tbody').append(cloneTr1);
             },
-            /* 상세 삭제 */
+            /* 내역 삭제 */
     		minusDetailRow : function(e){
     			var self = this;
     			var target = e.currentTarget;
