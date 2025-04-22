@@ -1,0 +1,82 @@
+
+var $ = require("jquery");
+var app = require("app");
+var Backbone = require("backbone");
+var _ = require('underscore');
+
+
+
+var Integration = Backbone.View.extend({
+    initialize : function(options){
+        this.options = options || {};
+        this.docModel = this.options.docModel;
+        this.variables = this.options.variables;
+        this.infoData = this.options.infoData;
+    },
+    
+    render : function() {
+        var self = this;
+        $('.viewModeHiddenPart').show();
+         
+		$(".period input").on("change",function(){
+            self.calDay();
+
+            console.log("start:", $('.period input').eq(0).val());
+            console.log("end:", $('.period input').eq(1).val());
+        });
+
+    },
+
+    calDay : function () {
+        var self = this;
+    
+        var startDate = moment($('.period input').eq(0).val(), "YYYY-MM-DD");
+        var endDate = moment($('.period input').eq(1).val(), "YYYY-MM-DD");
+        $(".dayWarning").text("※ 유효하지 않은 날짜입니다.").css("color", "red");
+    
+        if (!startDate.isValid() || !endDate.isValid() || startDate > endDate) {
+            $(".calDay input").val("");
+            $(".dayWarning").html("※ 유효하지 않은 날짜입니다.<br><br>").css("color", "red");
+            return;
+        }
+    
+        var dayDiff = endDate.diff(startDate, 'days') + 1;
+    
+        // 결과 표기
+        if (dayDiff > 0) {
+            $(".calDay input").val(dayDiff);
+        } else {
+            $(".calDay input").val("");
+        }
+    
+        // 5일 초과 체크
+        if (dayDiff > 5) {
+            $(".dayWarning").html("※ 최대 선택일수가 초과되었습니다.<br><br>").css("color", "red");
+        } else {
+            $(".dayWarning").text("");
+        }
+    },
+    
+    renderViewMode : function(){$('.viewModeHiddenPart').hide();},
+    onEditDocument : function(){this.render();},
+    beforeSave :function() {$('.viewModeHiddenPart').hide();},
+    afterSave :function() {$('.viewModeHiddenPart').hide();},
+    validate :function() {
+        try {
+            // 시작일과 종료일 비교 로직 추가
+            var startDate = moment($('.period input').eq(0).val(), "YYYY-MM-DD"); // 시작일
+            var endDate = moment($('.period input').eq(1).val(), "YYYY-MM-DD");   // 종료일
+
+            if (startDate.isValid() || endDate.isValid() || startDate.isAfter(endDate)) {
+                throw new Error("경조휴가 날짜가 잘못 선택되었습니다.");
+            }
+
+            return true;
+        }   catch (error) {
+            $.goMessage(error.message)
+            return false;
+        }        
+    },
+    getDocVariables : function(){}
+});
+return Integration;
