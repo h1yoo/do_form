@@ -1,4 +1,3 @@
-
 var $ = require("jquery");
 var app = require("app");
 var Backbone = require("backbone");
@@ -32,7 +31,6 @@ var Integration = Backbone.View.extend({
     
         var startDate = moment($('.period input').eq(0).val(), "YYYY-MM-DD");
         var endDate = moment($('.period input').eq(1).val(), "YYYY-MM-DD");
-        $(".dayWarning").text("※ 유효하지 않은 날짜입니다.").css("color", "red");
     
         if (!startDate.isValid() || !endDate.isValid() || startDate > endDate) {
             $(".calDay input").val("");
