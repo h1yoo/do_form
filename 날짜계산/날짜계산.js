@@ -34,7 +34,8 @@ var Integration = Backbone.View.extend({
     
         if (!startDate.isValid() || !endDate.isValid() || startDate > endDate) {
             $(".calDay input").val("");
-            $(".dayWarning").html("※ 유효하지 않은 날짜입니다.<br><br>").css("color", "red");
+            // $(".dayWarning").html("※ 유효하지 않은 날짜입니다.<br><br>").css("color", "red");
+            $(".dayWarning").html("<br>").css("color", "red");
             return;
         }
     
@@ -64,9 +65,10 @@ var Integration = Backbone.View.extend({
             // 시작일과 종료일 비교 로직 추가
             var startDate = moment($('.period input').eq(0).val(), "YYYY-MM-DD"); // 시작일
             var endDate = moment($('.period input').eq(1).val(), "YYYY-MM-DD");   // 종료일
+            var dayDiff = endDate.diff(startDate, 'days') + 1;
 
-            if (startDate.isValid() || endDate.isValid() || startDate.isAfter(endDate)) {
-                throw new Error("경조휴가 날짜가 잘못 선택되었습니다.");
+            if (startDate.isValid() || endDate.isValid() || startDate.isAfter(endDate) || dayDiff > 5) {
+                throw new Error("경조휴가 날짜를 다시 선택해주세요");
             }
 
             return true;
