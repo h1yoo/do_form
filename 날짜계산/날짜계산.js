@@ -67,6 +67,8 @@ var Integration = Backbone.View.extend({
             var endDate = moment($('.period input').eq(1).val(), "YYYY-MM-DD");   // 종료일
             var dayDiff = endDate.diff(startDate, 'days') + 1;
 
+            // 날짜 형식이 잘못되었거나 비어 있는 경우 |또는| 시작일이 종료일보다 뒤에 있는 경우 |또는| dayDiff가 5보다 큰 경우
+            // 셋 중 하나라도 참이면 Error를 던짐 
             if (startDate.isValid() || endDate.isValid() || startDate.isAfter(endDate) || dayDiff > 5) {
                 throw new Error("경조휴가 날짜를 다시 선택해주세요");
             }
