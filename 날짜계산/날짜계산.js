@@ -73,9 +73,13 @@ var Integration = Backbone.View.extend({
                 throw new Error("경조휴가 날짜를 다시 선택해주세요");
             }
 
+            // 날짜가 유효하고 순서도 올바르고 dayDiff도 5 이하이면 true 반환
             return true;
         }   catch (error) {
+            // throw new Error(...)로 던져진 예외나, validateTypeCheck() 내부에서 발생한 오류를 잡아냄
             $.goMessage(error.message)
+
+            // return false;를 통해 검증 실패를 알림
             return false;
         }        
     },
