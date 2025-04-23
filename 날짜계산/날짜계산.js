@@ -20,8 +20,8 @@ var Integration = Backbone.View.extend({
 		$(".period input").on("change",function(){
             self.calDay();
 
-            console.log("start:", $('.period input').eq(0).val());
-            console.log("end:", $('.period input').eq(1).val());
+            // console.log("start:", $('.period input').eq(0).val());
+            // console.log("end:", $('.period input').eq(1).val());
         });
 
     },
