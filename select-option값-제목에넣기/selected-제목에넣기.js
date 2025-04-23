@@ -6,22 +6,22 @@ var _ = require('underscore');
 
 var Integration = Backbone.View.extend({
   initialize : function(options){
-    this.options = options || {};
-    this.docModel = this.options.docModel;
-    this.variables = this.options.variables;
-    this.infoData = this.options.infoData;
-},
+        this.options = options || {};
+        this.docModel = this.options.docModel;
+        this.variables = this.options.variables;
+        this.infoData = this.options.infoData;
+    },
 
-render : function() {
-    var self = this;
-    $('.viewModeHiddenPart').show();
+    render : function() {
+        var self = this;
+        $('.viewModeHiddenPart').show();
 
-    $(".selectedSub select").on("change", function () {
-        self.checkInputSub();
-    });
-  },	
+        $(".selectedSub select").on("change", function () {
+            self.checkInputSub();
+        });
+    },	
 
-  
+
     checkInputSub : function () {
         var selected = $(".selectedSub select").val(); // 선택된 옵션값
         var inputVal = $('#tmp_title input').val(); // 기존 입력된 값
@@ -49,7 +49,7 @@ render : function() {
             $("#tmp_title input").val(inputVal).prop("readonly", false);
         }
     },
-  
+
     renderViewMode : function(){$('.viewModeHiddenPart').hide();},
     onEditDocument : function(){this.render();},
     beforeSave :function() {
