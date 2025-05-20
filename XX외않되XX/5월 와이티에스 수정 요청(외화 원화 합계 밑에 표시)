@@ -5,14 +5,11 @@
 		$(".price input, .amount input, .var1 input, .cur input").on("change",function(e){self.calAmount(e);
 		self.calAmount(e);
 		self.calAmount_total(e);
-
-    self.calSumCur();
 		});
-		// $(".cur input").on("change",function(){
-    //   self.calAmount();
-    //   self.calAmount_total();
-    //   self.calSumCur();
-    // });
+		$(".cur input").on("change",function(){
+      self.calAmount();
+      self.calAmount_total();
+    });
 		//행 추가/삭제
 		PlusMinusRow({
 				tableId : "dynamic_table1",
@@ -24,32 +21,21 @@
 				minusRowCallback : function() {
 				self.calAmount();
 				self.calAmount_total();
-				self.calSumCur();
 				},
 				plusRowCallback : function() {}
 		 });
 	},
-
-  /*
-   * var1 = 환율
-   * amount = 수량(set)
-   * price = 단가(외화)
-   * cur = 구매가
-   * 
-   * sum_cur -> .text = 총청구액 원화
-   * sum_cur_input input -> .val = 총청구액 외화
-   */
 	
   //합계 함수
   total : function(a) {
     var total_sum = 0;
     var total = $(a).each(function(i,t){
-    var total_val = $(t).val().replace(/,/g,"");
-    if(total_val == ""){
-      total_val=0;
-    }
-    total_sum = total_sum + Number(total_val);
-      });
+      var total_val = $(t).val().replace(/,/g,"");
+      if(total_val == ""){
+        total_val=0;
+      }
+      total_sum = total_sum + Number(total_val);
+    });
     return total_sum;
   },
 
@@ -63,19 +49,24 @@
 	},
 	
   calAmount_total : function() {
-		var total_calAmount = this.total('.cur input')
-		$('.sum_cur').text(GO.util.numberWithCommas(total_calAmount));
+		// var total_calAmount = this.total('.cur input');
+		// $('.sum_cur').text(GO.util.numberWithCommas(total_calAmount));
     
-		var total_calPrice = this.total('.price input')
-    $(".sum_cur_input input").val(GO.util.numberWithCommas(total_calPrice));
+    // // html > span 태그 + class 추가함
+		// var total_calPrice = this.total('.price input');
+    // $(".sum_price input").val(GO.util.numberWithCommas(total_calPrice));
+
+    // .total() 때문인지 행삭제 시 삭제된 데이터가 반영되지 않는 오류 발생 > 아래 코드로 수정
+		var sum_cur = 0;
+		var sum_price = 0;
+
+    $('.cur input').each(function(i,e){
+      sum_cur += Number($(e).val().replace(/,/g, ""));
+    })
+		$('.sum_cur').text(GO.util.numberWithCommas(sum_cur));
+
+    $('.price input').each(function(i,e){
+      sum_price += Number($(e).val().replace(/,/g, ""));
+    })
+		$('.sum_price input').val(GO.util.numberWithCommas(sum_price));
 	},
-
-  // calSumCur : function() {
-  //   	var sum_cur = 0;
-  
-  //     $(".cur input").each(function(i,e){
-  //       sum_cur += Number($(e).val().replace(/,/g, ""));
-  //     })
-
-  //     $(".sum_cur").val(GO.util.numberWithCommas(sum_cur));
-  // },
