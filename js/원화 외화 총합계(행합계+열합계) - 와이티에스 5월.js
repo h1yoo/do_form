@@ -355,7 +355,7 @@ var Integration = Backbone.View.extend({
     $('.price input').each(function(i,e){
       sum_price += Number($(e).val().replace(/,/g, ""));
     });
-    $(".sum_price input").val(GO.util.numberWithCommas(sum_price));
+    $(".sum_price input").val(GO.util.numberWithCommas(sum_price.toFixed(2)));
   },
 
 	renderViewMode : function(){$('.viewModeHiddenPart').hide();},
