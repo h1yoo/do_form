@@ -1,4 +1,27 @@
-    $("#dynamic_table2 .prePrice input, #dynamic_table2 .exchangeRate2 input, #dynamic_table2 .foreign input").on("change", function () {
+    PlusMinusRow({
+            tableId : "dynamic_table2",
+            plusBtnId : "plus2",
+            minusBtnId : "minus2",
+            copyRowClass : "copyRow2",
+            copyRowNoClass : "copyRowNo2",
+            rowspanClass : "rowspanTd2",
+            minusRowCallback : function() {
+              self.calOverPrice2(".prePrice", ".prePrice input", ".calWon", ".overPrice");
+              self.calExWon2(".exchangeRate2 input", ".foreign input", ".calWon");
+              self.calSumPrice('#dynamic_table2 .prePrice input', '#dynamic_table2 .sum_prePrice');
+              self.calSumPrice('#dynamic_table2 .foreign input', '#dynamic_table2 .sum_foreign');
+              self.calSumPriceText('#dynamic_table2 .calWon', '#dynamic_table2 .sum_calWon');
+            },
+            plusRowCallback : function() {
+              self.calOverPrice2(".prePrice", ".prePrice input", ".calWon", ".overPrice");
+              self.calExWon2(".exchangeRate2 input", ".foreign input", ".calWon");
+              self.calSumPrice('#dynamic_table2 .prePrice input', '#dynamic_table2 .sum_prePrice');
+              self.calSumPrice('#dynamic_table2 .foreign input', '#dynamic_table2 .sum_foreign');
+              self.calSumPriceText('#dynamic_table2 .calWon', '#dynamic_table2 .sum_calWon');
+            }
+    });
+
+$("#dynamic_table2 .prePrice input, #dynamic_table2 .exchangeRate2 input, #dynamic_table2 .foreign input").on("change", function () {
       self.calOverPrice2(".prePrice", ".prePrice input", ".calWon", ".overPrice");
 
       self.calExWon2(".exchangeRate2 input", ".foreign input", ".calWon");
