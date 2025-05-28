@@ -1,0 +1,23 @@
+calOverPrice2: function (prePriceEl, prePriceValEl, wonEl, overPriceEl) {
+  $("#dynamic_table2 tr").each(function () {
+    const $tr = $(this);
+
+    // 같은 tr 안에 있는 값만 선택
+    const preInput = $tr.find(prePriceValEl);
+    const calWonEl = $tr.find(wonEl);
+    const overPriceTarget = $tr.find(overPriceEl);
+
+    // 셋 중 하나라도 없으면 skip
+    if (preInput.length === 0 || calWonEl.length === 0 || overPriceTarget.length === 0) return;
+
+    // 값 추출 및 정제
+    let prePrice = parseFloat(preInput.val()?.replace(/,/g, '')) || 0;
+    let calPrice = parseFloat(calWonEl.text()?.replace(/,/g, '')) || 0;
+
+    // 계산
+    let over = calPrice > prePrice ? calPrice - prePrice : 0;
+
+    // 반영
+    overPriceTarget.text(GO.util.numberWithCommas(over));
+  });
+}
