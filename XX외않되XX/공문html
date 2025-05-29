@@ -1,0 +1,17 @@
+
+			<tr>
+				<td colspan="2" class="BCel noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l" style="">
+					<div style="display: flex; flex-wrap: nowrap;">
+						<span style="font-family: &quot;맑은 고딕&quot;; font-size: 9pt;">
+							시행&nbsp; &nbsp;
+							<span unselectable="on" contenteditable="false" class="comp_wrap" data-cid="3" data-dsl="{{label:docNo}}" data-wrapper="" style="max-width: 80px;" data-value="" data-autotype=""><span class="comp_item">문서번호</span><span contenteditable="false" class="comp_active" style="display:none;"> <span class="Active_dot1"></span><span class="Active_dot2"></span> <span class="Active_dot3"></span><span class="Active_dot4"></span> </span> <span contenteditable="false" class="comp_hover" data-content-protect-cover="true" data-origin="3"> <a contenteditable="false" class="ic_prototype ic_prototype_trash" data-content-protect-cover="true" data-component-delete-button="true"></a> </span> </span>
+						</span>
+					</div>
+				</td>
+				<td colspan="2" class="BCel noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l" style="">
+					<div style="display: flex; flex-wrap: nowrap;">
+						(<span unselectable="on" contenteditable="false" class="comp_wrap" data-cid="4" data-dsl="{{label:draftDate}}" data-wrapper="" style="max-width: 80px;" data-value="" data-autotype=""><span class="comp_item">기안일</span><span contenteditable="false" class="comp_active" style="display:none;"> <span class="Active_dot1"></span><span class="Active_dot2"></span> <span class="Active_dot3"></span><span class="Active_dot4"></span> </span> <span contenteditable="false" class="comp_hover" data-content-protect-cover="true" data-origin="4"> <a contenteditable="false" class="ic_prototype ic_prototype_trash" data-content-protect-cover="true" data-component-delete-button="true"></a> </span> </span>)
+						접수
+					</div>
+				</td>
+			</tr>
