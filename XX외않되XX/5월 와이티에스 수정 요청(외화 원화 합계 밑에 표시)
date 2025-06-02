@@ -1,117 +1,27 @@
-render : function() {
-		var self = this;
-		$('.viewModeHiddenPart').show();
-		$(".price input, .amount input, .var1 input").on("change",function(e){
-      self.calAmount(e);
-  		self.calAmount_total(e);
-		});
-		$(".cur input").on("change",function(){
-      // self.calTotal();
-      self.calAmount();
-      self.calAmount_total();
-    });
-		//행 추가/삭제
-		PlusMinusRow({
-				tableId : "dynamic_table1",
-				plusBtnId : "plus1", 
-				minusBtnId : "minus1",
-				copyRowClass : "copyRow1",
-				copyRowNoClass : "copyRowNo1",
-				rowspanClass : "rowspanTd1",
-				minusRowCallback : function() {
-          // self.calTotal();
-          self.calAmount();
-          self.calAmount_total();
-				},
-				plusRowCallback : function() {}
-		 });
-	},
-	
-  // //합계 함수
-  // total : function(a) {
-  //   var total_sum = 0;
-  //   var total = $(a).each(function(i,t){
-  //     var total_val = $(t).val().replace(/,/g,"");
-  //     if(total_val == ""){
-  //       total_val=0;
-  //     }
-  //     total_sum = total_sum + Number(total_val);
-  //   });
-  //   return total_sum;
-  // },
 
-	// calAmount : function (e) {
-	// 	var tg = $(e.currentTarget);
-	// 	var var1 = tg.closest('tr').find('.var1 input').val().replace(/,/g,'') || 0;
-	// 	var amount = tg.closest('tr').find('.amount input').val().replace(/,/g,'') || 0;
-	// 	var price = tg.closest('tr').find('.price input').val().replace(/,/g,'') || 0;
-	// 	var cur = Number(var1) * Number(amount) * Number(price);
-	// 	tg.closest('tr').find('.cur input').val(GO.util.numberWithCommas(cur));
-	// },
-  // // 각 행 합계 구하는 함수
-  // // calTotal : function (calClassEL, calEL) {
-  // //   $("#dynamic_table1 tr").each(function(i, e){
-  // //     if ($(e).find(calClassEL)[0]) {
-  // //       var amount = parseInt($(e).find(calEL).val().replace(/,/g, "")) || 0;
-  // //       // var Amount2_2 = parseInt($(e).find(".Amount2-2 input").val().replace(/,/g, "")) || 0;
-        
-  // //       var totalAmount =+ amount;
-
-  // //       $(e).find(calEL).val(GO.util.numberWithCommas(totalAmount));
-  // //     }
-  // //   });
-  // // },
-	
-  // calAmount_total : function() {
-	// 	var total_calAmount = this.total('.cur input');
-	// 	$('.sum_cur').text(GO.util.numberWithCommas(total_calAmount));
-    
-  //   // html > span 태그 + class 추가함
-	// 	var total_calPrice = this.total('.price input');
-  //   $(".sum_price input").val(GO.util.numberWithCommas(total_calPrice));
-
-  //   // 이게 문제가 아니라 minusRowCallback 이게 제대로 안 먹고 있는 것 같음
-  //   // // .total() 때문인지 행삭제 시 삭제된 데이터가 반영되지 않는 오류 발생 > 아래 코드로 수정 ??? 그래도 행 삭제하면 삭제된 데이터가 반영되지 않음 .. 뭐가 문제인지 모르겠음
-	// 	// var sum_cur = 0;
-	// 	// var sum_price = 0;
-
-  //   // $('.cur input').each(function(i,e){
-  //   //   sum_cur += Number($(e).val().replace(/,/g, ""));
-  //   // })
-	// 	// $('.sum_cur').text(GO.util.numberWithCommas(sum_cur));
-
-  //   // $('.price input').each(function(i,e){
-  //   //   sum_price += Number($(e).val().replace(/,/g, ""));
-  //   // })
-	// 	// $('.sum_price input').val(GO.util.numberWithCommas(sum_price));
-	// },
+	calAmount : function (e) {
+    if (e) {
+      var tg = $(e.currentTarget);
+      var var1 = tg.closest('tr').find('.var1 input').val().replace(/,/g,'') || 0;
+      var amount = tg.closest('tr').find('.amount input').val().replace(/,/g,'') || 0;
+      var price = tg.closest('tr').find('.price input').val().replace(/,/g,'') || 0;
+      var cur = Number(var1) * Number(amount) * Number(price);
+      tg.closest('tr').find('.cur input').val(GO.util.numberWithCommas(cur));
+    } else {
+      $("#dynamic_table1 tr").each(function(i, e){
+        if ($(e).find(".var1")[0]) {
+          var var1 = parseInt($(e).find(".var1 input").val().replace(/,/g, "")) || 0;
+          var amount = parseInt($(e).find(".amount input").val().replace(/,/g, "")) || 0;
+          var price = parseInt($(e).find(".price input").val().replace(/,/g, "")) || 0;
+          var cur = var1 * amount * price;
   
-  // 행합계
-  calAmount : function () {
-    var self = this;
-    
-    $("#dynamic_table1 tr").each(function(i, e){
-      if ($(e).find(".var1")[0]) {
-        var var1 = parseInt($(e).find(".var1 input").val().replace(/,/g, "")) || 0;
-        var amount = parseInt($(e).find(".amount input").val().replace(/,/g, "")) || 0;
-        var price = parseInt($(e).find(".price input").val().replace(/,/g, "")) || 0;
-        // 	var var1 = tg.closest('tr').find('.var1 input').val().replace(/,/g,'') || 0;
-        // 	var amount = tg.closest('tr').find('.amount input').val().replace(/,/g,'') || 0;
-        // 	var price = tg.closest('tr').find('.price input').val().replace(/,/g,'') || 0;
-        
-        // sumCost = accomCost + transCost + foodCost;
-        // totalCost += sumCost;
+          $(e).find(".cur").val(GO.util.numberWithCommas(cur));
+        }
+      });
+    }
+	},
 
-        // var cur = Number(var1) * Number(amount) * Number(price);
-        var cur = var1 * amount * price;
-
-        $(e).find(".cur").val(GO.util.numberWithCommas(cur));
-      }
-    });
-    // $(".totalCost").text(GO.util.numberWithCommas(totalCost));
-  },
-
-  // 열합계
+  
   calAmount_total : function () {
     var self = this;
     var sum_cur = 0;
@@ -120,9 +30,10 @@ render : function() {
     });
     $(".sum_cur").text(GO.util.numberWithCommas(sum_cur));
     
+    // html 수정 - 수정된 html 반영 필수 !!
     var sum_price = 0;
     $('.price input').each(function(i,e){
       sum_price += Number($(e).val().replace(/,/g, ""));
     });
-    $(".sum_price inpu").val(GO.util.numberWithCommas(sum_price));
+    $(".sum_price").text(GO.util.numberWithCommas(sum_price.toFixed(2)));
   },
