@@ -1,39 +1,30 @@
-
-	calAmount : function (e) {
-    if (e) {
-      var tg = $(e.currentTarget);
-      var var1 = tg.closest('tr').find('.var1 input').val().replace(/,/g,'') || 0;
-      var amount = tg.closest('tr').find('.amount input').val().replace(/,/g,'') || 0;
-      var price = tg.closest('tr').find('.price input').val().replace(/,/g,'') || 0;
-      var cur = Number(var1) * Number(amount) * Number(price);
-      tg.closest('tr').find('.cur input').val(GO.util.numberWithCommas(cur));
-    } else {
-      $("#dynamic_table1 tr").each(function(i, e){
-        if ($(e).find(".var1")[0]) {
-          var var1 = parseInt($(e).find(".var1 input").val().replace(/,/g, "")) || 0;
-          var amount = parseInt($(e).find(".amount input").val().replace(/,/g, "")) || 0;
-          var price = parseInt($(e).find(".price input").val().replace(/,/g, "")) || 0;
-          var cur = var1 * amount * price;
+calAmount_total : function () {
+  var self = this;
   
-          $(e).find(".cur").val(GO.util.numberWithCommas(cur));
-        }
-      });
+  var sum_cur = 0;
+  $('.cur input').each(function(i,e){
+    sum_cur += Number($(e).val().replace(/,/g, ""));
+  });
+  $(".sum_cur").text(GO.util.numberWithCommas(sum_cur));
+
+  // 💡 여기가 핵심 - 단가 * 수량의 합계를 구함
+  var sum_price = 0;
+  $("#dynamic_table1 tr").each(function(i, e){
+    var priceStr = $(e).find(".price input").val();
+    var amountStr = $(e).find(".amount input").val();
+
+    // 디버깅 출력
+    console.log(`row ${i} - priceStr: ${priceStr}, amountStr: ${amountStr}`);
+
+    if (priceStr && amountStr) {
+      var price = parseFloat(priceStr.replace(/,/g, "")) || 0;
+      var amount = parseFloat(amountStr.replace(/,/g, "")) || 0;
+      sum_price += price * amount;
+
+      console.log(`→ parsed: price=${price}, amount=${amount}, partial=${price * amount}`);
     }
-	},
+  });
 
-  
-  calAmount_total : function () {
-    var self = this;
-    var sum_cur = 0;
-    $('.cur input').each(function(i,e){
-      sum_cur += Number($(e).val().replace(/,/g, ""));
-    });
-    $(".sum_cur").text(GO.util.numberWithCommas(sum_cur));
-    
-    // html 수정 - 수정된 html 반영 필수 !!
-    var sum_price = 0;
-    $('.price input').each(function(i,e){
-      sum_price += Number($(e).val().replace(/,/g, ""));
-    });
-    $(".sum_price").text(GO.util.numberWithCommas(sum_price.toFixed(2)));
-  },
+  console.log(`총합 sum_price = ${sum_price}`);
+  $(".sum_price").text(GO.util.numberWithCommas(sum_price.toFixed(2)));
+}
