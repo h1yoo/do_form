@@ -1,0 +1,65 @@
+var html1 = "";
+		var html2 = "";
+
+		$('.sign_type1_inline').each(function (index2, item) {
+
+			$(item).find('.sign_member').each(function (index, item) {
+				if (index2 == 0) {
+
+					var i1 = $(item).find('.sign_rank').text();
+					var i2 = $(item).find('.sign_name').text();
+					var i3 = $(item).find('.sign_stamp img').attr("src");
+					var i4 = $(item).find('.sign_date').text();
+					var i5 = "";
+
+					if(i3 == undefined){
+						i5 = `<div>${i2}</div>`;
+					}else{
+						i5 = `<div style="text-align: center;"><img src="${i3}" style="height: 35px;"></div>`;
+					}
+
+					html1 += `
+								<div style="display: flex; align-items: center; margin-right: 30px;">
+
+									<div style="margin-right: 5px;">${i1}</div>
+									<div>
+										<div>${i4}</div>
+										${i5}
+									</div>
+
+								</div>
+							 `;
+
+				} else {
+
+					var i1 = $(item).find('.sign_rank').text();
+					var i2 = $(item).find('.sign_name').text();
+					var i3 = $(item).find('.sign_stamp img').attr("src");
+					var i4 = $(item).find('.sign_date').text();
+					var i5 = "";
+
+					if(i3 == undefined){
+						i5 = `<div>${i2}</div>`;
+					}else{
+						i5 = `<div><img src="${i3}" style="height: 35px;"></div>`;
+					}
+
+					html2 += `
+								<div style="display: flex; align-items: center; margin-right: 30px;">
+
+									<div style="margin-right: 5px;">${i1}</div>
+									<div>
+										<div>${i4}</div>
+										${i5}
+									</div>
+
+								</div>
+							 `;
+							 
+				}
+			});
+
+		});
+
+		$('#ttt').html(html1)
+		$('#ttt2').html(html2)
