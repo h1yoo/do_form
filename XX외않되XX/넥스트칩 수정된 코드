@@ -1,14 +1,38 @@
-calOverPrice2: function ($tr, prePriceValEl, wonEl, overPriceEl) {
-  const preInput = $tr.find(prePriceValEl);
-  const calWonEl = $tr.find(wonEl);
-  const overPriceTarget = $tr.find(overPriceEl);
 
-  if (preInput.length === 0 || calWonEl.length === 0 || overPriceTarget.length === 0) return;
+// (2) 현금사용액 - 적용환율1 차액금 계산 함수
+calOverPrice2 : function (prePriceValEl, wonEl, overPriceEl) {
 
-  let prePrice = parseFloat(preInput.val()?.replace(/,/g, '')) || 0;
-  let calPrice = parseFloat(calWonEl.text()?.replace(/,/g, '')) || 0;
-
-  let over = calPrice > prePrice ? calPrice - prePrice : 0;
-
-  overPriceTarget.text(GO.util.numberWithCommas(over));
-}
+  var self = this;
+         
+  
+  $("#dynamic_table2 tr").each(function(i, e){
+  
+        if ($(e).find(".prePrice_foreign")[0]) {
+          var prePrice = parseInt($(e).find(prePriceValEl).text().replace(/\,/g,"")); if (isNaN(prePrice)) prePrice = 0;
+  
+          var price = parseInt($(e).find(wonEl).text().replace(/\,/g,"")); if (isNaN(price)) price = 0;
+  
+         
+  
+          var overPrice = 0;
+          overPrice = price - prePrice;
+          $(e).find(overPriceEl).text(GO.util.numberWithCommas(overPrice));
+  
+          // if (price > prePrice) {
+  
+          //     overPrice = price - prePrice;
+  
+          //     $(e).find(overPriceEl).text(GO.util.numberWithCommas(overPrice));
+  
+          // }
+  
+          // else {
+  
+          //     $(e).find(overPriceEl).text(0);
+  
+          // }
+  
+      }
+  
+    });
+  },
