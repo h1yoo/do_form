@@ -1,0 +1,21 @@
+// 금액 계산 (= 단가 * 수량)
+  calPrice : function () {
+    $("#dynamic_table1 tr").each(function(i, e){
+      if ($(e).find(".amount")[0]) {
+        var amount = parseInt($(e).find(".amount input").val().replace(/,/g, "")) || 0;
+        var unit = parseInt($(e).find(".unit input").val().replace(/,/g, "")) || 0;
+        // var tax = parseInt($(e).find(".tax input").val().replace(/,/g, "")) || 0;
+        // var price = 0;
+        
+        // if (tax == 0 || tax == "") { 
+        //   price = amount * unit;
+        // } else {
+        //   price = amount * unit + (unit * tax / 100) * amount;
+        // }
+
+        var price = amount * unit;
+        
+        $(e).find(".price input").val(GO.util.numberWithCommas(price.toFixed(0)));
+      }
+    });
+  },
