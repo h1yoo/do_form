@@ -34,6 +34,7 @@ var Integration = Backbone.View.extend({
     
         if (!startDate.isValid() || !endDate.isValid() || startDate > endDate) {
             $(".calDay input").val("");
+            // $(".dayWarning").html("※ 유효하지 않은 날짜입니다.<br><br>").css("color", "red");	// css를 { color: "red" } 이렇게 작성할 수도 있고 "color", "red" 이렇게 작성할 수도 있음
             $(".dayWarning").html("※ 유효하지 않은 날짜입니다.<br><br>").css("color", "red");
             // $(".dayWarning").html("<br>").css("color", "red");
             return;
@@ -50,7 +51,8 @@ var Integration = Backbone.View.extend({
     
         // 5일 초과 체크
         if (dayDiff > 5) {
-            $(".dayWarning").html("※ 최대 선택일수가 초과되었습니다.<br><br>").css("color", "red");
+            // $(".dayWarning").html("※ 최대 선택일수가 초과되었습니다.<br><br>").css("color", "red");
+            $(".dayWarning").html("※ 최대 선택일수가 초과되었습니다.<br><br>").css({ color: "red" });
         } else {
             $(".dayWarning").html("<br>");
         }
