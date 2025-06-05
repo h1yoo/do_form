@@ -4,7 +4,6 @@ var Backbone = require("backbone");
 var _ = require('underscore');
 
 
-
 var Integration = Backbone.View.extend({
     initialize : function(options){
         this.options = options || {};
@@ -46,7 +45,7 @@ var Integration = Backbone.View.extend({
         
         // 유효하지 않은 날짜 표기
         // else {
-          if (!startDate.isValid() || !endDate.isValid() || startDate > endDate || startDate.isAfter(endDate) || dayDiff <= 0) {
+        if (!startDate.isValid() || !endDate.isValid() || startDate > endDate || startDate.isAfter(endDate) || dayDiff <= 0) {
         // if (!startDate.isValid() || !endDate.isValid() || startDate.isAfter(endDate)) {
           $(".calDay input").val("");
           // $(".dayWarning").html("※ 유효하지 않은 날짜입니다.<br><br>").css("color", "red");	// css를 { color: "red" } 이렇게 작성할 수도 있고 "color", "red" 이렇게 작성할 수도 있음
