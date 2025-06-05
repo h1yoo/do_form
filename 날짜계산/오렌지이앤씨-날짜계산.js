@@ -4,7 +4,6 @@ var Backbone = require("backbone");
 var _ = require('underscore');
 
 
-
 var Integration = Backbone.View.extend({
     initialize : function(options){
         this.options = options || {};
