@@ -17,11 +17,8 @@ var Integration = Backbone.View.extend({
         var self = this;
         $('.viewModeHiddenPart').show();
          
-		$(".period input").on("change",function(){
+		    $(".period input").on("change",function(){
             self.calDay();
-
-            // console.log("start:", $('.period input').eq(0).val());
-            // console.log("end:", $('.period input').eq(1).val());
         });
 
     },
