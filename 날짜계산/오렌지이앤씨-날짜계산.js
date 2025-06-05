@@ -4,6 +4,7 @@ var Backbone = require("backbone");
 var _ = require('underscore');
 
 
+
 var Integration = Backbone.View.extend({
     initialize : function(options){
         this.options = options || {};
@@ -30,15 +31,19 @@ var Integration = Backbone.View.extend({
         var dayDiff = endDate.diff(startDate, 'days') + 1;
     
         // 결과 표기
-        if (startDate.isValid() && endDate.isValid() && startDate < endDate && dayDiff > 0) {
-        // if (dayDiff > 0) {
-            $(".calDay input").val(dayDiff);
-            $(".dayWarning").html("<br>");
-        } 
+        $(".calDay input").val(dayDiff);
+        $(".dayWarning").html("<br>"); // 초기화
+        // if (startDate.isValid() && endDate.isValid() && startDate < endDate && dayDiff > 0) {
+        // // if (dayDiff > 0) {
+        //     $(".calDay input").val(dayDiff);
+        //     $(".dayWarning").html("<br>");
+        // } 
+
         // 5일 초과 체크
         if (dayDiff > 5 || $(".calDay input").val() > 5) {
             $(".dayWarning").html("※ 최대 선택일수가 초과되었습니다.<br><br>").css({ color: "red" });
         } 
+        
         // 유효하지 않은 날짜 표기
         // else {
           if (!startDate.isValid() || !endDate.isValid() || startDate > endDate || startDate.isAfter(endDate) || dayDiff <= 0) {
@@ -46,9 +51,8 @@ var Integration = Backbone.View.extend({
           $(".calDay input").val("");
           // $(".dayWarning").html("※ 유효하지 않은 날짜입니다.<br><br>").css("color", "red");	// css를 { color: "red" } 이렇게 작성할 수도 있고 "color", "red" 이렇게 작성할 수도 있음
           $(".dayWarning").html("※ 유효하지 않은 날짜입니다.<br><br>").css({ color: "red" });
-          console.log("dayWarning!! 유효하지 않은 날짜입니다");   // 콘솔에는 뜸 - 기존테스트에도 뜸 / 차세대만 안뜸
-          // $(".dayWarning").html("<br>").css({ color: "red" });
-          // return;
+          // console.log("dayWarning!! 유효하지 않은 날짜입니다");   // 콘솔에는 뜸 - 기존테스트에도 뜸 / 차세대만 안뜸
+          return;   // return 필요 !! >> 비동기처리 관련 문제 해결을 위해
         }
     },
     
