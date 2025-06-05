@@ -27,34 +27,32 @@ var Integration = Backbone.View.extend({
     },
     
     calDay : function () {
-        var self = this;
-    
         var startDate = moment($('.period input').eq(0).val(), "YYYY-MM-DD");
         var endDate = moment($('.period input').eq(1).val(), "YYYY-MM-DD");
-    
-        if (!startDate.isValid() || !endDate.isValid() || startDate > endDate) {
-            $(".calDay input").val("");
-            // $(".dayWarning").html("※ 유효하지 않은 날짜입니다.<br><br>").css("color", "red");	// css를 { color: "red" } 이렇게 작성할 수도 있고 "color", "red" 이렇게 작성할 수도 있음
-            $(".dayWarning").html("※ 유효하지 않은 날짜입니다.<br><br>").css("color", "red");
-            // $(".dayWarning").html("<br>").css("color", "red");
-            return;
-        }
+        // console.log("startDate  : ", startDate, ", endDate : ", endDate);
     
         var dayDiff = endDate.diff(startDate, 'days') + 1;
     
         // 결과 표기
-        if (dayDiff > 0) {
+        if (startDate.isValid() && endDate.isValid() && startDate < endDate && dayDiff > 0) {
+        // if (dayDiff > 0) {
             $(".calDay input").val(dayDiff);
-        } else {
-            $(".calDay input").val("");
-        }
-    
-        // 5일 초과 체크
-        if (dayDiff > 5) {
-            // $(".dayWarning").html("※ 최대 선택일수가 초과되었습니다.<br><br>").css("color", "red");
-            $(".dayWarning").html("※ 최대 선택일수가 초과되었습니다.<br><br>").css({ color: "red" });
-        } else {
             $(".dayWarning").html("<br>");
+        } 
+        // 5일 초과 체크
+        if (dayDiff > 5 || $(".calDay input").val() > 5) {
+            $(".dayWarning").html("※ 최대 선택일수가 초과되었습니다.<br><br>").css({ color: "red" });
+        } 
+        // 유효하지 않은 날짜 표기
+        // else {
+          if (!startDate.isValid() || !endDate.isValid() || startDate > endDate || startDate.isAfter(endDate) || dayDiff <= 0) {
+        // if (!startDate.isValid() || !endDate.isValid() || startDate.isAfter(endDate)) {
+          $(".calDay input").val("");
+          // $(".dayWarning").html("※ 유효하지 않은 날짜입니다.<br><br>").css("color", "red");	// css를 { color: "red" } 이렇게 작성할 수도 있고 "color", "red" 이렇게 작성할 수도 있음
+          $(".dayWarning").html("※ 유효하지 않은 날짜입니다.<br><br>").css({ color: "red" });
+          console.log("dayWarning!! 유효하지 않은 날짜입니다");   // 콘솔에는 뜸 - 기존테스트에도 뜸 / 차세대만 안뜸
+          // $(".dayWarning").html("<br>").css({ color: "red" });
+          // return;
         }
     },
     
@@ -68,10 +66,10 @@ var Integration = Backbone.View.extend({
             var startDate = moment($('.period input').eq(0).val(), "YYYY-MM-DD"); // 시작일
             var endDate = moment($('.period input').eq(1).val(), "YYYY-MM-DD");   // 종료일
             var dayDiff = endDate.diff(startDate, 'days') + 1;
-
+ 
             // 날짜 형식이 잘못되었거나 비어 있는 경우 |또는| 시작일이 종료일보다 뒤에 있는 경우 |또는| dayDiff가 5보다 큰 경우
             // 셋 중 하나라도 참이면 Error를 던짐 
-            if (startDate.isValid() || endDate.isValid() || startDate.isAfter(endDate) || dayDiff > 5) {
+            if (!startDate.isValid() || !endDate.isValid() || startDate.isAfter(endDate) || dayDiff > 5) {
                 throw new Error("경조휴가 날짜를 다시 선택해주세요");
             }
 
