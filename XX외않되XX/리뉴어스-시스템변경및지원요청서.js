@@ -4,21 +4,21 @@
         var title1 = "";
         var title2 = "";
         var title3 = "";
-        var emergency = $(".emergency select").val();  // 선택된 긴급여부 드롭박스 옵션값
         var selected = $(".selectedSub select").val();  // 선택된 대상시스템 드롭박스 옵션값
         var request = $(".request select").val();  // 선택된 요청구분 드롭박스 옵션값
+        var emergency = $(".emergency select").val();  // 선택된 긴급여부 드롭박스 옵션값
         // var selected = $(".selectedSub select").val();
-        // var prefixes = $(".selectedSub select option").map(function () {   // 대상시스템 드롭박스 옵션값 모두 가져오기
+        // var prefixes = $(".selectedSub select option").map(function () {   // 드롭박스 옵션값 모두 가져오기
         //     return $(this).text();
         // }).get();
         var inputVal = $("#tmp_title input").val();
-        var prefixes1 = $(".emergency select option").map(function () {   // 긴급여부 드롭박스 옵션값 모두 가져오기
+        var prefixes1 = $(".selectedSub select option").map(function () {   // 대상시스템 드롭박스 옵션값 모두 가져오기
             return $(this).text();
         }).get();
-        var prefixes2 = $(".selectedSub select option").map(function () {   // 대상시스템 드롭박스 옵션값 모두 가져오기
+        var prefixes2 = $(".request select option").map(function () {   // 요청구분 드롭박스 옵션값 모두 가져오기
             return $(this).text();
         }).get();
-        var prefixes3 = $(".request select option").map(function () {   // 요청구분 드롭박스 옵션값 모두 가져오기
+        var prefixes3 = $(".emergency select option").map(function () {   // 긴급여부 드롭박스 옵션값 모두 가져오기
             return $(this).text();
         }).get();
 
@@ -48,28 +48,28 @@
         // if (selected && selected !== "--선택--") {
         //     $("#prefixText").text(selected + "_");
         // }
-        if (emergency && emergency !== "--선택--") {
+        if (selected && selected !== "--선택--") {
             title1 = emergency + "/";
             title = title1 + title2 + title3;
             $("#prefixText").text(title);
         }
-        if (selected && selected !== "--선택--") {
+        if (request && request !== "--선택--") {
             title2 = selected + "/";
             title = title1 + title2 + title3;
             $("#prefixText").text(title);
         }
-        if (request && request !== "--선택--") {
+        if (emergency && emergency !== "--선택--") {
             title3 = request + "_";
             title = title1 + title2 + title3;
             $("#prefixText").text(title);
         }
         if (selected == "--선택--") {
-            title2 = "";
+            title1 = "";
             title = title1 + title2 + title3;
             $("#prefixText").text(title);
         }
         if (request == "--선택--") {
-            title3 = "_";
+            title2 = "";
             title = title1 + title2 + title3;
             $("#prefixText").text(title);
         }
