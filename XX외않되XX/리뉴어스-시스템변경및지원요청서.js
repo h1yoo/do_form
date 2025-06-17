@@ -49,17 +49,17 @@
         //     $("#prefixText").text(selected + "_");
         // }
         if (selected && selected !== "--선택--") {
-            title1 = emergency + "/";
+            title1 = selected + "/";
             title = title1 + title2 + title3;
             $("#prefixText").text(title);
         }
         if (request && request !== "--선택--") {
-            title2 = selected + "/";
+            title2 = request + "/";
             title = title1 + title2 + title3;
             $("#prefixText").text(title);
         }
         if (emergency && emergency !== "--선택--") {
-            title3 = request + "_";
+            title3 = emergency + "_";
             title = title1 + title2 + title3;
             $("#prefixText").text(title);
         }
