@@ -39,7 +39,7 @@
             }
         });
         prefixes3.forEach(function (prefix) {
-            if (inputVal.startsWith(prefix + "/")) {
+            if (inputVal.startsWith(prefix + "_")) {
                 inputVal = inputVal.slice(prefix.length + 1); // prefix 제거
             }
         });
@@ -59,11 +59,19 @@
             $("#prefixText").text(title);
         }
         if (request && request !== "--선택--") {
-            title3 = request;
+            title3 = request + "_";
             title = title1 + title2 + title3;
             $("#prefixText").text(title);
-        } else {
-            $("#prefixText").text("");
+        }
+        if (selected == "--선택--") {
+            title2 = "";
+            title = title1 + title2 + title3;
+            $("#prefixText").text(title);
+        }
+        if (request == "--선택--") {
+            title3 = "_";
+            title = title1 + title2 + title3;
+            $("#prefixText").text(title);
         }
 
         $("#tmp_title input").val(inputVal);
