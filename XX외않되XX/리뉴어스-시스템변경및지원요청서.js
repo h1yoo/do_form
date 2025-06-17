@@ -7,10 +7,7 @@
         var selected = $(".selectedSub select").val();  // 선택된 대상시스템 드롭박스 옵션값
         var request = $(".request select").val();  // 선택된 요청구분 드롭박스 옵션값
         var emergency = $(".emergency select").val();  // 선택된 긴급여부 드롭박스 옵션값
-        // var selected = $(".selectedSub select").val();
-        // var prefixes = $(".selectedSub select option").map(function () {   // 드롭박스 옵션값 모두 가져오기
-        //     return $(this).text();
-        // }).get();
+        
         var inputVal = $("#tmp_title input").val();
         var prefixes1 = $(".selectedSub select option").map(function () {   // 대상시스템 드롭박스 옵션값 모두 가져오기
             return $(this).text();
@@ -22,12 +19,6 @@
             return $(this).text();
         }).get();
 
-        // 모든 prefix 후보들 중 실제로 앞에 붙어 있는 prefix만 제거
-        // prefixes.forEach(function (prefix) {
-        //     if (inputVal.startsWith(prefix + "_")) {
-        //         inputVal = inputVal.slice(prefix.length + 1); // prefix 제거
-        //     }
-        // });
         prefixes1.forEach(function (prefix) {
             if (inputVal.startsWith(prefix + "/")) {
                 inputVal = inputVal.slice(prefix.length + 1); // prefix 제거
@@ -44,10 +35,6 @@
             }
         });
     
-        // prefix 텍스트 표시
-        // if (selected && selected !== "--선택--") {
-        //     $("#prefixText").text(selected + "_");
-        // }
         if (selected && selected !== "--선택--") {
             title1 = selected + "/";
             title = title1 + title2 + title3;
