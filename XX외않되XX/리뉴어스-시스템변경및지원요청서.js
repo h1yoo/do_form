@@ -1,31 +1,67 @@
 
     checkInputSub: function () {
-
+        var title = "";
+        var title1 = "";
+        var title2 = "";
+        var title3 = "";
         var emergency = $(".emergency select").val();  // 선택된 긴급여부 드롭박스 옵션값
         var selected = $(".selectedSub select").val();  // 선택된 대상시스템 드롭박스 옵션값
         var request = $(".request select").val();  // 선택된 요청구분 드롭박스 옵션값
-        // var prefixes = $(".selectedSub select option").map(function () {    // 대상시스템 드롭박스 옵션값 모두 추출
+        // var selected = $(".selectedSub select").val();
+        // var prefixes = $(".selectedSub select option").map(function () {   // 대상시스템 드롭박스 옵션값 모두 가져오기
         //     return $(this).text();
         // }).get();
         var inputVal = $("#tmp_title input").val();
-        var title = "";
-        console.log("selected: ", selected, " , inputVal: ", inputVal, " , prefixes: ", prefixes);
+        var prefixes1 = $(".emergency select option").map(function () {   // 긴급여부 드롭박스 옵션값 모두 가져오기
+            return $(this).text();
+        }).get();
+        var prefixes2 = $(".selectedSub select option").map(function () {   // 대상시스템 드롭박스 옵션값 모두 가져오기
+            return $(this).text();
+        }).get();
+        var prefixes3 = $(".request select option").map(function () {   // 요청구분 드롭박스 옵션값 모두 가져오기
+            return $(this).text();
+        }).get();
 
-        // // 모든 prefix 후보들 중 실제로 앞에 붙어 있는 prefix만 제거
+        // 모든 prefix 후보들 중 실제로 앞에 붙어 있는 prefix만 제거
         // prefixes.forEach(function (prefix) {
         //     if (inputVal.startsWith(prefix + "_")) {
         //         inputVal = inputVal.slice(prefix.length + 1); // prefix 제거
         //     }
         // });
+        prefixes1.forEach(function (prefix) {
+            if (inputVal.startsWith(prefix + "/")) {
+                inputVal = inputVal.slice(prefix.length + 1); // prefix 제거
+            }
+        });
+        prefixes2.forEach(function (prefix) {
+            if (inputVal.startsWith(prefix + "/")) {
+                inputVal = inputVal.slice(prefix.length + 1); // prefix 제거
+            }
+        });
+        prefixes3.forEach(function (prefix) {
+            if (inputVal.startsWith(prefix + "/")) {
+                inputVal = inputVal.slice(prefix.length + 1); // prefix 제거
+            }
+        });
     
         // prefix 텍스트 표시
+        // if (selected && selected !== "--선택--") {
+        //     $("#prefixText").text(selected + "_");
+        // }
         if (emergency && emergency !== "--선택--") {
-            title += emergency + "/";
+            title1 = emergency + "/";
+            title = title1 + title2 + title3;
             $("#prefixText").text(title);
-        } else if (selected && selected !== "--선택--") {
+        }
+        if (selected && selected !== "--선택--") {
+            title2 = selected + "/";
+            title = title1 + title2 + title3;
             $("#prefixText").text(title);
-        } else if (request && request !== "--선택--") {
-            $("#prefixText").text(seltitle);
+        }
+        if (request && request !== "--선택--") {
+            title3 = request;
+            title = title1 + title2 + title3;
+            $("#prefixText").text(title);
         } else {
             $("#prefixText").text("");
         }
