@@ -1,47 +1,49 @@
 
-formatDate: function(rawDate) {
-    var date = new Date(rawDate);
-    if (isNaN(date)) return rawDate;
-
-    var yyyy = date.getFullYear();
-    var mm = ("0" + (date.getMonth() + 1)).slice(-2);
-    var dd = ("0" + date.getDate()).slice(-2);
-    return `${yyyy}/${mm}/${dd}`;
-},
-
 checkInputSub: function () {
-    // 체크된 항목들을 배열로 추출
-    var subCertSel = $(".subCertSel input[type='checkbox']:checked")
-        .map(function () {
-            return $(this).val();
-        })
-        .get()
-        .join(", "); // 예: "매출, 상품권"
+    var subCertSel = [];
+    
+    $(".subCertSel").nextAll("tr").slice(0, 3).find("td").each(function () {
+        var $td = $(this);
+        var label = $td.contents().filter(function () {
+            return this.nodeType === 3; // 텍스트 노드만
+        }).text().trim();
+
+        var value = $td.find("select").val();
+        if (value !== "0") {
+            subCertSel.push(label);
+        }
+    });
+
     var subDate = this.formatDate($(".subDate input").val());
     var subUse = $(".subUse select").val();
 
-    if (subCertSel || subDate || subUse) {
-            var title = subUse + "(" + subDate + ", " + subCertSel + ")" || "";
-            $("#subject input").val(title);
-            $("#tmp_title input").val(title);
+    if (subCertSel.length || subDate || subUse) {
+        var title = subUse + "(" + subDate + ", " + subCertSel.join(", ") + ")" || "";
+        $("#subject input").val(title);
+        $("#tmp_title input").val(title);
     }
 },
 
-
-beforeSave :function() {
+beforeSave: function () {
     $('.viewModeHiddenPart').hide();
 
-    // 체크된 항목들을 배열로 추출
-    var subCertSel = $(".subCertSel input[type='checkbox']:checked")
-        .map(function () {
-            return $(this).val();
-        })
-        .get()
-        .join(", "); // 예: "매출, 상품권"
+    var subCertSel = [];
+    
+    $(".subCertSel").nextAll("tr").slice(0, 3).find("td").each(function () {
+        var $td = $(this);
+        var label = $td.contents().filter(function () {
+            return this.nodeType === 3;
+        }).text().trim();
+
+        var value = $td.find("select").val();
+        if (value !== "0") {
+            subCertSel.push(label);
+        }
+    });
+
     var subDate = this.formatDate($(".subDate input").val());
     var subUse = $(".subUse select").val();
 
-    var title = subUse + "(" + subDate + ", " + subCertSel + ")" || "";
-
-    $("#subject").val(title); // 최종 제목 세팅
-},
+    var title = subUse + "(" + subDate + ", " + subCertSel.join(", ") + ")" || "";
+    $("#subject").val(title);
+}
