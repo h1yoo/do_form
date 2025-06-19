@@ -1,10 +1,25 @@
+const certTypes = [
+  '재직증명',
+  '재직증명(영문)',
+  '경력증명',
+  '경력증명(영문)',
+  '원천징수영수증',
+  '갑종근로소득납세필증명'
+];
 
-// 가장 안전하고 깔끔한 방법: 전체 테이블/섹션 범위에서 체크된 것들 모두 수집
-var subCertSel = $("table .subCertSel")
-    .closest("table") // 같은 테이블 안에서
-    .find("input[type='checkbox']:checked")
-    .map(function () {
-        return $(this).val();
-    })
-    .get()
-    .join(", ");
+const certCounts = [];
+
+$('td').each(function () {
+  const td = $(this);
+  certTypes.forEach(function (certName, index) {
+    if (td.text().includes(certName)) {
+      const selectEl = td.find('select.editor_slt');
+      if (selectEl.length > 0) {
+        const val = parseInt(selectEl.val(), 10);
+        certCounts[index] = val;
+      }
+    }
+  });
+});
+
+console.log(certCounts);  // 예: [1, 0, 2, 0, 1, 0] 형태
