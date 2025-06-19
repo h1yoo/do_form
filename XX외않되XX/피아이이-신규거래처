@@ -5,12 +5,19 @@
 
 
     checkInputSub: function () {
-      var subCorrSel = $(".subCorrSel input").val();
-      var subCorr = $(".subCorr input").val();
+    // 체크된 항목들을 배열로 추출
+    var subCorrSel = $(".subCorrSel input[type='checkbox']:checked")
+        .map(function () {
+            return $(this).val();
+        })
+        .get()
+        .join(", "); // 예: "매출, 상품권"
 
-      if (subCorrSel || subCorr) {
-            var title = subCorr + "(" + subCorrSel + ")" || "";
-            $("#subject input").val(title);
-            $("#tmp_title input").val(title);
-      }
-    },
+    var subCorr = $(".subCorr input").val(); // 같이 쓰는 텍스트 입력란
+
+    if (subCorrSel || subCorr) {
+        var title = subCorr + " (" + subCorrSel + ")";
+        $("#subject input").val(title);
+        $("#tmp_title input").val(title);
+    }
+}
