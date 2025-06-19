@@ -1,0 +1,16 @@
+
+			<td class="subCorrSel" style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle; border-image: none;">
+				<span unselectable="on" contenteditable="false" class="comp_wrap" data-cid="4" data-dsl="{{check_매출_상품권_기타}}" data-wrapper="" style="" data-value="" data-autotype=""><input class="editor_opt" type="checkbox" name="" value="매출"><label class="editor_label">매출</label><input class="editor_opt" type="checkbox" name="" value="상품권"><label class="editor_label">상품권</label><input class="editor_opt" type="checkbox" name="" value="기타"><label class="editor_label">기타</label><span contenteditable="false" class="comp_active" style="display:none;"> <span class="Active_dot1"></span><span class="Active_dot2"></span> <span class="Active_dot3"></span><span class="Active_dot4"></span> </span> <span contenteditable="false" class="comp_hover" data-content-protect-cover="true" data-origin="4"> <a contenteditable="false" class="ic_prototype ic_prototype_trash" data-content-protect-cover="true" data-component-delete-button="true"></a> </span> </span><span unselectable="on" contenteditable="false" class="comp_wrap" data-cid="5" data-dsl="{{text$width:280$}}" data-wrapper="" style="width: 280px;" data-value="" data-autotype=""><input class="ipt_editor" type="text"><span contenteditable="false" class="comp_active" style="display:none;"> <span class="Active_dot1"></span><span class="Active_dot2"></span> <span class="Active_dot3"></span><span class="Active_dot4"></span> </span> <span contenteditable="false" class="comp_hover" data-content-protect-cover="true" data-origin="5"> <a contenteditable="false" class="ic_prototype ic_prototype_trash" data-content-protect-cover="true" data-component-delete-button="true"></a> </span> </span><br>
+			</td>
+
+
+    checkInputSub: function () {
+      var subCorrSel = $(".subCorrSel input").val();
+      var subCorr = $(".subCorr input").val();
+
+      if (subCorrSel || subCorr) {
+            var title = subCorr + "(" + subCorrSel + ")" || "";
+            $("#subject input").val(title);
+            $("#tmp_title input").val(title);
+      }
+    },
