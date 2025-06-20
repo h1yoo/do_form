@@ -1,25 +1,27 @@
+checkInputSub: function () {
+    // 선택된 체크박스 가져오기
+    const query = 'input[type="checkbox"]:checked';
+    const selectedEls = document.querySelectorAll(query);
 
-    checkInputSub: function () {
-        // 선택된 목록 가져오기
-        const query = 'input[type="checkbox"]:checked';
-        const selectedEls = 
-            document.querySelectorAll(query);
-        
-            // 선택된 목록에서 value 찾기
-            let result = '';
-            selectedEls.forEach((el) => {
-            result += el.value + ' ';
-        });
-    
-        // var subCertSel = certCounts.join(',');
-        var subDate = this.formatDate($(".subDate input").val());
-        var subUse = $(".subUse select").val();
+    // 선택된 값 구성
+    let result = '';
+    const selectedCount = selectedEls.length;
 
-        if (result || subDate || subUse) {
-        // if (subCertSel || subDate || subUse) {
-                var title = subUse + "(" + subDate + ", " + result + ")" || "";
-                // var title = subUse + "(" + subDate + ", " + subCertSel + ")" || "";
-                $("#subject input").val(title);
-                $("#tmp_title input").val(title);
+    if (selectedCount > 0) {
+        result = selectedEls[0].value;
+        if (selectedCount > 1) {
+            result += ` 외 ${selectedCount - 1}건`;
         }
-    },
+    }
+
+    // 날짜 및 구분 가져오기
+    const subDate = this.formatDate($(".subDate input").val());
+    const subUse = $(".subUse select").val();
+
+    // 하나라도 값이 있으면 제목 작성
+    if (result || subDate || subUse) {
+        const title = `${subUse || ""}(${subDate || ""}, ${result || ""})`;
+        $("#subject input").val(title);
+        $("#tmp_title input").val(title);
+    }
+}
