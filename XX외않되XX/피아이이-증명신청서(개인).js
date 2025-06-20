@@ -10,11 +10,15 @@
             selectedEls.forEach((el) => {
             result += el.value + ' ';
         });
+    
+        // var subCertSel = certCounts.join(',');
         var subDate = this.formatDate($(".subDate input").val());
         var subUse = $(".subUse select").val();
 
-        if (subCertSel || subDate || subUse) {
+        if (result || subDate || subUse) {
+        // if (subCertSel || subDate || subUse) {
                 var title = subUse + "(" + subDate + ", " + result + ")" || "";
+                // var title = subUse + "(" + subDate + ", " + subCertSel + ")" || "";
                 $("#subject input").val(title);
                 $("#tmp_title input").val(title);
         }
