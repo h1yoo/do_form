@@ -37,11 +37,6 @@ var Integration = Backbone.View.extend({
         //     $(".calDay input").val(dayDiff);
         //     $(".dayWarning").html("<br>");
         // } 
-
-        // 5일 초과 체크
-        if (dayDiff > 5 || $(".calDay input").val() > 5) {
-            $(".dayWarning").html("※ 최대 선택일수가 초과되었습니다.<br><br>").css({ color: "red" });
-        } 
         
         // 유효하지 않은 날짜 표기
         // else {
@@ -51,8 +46,13 @@ var Integration = Backbone.View.extend({
           // $(".dayWarning").html("※ 유효하지 않은 날짜입니다.<br><br>").css("color", "red");	// css를 { color: "red" } 이렇게 작성할 수도 있고 "color", "red" 이렇게 작성할 수도 있음
           $(".dayWarning").html("※ 유효하지 않은 날짜입니다.<br><br>").css({ color: "red" });
           // console.log("dayWarning!! 유효하지 않은 날짜입니다");   // 콘솔에는 뜸 - 기존테스트에도 뜸 / 차세대만 안뜸
-          return;   // return 필요 !! >> 비동기처리 관련 문제 해결을 위해
+          // return;   // return 필요 !! >> 비동기처리 관련 문제 해결을 위해 >> html에도 스크립트 코드가 있어서 꼬인 듯. 이 문제는 아닌 것으로 확인
         }
+
+        // 5일 초과 체크
+        if (dayDiff > 5 || $(".calDay input").val() > 5) {
+            $(".dayWarning").html("※ 최대 선택일수가 초과되었습니다.<br><br>").css({ color: "red" });
+        } 
     },
     
     renderViewMode : function(){$('.viewModeHiddenPart').hide();},
