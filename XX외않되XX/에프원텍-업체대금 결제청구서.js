@@ -60,8 +60,12 @@ var Integration = Backbone.View.extend({
 	calAmountText : function (priceEl, sumPriceEl) {
 		var sum_price = 0;
 
-    $(priceEl).each(function(i,e){
-      sum_price += Number($(e).text().replace(/,/g, ""));
+    $(priceEl).each(function () {
+    // $(priceEl).each(function(i,e){   // input이 아닌 값을 e로 받아오면 추가 클릭 시 값이 이상하게 들어감
+      var val = parseint($(this).text().replace(/,/g, ""));
+      if (!isNaN(val)) {
+        sum_price += val;
+      }
     });    
 
     $(sumPriceEl).text(GO.util.numberWithCommas(sum_price));
