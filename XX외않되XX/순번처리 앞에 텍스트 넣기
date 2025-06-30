@@ -1,24 +1,15 @@
+// ② 순번(No) 처리 - 순번 클래스가 한 행에 두 개 이상 있을 경우 고려 (optional)
+if ($("#" + settings.tableId + " ." + settings.copyRowNoClass)[0] !== undefined) {
+  // 원본 행과 복사된 행 전체를 대상으로 순번 재정렬
+  var allRows = $("#" + settings.tableId + " ." + settings.copyRowClass)
+    .add("#" + settings.tableId + " .copiedRow");
 
-    // ② 순번(No) 처리 - 순번 클래스가 한 행에 두 개 이상 있을 경우 고려 (optional)
-    //    ex) 1  ...     2  ...             ex) 1  ...     1  ...
-    //        3  ...     4  ...     or          2  ...     2  ...
-// PlusMinusRow 초기화 직후에 1번 순번 텍스트도 세팅
-var $firstNoEl = $("#" + settings.tableId + " ." + settings.copyRowNoClass).first();
-if ($firstNoEl.length) {
-  $firstNoEl.text("주요출장일정 1");
+  allRows.each(function(index) {
+    var $row = $(this);
+    var $noEls = $row.find("." + settings.copyRowNoClass);
+
+    $noEls.each(function() {
+      $(this).text(index + 1); // "주요출장일정" 제거하고 숫자만
+    });
+  });
 }
-
-    if ($("#" + settings.tableId + " ." + settings.copyRowNoClass)[0] !== undefined) {
-      var copyRowNoCnt = $tr.find("." + settings.copyRowNoClass).length; // 한 행에 존재하는 순번 클래스의 수
-      
-      for (var i = 0; i < copyRowNoCnt; i++) {
-        if (!$tr.find("." + settings.copyRowNoClass).attr('rowspan')) {
-          var newNo = parseInt($($tr.find("." + settings.copyRowNoClass)[i]).text()) + settings.copyRowNoSize * plusCnt * $tr.length;
-        }
-        else {
-          var newNo = parseInt($($tr.find("." + settings.copyRowNoClass)[i]).text()) + settings.copyRowNoSize * plusCnt;
-        }
-
-        $($tr.find("." + settings.copyRowNoClass)[i]).text("주요출장일정 " + newNo);
-      }
-    }
