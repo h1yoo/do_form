@@ -114,6 +114,20 @@ var PlusMinusRow = function (options) {
     // ② 순번(No) 처리 - 순번 클래스가 한 행에 두 개 이상 있을 경우 고려 (optional)
     //    ex) 1  ...     2  ...             ex) 1  ...     1  ...
     //        3  ...     4  ...     or          2  ...     2  ...
+    // if ($("#" + settings.tableId + " ." + settings.copyRowNoClass)[0] !== undefined) {
+    //   var copyRowNoCnt = $tr.find("." + settings.copyRowNoClass).length; // 한 행에 존재하는 순번 클래스의 수
+      
+    //   for (var i = 0; i < copyRowNoCnt; i++) {
+    //     if (!$tr.find("." + settings.copyRowNoClass).attr('rowspan')) {
+    //       var newNo = parseInt($($tr.find("." + settings.copyRowNoClass)[i]).text()) + settings.copyRowNoSize * plusCnt * $tr.length;
+    //     }
+    //     else {
+    //       var newNo = parseInt($($tr.find("." + settings.copyRowNoClass)[i]).text()) + settings.copyRowNoSize * plusCnt;
+    //     }
+
+    //     $($tr.find("." + settings.copyRowNoClass)[i]).text("주요출장일정 " + newNo);
+    //   }
+    // }
     // // ////////////// 순번처리 코드 수정 > 텍스트 제거 후 추가
     if ($("#" + settings.tableId + " ." + settings.copyRowNoClass)[0] !== undefined) {
       var copyRowNoCnt = $tr.find("." + settings.copyRowNoClass).length; // 한 행에 존재하는 순번 클래스의 수
@@ -319,7 +333,7 @@ var Integration = Backbone.View.extend({
         plusBtnId : "plus2", 
         minusBtnId : "minus2",
         copyRowClass : "copyRow2",
-				copyRowNoClass : "copyRowNo2",
+	copyRowNoClass : "copyRowNo2",
         rowspanClass : "rowspanTd2"
     });
     PlusMinusRow({
@@ -342,10 +356,10 @@ var Integration = Backbone.View.extend({
         minusBtnId : "minus4",
         copyRowClass : "copyRow4",
         rowspanClass : "rowspanTd4",
-				minusRowCallback : function() {
+	minusRowCallback : function() {
           self.calAmount(".amount input", ".sum_amount");
         },
-				plusRowCallback : function() {}
+	plusRowCallback : function() {}
     });
     
 		$(".accomCost input, .transCost input, .foodCost input").on("change",function(){
