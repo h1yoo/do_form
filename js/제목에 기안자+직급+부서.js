@@ -36,8 +36,11 @@ var Integration = Backbone.View.extend({
     }
     
     },
-    
-     
+
+
+     // 제목 컴포넌트에 표시하기 위해 autoSubject 함수 추가
+	// 이 부분만 추가하고, render 부분에 self.autoSubject(); 추가해서 사용하면 됨
+	// html 건드릴 필요는 없지만 #draftDept가 안먹으면 기안부서 td 태그에 userDep 클래스 추가해서 사용하기
     autoSubject: function() {
 		$('.sign_type1_inline').each(function (index2, item) {
 			$(item).find('.sign_member').each(function (index, item) {
