@@ -1,0 +1,341 @@
+var Integration = Backbone.View.extend({
+    initialize : function(options) {
+        this.options = options || {};
+        this.docModel = this.options.docModel;
+        this.variables = this.options.variables;
+        this.infoData = this.options.infoData;
+    },
+    
+    render : function() {
+        var self = this;
+        if (this.docModel.docStatus == "CREATE" && this.docModel.docType == "DRAFT") {
+            $('.StartTime select').eq(0).val('09')
+            $('.EndTime select').eq(0).val('18')
+        }
+
+        if (GO.util.store.get('document.docMode') == "EDIT") {
+            this.bindEvent();
+        }
+
+        	
+    },
+
+
+    //이벤트 관리
+    bindEvent : function() {
+        var self = this;
+    },
+
+    /**
+     * 전자결재 문서 조회 폼 렌더링
+     * 읽기모드에서 함수가 필요한 경우 구현
+     */
+    renderViewMode : function() {
+        $('.viewModeHiddenPart').hide();
+    },
+
+    /**
+     * 전자결재 결재요청/저장 클릭 후 서버에 전송되기 직전 호출
+     */
+    beforeSave : function() {
+
+    },
+
+    /**
+     * 전자결재 서버에 문서가 저장된 후 호출
+     */
+    afterSave : function() {
+
+    },
+    
+    onEditDocument : function() {
+
+        this.render();
+
+    },
+
+    /**
+     * 전자결재 결재요청/저장 전 데이터 유효성 검사 수행
+     * @returns {boolean} 유효한 데이터일 경우 true, 그외 false
+     */
+    validate : function() {
+        return true;
+    },
+    
+	addRowspan : function(el) {
+		var self = this;
+		var rowspan = parseFloat($(el).attr('rowspan'));
+		$(el).attr('rowspan', rowspan + 1);
+	},
+	
+	minusRowspan : function(el) {
+		var self = this;
+		var rowspan = parseFloat($(el).attr('rowspan'));
+		if(rowspan>2){
+			$(el).attr('rowspan', rowspan - 1);
+		}
+	},
+    /* 행 추가 로직 START */
+    PlusMinusRow : function(plusBtnId, minusBtnId, copyRowClass, copiedRowClass, rowNoClass, {
+          plusRowCallback,
+          minusRowCallback
+        } = {}) {
+        var self = this;
+        $(copyRowClass).hide();
+        if (this.docModel.docStatus == 'CREATE' && this.docModel.docType == 'DRAFT') {
+            self.addRow(copyRowClass, copiedRowClass.replace('.', ''), copiedRowClass, rowNoClass);
+        }
+        
+        $(plusBtnId).on('click', function () {
+            self.addRow(copyRowClass, copiedRowClass.replace('.', ''), copiedRowClass, rowNoClass);
+            
+            if (typeof plusRowCallback === 'function') {
+              plusRowCallback();
+            }
+          });
+
+          $(minusBtnId).on('click', function () {
+            self.minusRow(copiedRowClass);
+            
+            if (typeof minusRowCallback === 'function') {
+              minusRowCallback();
+            }
+          });
+    },
+        
+    addRow : function(copyRow, copiedRowName, copiedClass, rowNo){
+    	var self = this;
+    	var $tr = $(copyRow).clone(true);
+    	$tr.show();
+			$tr.attr('class', copiedRowName);
+			var $cloneTr = self.getTemplateByClone($tr);
+			
+			if($(copiedClass).length == 0){
+				$(copyRow+":last").after($cloneTr);
+				$cloneTr.find(rowNo).text($(copiedClass).length);
+			}
+			$(copiedClass+":last").after($cloneTr);
+			$cloneTr.find(rowNo).text($(copiedClass).length);
+    },
+
+    minusRow : function(e){
+    	var self = this;
+		if ($(e).length > 1) {
+				$(e).last().remove();
+			}
+    },
+    
+	
+    getTemplateByClone : function(template , opt){
+        var self = this;
+        var $tr = $(template).clone(true);
+
+        // ★ 초기화 로직 START
+        // 일반 input 초기화
+        $tr.find('input').each(function(){
+            var type = $(this).attr('type');
+            if (type === 'checkbox' || type === 'radio') {
+                $(this).prop('checked', false);
+            } else {
+                $(this).val('');
+            }
+        });
+
+        // textarea 초기화
+        $tr.find('textarea').val('');
+
+        // select 초기화
+        $tr.find('select').each(function(){
+            var firstVal = $(this).find('option:first').val();
+            $(this).val(firstVal);
+            $(this).attr('data-selectval', firstVal);
+        });
+        // ★ 초기화 로직 END
+
+        if (opt && opt.numbering) {
+            $tr.find("td").eq(opt.idx).text(opt.val);
+        }
+
+        $tr.find('input[data-dsl*="cSum"]').each(function(){
+            self.bindCsumComponent(this);
+        });
+        $tr.find('input[data-dsl*="currency"]').each(function(){
+            self.bindCurrencyComponent(this);
+        });
+        $tr.find('input[data-dsl*="number"]').each(function(){
+            self.bindNumberComponent(this);
+        });
+        $tr.find('input[data-dsl*="calendar"]').each(function(i, item){
+            var uniqueId = _.uniqueId('editorForm_');
+            $(item).attr({"name": uniqueId, "id": uniqueId});
+            self.bindCalendarComponent(this);
+        });
+        
+        $tr.find('input[type="checkbox"]').each(function(i, item){
+        	var uniqueId = 'editorForm_' + Date.now() + '' + _.uniqueId();
+        	$(item).attr({"name": uniqueId, "id": uniqueId})
+        });
+        
+
+        $tr.find('select[data-dsl*="cSel"]').each(function(i, item){
+            var uniqueId = _.uniqueId('editorForm_');
+            $(item).attr({"name": uniqueId,"id": uniqueId});
+            self.bindCselComponent(self);
+        });
+
+        $tr.find('select[data-dsl*="select"]').each(function(i, item){
+            var uniqueId = _.uniqueId('editorForm_');
+            $(item).attr({"name": uniqueId, "id": uniqueId});
+        });
+
+        $tr.find('input[data-dsl="{{text}}"]').each(function(i, item){
+            var uniqueId = _.uniqueId('editorForm_');
+            $(item).attr({"name": uniqueId, "id": uniqueId});
+        });
+
+        $tr.find('input[data-dsl="{{textarea}}"]').each(function(i, item){
+            var uniqueId = _.uniqueId('editorForm_');
+            $(item).attr({"name": uniqueId, "id": uniqueId});
+        });
+
+        $tr.find('textarea[data-dsl="{{textarea}}"]').each(function(i, item){
+            var uniqueId = _.uniqueId('editorForm_');
+            $(item).attr({"name": uniqueId, "id": uniqueId});
+        });
+
+        return $tr;
+    },
+    
+    bindCselComponent : function(target){
+        if ($(target).attr('data-selectval')) {
+            $(target).val($(target).attr('data-selectval'));
+        } else {
+            $(target).find("option:first").attr("selected", "selected");
+        }
+			$(target).off('change');
+			$(target).on('change',function(){
+				var selectVal = $(target).find(':selected').val();
+				$(target).attr('data-selectval',selectVal);
+			});
+		},
+		bindCurrencyComponent : function(target){
+			$(target).removeAttr('inputmask');
+			var dslKey = $(target).attr('data-dsl');
+			var parseKey;
+			dslKey.replace(/{{([^}}]*)}}/g,function(m,key){
+				parseKey = key;
+			});
+
+			var precision = parseKey.split('_');
+			
+			$(target).inputmask({
+				'alias': 'decimal',
+				'groupSeparator': ',', 
+				'autoGroup': true,
+				'digits' : parseInt(precision[1] ? precision[1] : '0'),
+				'allowMinus' : true
+			});
+		},
+
+		bindNumberComponent : function(target){
+			$(target).css('ime-mode', 'disabled');
+			$(target).off('keydown');
+			$(target).on('keydown',function(e){
+				//Delete, Backspace, Tab, Esc, Enter, decimal point, period, ,
+				 if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190, 188, 189]) !== -1 ||
+				         // Ctrl+A 허용
+				        (e.keyCode == 65 && e.ctrlKey === true) || 
+				         // home, end, left, right 허용
+				        (e.keyCode >= 35 && e.keyCode <= 39)) {
+				             return;
+				 }
+				 
+				 var valid = false; //^[0-9]+$/.test(String.fromCharCode(e.keyCode)); 오른쪽 숫자키가 안됨. String.fromCharCode()로 변경하면서 문제 발생(소문자로 변경됨)
+				 if( ( e.keyCode >=48 && e.keyCode <= 57 ) || ( e.keyCode >=96 && e.keyCode <= 105 ) ){
+					 valid=true;
+				 }else{
+					 e.preventDefault();
+				 }
+				 
+				 if(e.shiftKey && valid){
+				 	e.preventDefault();
+				 }
+			});
+		},
+		bindCalendarComponent : function(target){
+			$(target).removeClass('hasDatepicker')
+			$(target).datepicker({
+			    dateFormat : "yy-mm-dd(D)",
+			    changeMonth: true,
+			    changeYear : true,
+			    yearRange : 'c-100:c+10',
+			    yearSuffix: "",
+			    onSelect: function( selectedDate ) {
+			    	$(target).trigger('change');
+			    },
+			    beforeShow : function(elplaceholder, object) {
+				    object.dpDiv.attr("data-layer", "");
+				    var isBeforeCallback = true;
+				    $(document).trigger("showLayer.goLayer", isBeforeCallback);
+				},
+				onClose : function() {
+				    var isBeforeCallback = true;
+				    $(document).trigger("hideLayer.goLayer", isBeforeCallback);
+				}
+		    });
+		},
+		bindCsumComponent : function(target){
+			$(target).removeAttr('inputmask');
+			var name = $(target).attr('name');
+			var dslKey = $(target).attr('data-dsl');
+			var parseKey;
+			dslKey.replace(/{{([^}}]*)}}/g,function(m,key){
+				parseKey = key;
+			});
+			var precisionValue = '0'
+			if (parseKey.search('_') >= 0) {
+				precisionValue = parseKey.split('_')[1].split(':')[0];	
+			}
+			$(target).inputmask({
+	                'alias': 'decimal', 
+    	        'groupSeparator': ',', 
+	                'autoGroup': true,
+	                'digits' : parseInt(precisionValue),
+	                'allowMinus' : true
+		        });
+			$(target).off('focusout');
+			$(target).on('focusout',function(){
+				var sum = 0;
+				_.each( $('form input[data-dsl*="cSum"][name='+ name +']'), function(item){
+					var value = $(item).val().replace(/\,/g,"");
+					var num = parseFloat(value) || 0;
+					sum += num;
+				}, this);
+				sum = parseFloat(sum.toFixed(precisionValue));
+				$('form input[data-dsl*="rSum"][name='+ name +']').val(GO.util.formatNumber(sum));
+			});
+		},
+		/* 행 추가 로직 END */
+ 
+
+    /**
+
+     * 사용자 입력값 외 별도의 변수를 전송하고자 할 때 구현
+
+     *
+
+     * 주의: $('#document_content').getDocVariables()의 리턴값을 확장해서 반환해야 한다.
+
+     */
+
+    getDocVariables : function() {
+
+ 
+
+        return $('#document_content').getDocVariables();
+
+    },
+
+})
+
+return Integration;
