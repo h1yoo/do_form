@@ -1,20 +1,23 @@
 
     calTime : function () {
-        var startTime = $('.workTime select').eq(0).val();
-        var startMin = $('.workTime select').eq(1).val();
-        var endTime = $('.workTime select').eq(3).val();
-        var endMin = $('.workTime select').eq(4).val();
-        console.log("시간");
-        console.log("startTime: " + startTime);
-        console.log("startMin: " + startMin);
-        console.log("endTime: " + endTime);
-        console.log("endMin: " + endMin);
-    
+        var startTime = parseInt($('.workTime select').eq(0).val()) || 0;
+        var startMin = parseInt($('.workTime select').eq(1).val()) || 0;
+        var endTime = parseInt($('.workTime select').eq(2).val()) || 0;
+        var endMin = parseInt($('.workTime select').eq(3).val()) || 0;
+        
         var timeDiff = endTime - startTime;
-        var minDiff = timeDiff * 60 + (endMin - startMin);
-        var hour = (minDiff / 60) % 24;
-        var minute = minDiff % 60;
-    
+        var minDiff = endMin - startMin;
+        
         // 결과 표기
-        $(".sum_workTime").text(hour + "시간 " + minute + "분");
-}
+        if (hour <= 0) {
+            console.log("hour 0 아닌데 왜 안나옴");
+            $(".sum_workTime").text(minDiff + "분");
+        }
+        else {
+            if (minDiff < 0) {
+                timeDiff -= 1;
+                minDiff = 60 + minDiff;
+            }
+            $(".sum_workTime").text(timeDiff + "시간 " + minDiff + "분");
+        }
+    },
