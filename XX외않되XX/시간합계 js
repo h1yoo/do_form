@@ -1,0 +1,8 @@
+
+    calTime : function () {
+        var startTime = moment($('#time').eq(0).val(), "YYYY-MM-DD");
+        var startMin = moment($('#time').eq(1).val(), "YYYY-MM-DD");
+        var endTime = moment($('#time').eq(3).val(), "YYYY-MM-DD");
+        var endMin = moment($('#time').eq(4).val(), "YYYY-MM-DD");
+
+    }
