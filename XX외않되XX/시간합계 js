@@ -1,8 +1,20 @@
 
     calTime : function () {
-        var startTime = moment($('#time').eq(0).val(), "YYYY-MM-DD");
-        var startMin = moment($('#time').eq(1).val(), "YYYY-MM-DD");
-        var endTime = moment($('#time').eq(3).val(), "YYYY-MM-DD");
-        var endMin = moment($('#time').eq(4).val(), "YYYY-MM-DD");
-
-    }
+        var startTime = $('.workTime select').eq(0).val();
+        var startMin = $('.workTime select').eq(1).val();
+        var endTime = $('.workTime select').eq(3).val();
+        var endMin = $('.workTime select').eq(4).val();
+        console.log("시간");
+        console.log("startTime: " + startTime);
+        console.log("startMin: " + startMin);
+        console.log("endTime: " + endTime);
+        console.log("endMin: " + endMin);
+    
+        var timeDiff = endTime - startTime;
+        var minDiff = timeDiff * 60 + (endMin - startMin);
+        var hour = (minDiff / 60) % 24;
+        var minute = minDiff % 60;
+    
+        // 결과 표기
+        $(".sum_workTime").text(hour + "시간 " + minute + "분");
+}
