@@ -1,6 +1,21 @@
+$(document).on("change", ".CBRE_GSA1_2_Acc", function () {
+  var selectedValue = $(this).val();           // 현재 선택된 값
+  var $this = $(this);                         // 현재 select 요소
 
+  // 같은 행 또는 같은 부모 내의 .CBRE_GSA1_2_Acc 중 자기 자신이 아닌 것만 선택
+  $this.closest("tr").find(".CBRE_GSA1_2_Acc").each(function () {
+    if (this !== $this[0]) {
+      $(this).val(selectedValue).trigger("change"); // 값 설정 + 필요 시 이벤트 트리거
+    }
+  });
+});
 			
-			var select1 = $('#select1 select option:selected').val();
+			
+
+
+
+
+var select1 = $('#select1 select option:selected').val();
       
       if(select1 == "CBRE GSA로지스틱스제1호전문투자형사모부동산자투자유한회사"){
           $('#add2').show();
