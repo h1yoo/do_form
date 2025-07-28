@@ -1,10 +1,6 @@
 
 			
 			var select1 = $('#select1 select option:selected').val();
-      // var firstCBRErow = $('[class^="CBRE_"]').first();
-      // firstCBRErow.find('.out1 select').append('\
-      //   <option value="(주)하나은행">(주)하나은행</option>\
-      //   ');
       
       if(select1 == "CBRE GSA로지스틱스제1호전문투자형사모부동산자투자유한회사"){
           $('#add2').show();
