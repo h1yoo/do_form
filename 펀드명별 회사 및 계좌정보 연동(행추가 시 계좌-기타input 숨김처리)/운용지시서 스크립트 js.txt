@@ -1,0 +1,798 @@
+var $ = require("jquery");
+var app = require("app");
+var Backbone = require("backbone");
+var _ = require('underscore');
+
+
+/* ------------------------------------------ PlusMinusRow.js Start ------------------------------------------ */
+
+var PlusMinusRow = function (options) {
+  // 사용자가 정의하지 않은 일부 옵션 변수의 기본값
+  var defaults = {
+    maxRow: 0,											// 행 추가 최대 개수 (0: 무제한)
+    copyRowNoSize: 1									// 행 순번(No) 증가량
+  };
+
+  // 사용자가 정의할 수 있는 옵션 변수
+  var options = {
+    tableId: options.tableId,							// 행 추가/삭제 수행 테이블 id (*필수)
+	
+    plusBtnId: options.plusBtnId,						// 행 추가 버튼 id (*필수)
+    minusBtnId: options.minusBtnId,						// 행 삭제 버튼 id (*필수)
+
+    copyRowClass: options.copyRowClass,					// 복사할 행(tr)의 class (*필수)
+
+    copyRowNoClass: options.copyRowNoClass,				// 순번(No) 열(td)의 class
+    copyRowNoSize: options.copyRowNoSize,				// 순번(No) 증가량 :int
+
+	rowNo: options.rowNo,								// 입력한 행 수만큼 추가
+    maxRow: options.maxRow,								// 행 추가 최대 개수 :int
+    maxNo: options.maxNo,								// 행 추가 최대 순번(No) :int
+
+    rowspanClass: options.rowspanClass,					// 처리할 rowspan 속성이 있는 열(td)의 class
+
+    plusRowCallback: options.plusRowCallback,			// 행 추가 콜백 함수명
+    minusRowCallback: options.minusRowCallback			// 행 삭제 콜백 함수명
+  };
+
+  var settings = $.extend({}, defaults, options);
+
+
+  // 행 추가 수행 횟수 계산 (순번 계산시 필요) - 문서 수정하는 경우 고려
+  var plusCnt;
+
+  if ($("#" + settings.tableId + " .copiedRow")[0] === undefined) {
+    plusCnt = 1;
+  }
+  else {
+    // 다중행일 경우 고려
+    if (!$($("#" + settings.tableId + " ." + settings.copyRowClass + " td")[0]).attr("rowspan")) {
+      plusCnt = $("#" + settings.tableId + " .copiedRow").length + 1;
+    }
+    else {
+      var rowCnt = parseInt($($("#" + settings.tableId + " ." + settings.copyRowClass + " td")[0]).attr("rowspan"));
+      plusCnt = ($("#" + settings.tableId + " .copiedRow").length + rowCnt) / rowCnt;
+    }
+  }
+
+  //입력한 행 수만큼 추가
+  $("." + settings.rowNo).on('change', function () {
+	$("#" + settings.tableId + " .copiedRow").remove();
+	plusCnt=1;
+
+	var row_no = parseInt($("." + settings.rowNo+ " input").val());
+
+	for(var i=0; i<row_no-1; i++){
+		plusRow();
+		plusCnt++;
+	}
+  });
+  
+
+  // 행 추가 수행
+  $("#" + settings.plusBtnId).on('click', function () {
+    // 행 추가 최대수까지 or 무제한으로
+    if ($("#" + settings.tableId + " ." + settings.copyRowClass).length + $("#" + settings.tableId + " .copiedRow").length < settings.maxRow || settings.maxRow == 0) {
+      // 행 추가 최대 순번까지
+      if (settings.maxNo !== undefined) {
+        if (parseInt($("#" + settings.tableId + " ." + settings.copyRowNoClass + ":last").text()) < settings.maxNo) {
+          plusRow();
+          plusCnt++;
+        }
+      }
+      else {
+        plusRow();
+        plusCnt++;
+      }
+    }
+  });
+
+  // 행 삭제 수행
+  $("#" + settings.minusBtnId).on('click', minusRow);
+
+
+
+  function plusRow() {
+    var $tr = $("#" + settings.tableId + " ." + settings.copyRowClass).clone(true); // 추가할 행 복사 (이벤트도)
+
+    // 계좌 - 기타 input 숨긴 후 행추가
+    if ($('#select1 select option:selected').val() != "선택") {
+      // 펀드명이 "선택"으로 선택되지 않으면 계좌 input 숨김
+      $tr.find(".CBRE_defaultInput").hide();
+    }
+    
+    // ① rowspan 처리 (optional)
+    if ($("#" + settings.tableId + " ." + settings.rowspanClass)[0] !== undefined) {
+      $.each($("#" + settings.tableId + " ." + settings.rowspanClass), function (k, v) {
+        $(v).attr("rowspan", parseInt($(v).attr("rowspan")) + $tr.length);
+      });
+
+      $.each($tr.find("td[rowspan]"), function (k, v) {
+        if ($(v).hasClass(settings.rowspanClass)) {
+          $(v).remove();		// rowspan을 가진 행(td) 삭제
+        }
+      });
+    }
+
+    // ② 순번(No) 처리 - 순번 클래스가 한 행에 두 개 이상 있을 경우 고려 (optional)
+    //    ex) 1  ...     2  ...             ex) 1  ...     1  ...
+    //        3  ...     4  ...     or          2  ...     2  ...
+    if ($("#" + settings.tableId + " ." + settings.copyRowNoClass)[0] !== undefined) {
+      var copyRowNoCnt = $tr.find("." + settings.copyRowNoClass).length; // 한 행에 존재하는 순번 클래스의 수
+
+      for (var i = 0; i < copyRowNoCnt; i++) {
+        if (!$tr.find("." + settings.copyRowNoClass).attr('rowspan')) {
+          var newNo = parseInt($($tr.find("." + settings.copyRowNoClass)[i]).text()) + settings.copyRowNoSize * plusCnt * $tr.length;
+        }
+        else {
+          var newNo = parseInt($($tr.find("." + settings.copyRowNoClass)[i]).text()) + settings.copyRowNoSize * plusCnt;
+        }
+
+        $($tr.find("." + settings.copyRowNoClass)[i]).text(newNo);
+      }
+    }
+
+    // ③ 복사행 class 재설정 및 컴포넌트 초기화
+    var i = 1;		// 다중행 복사일 때 컴포넌트 name/id 처리시 필요. copiedRow의 수
+    $.each($tr, function (k, v) {
+      $(v).removeClass(settings.copyRowClass);
+      $(v).addClass('copiedRow');
+
+      initComponent($(v), i++);
+    });
+
+    // ④ 처리 완료된 복사행을 테이블에 추가 (마지막 행으로)
+    if ($("#" + settings.tableId + " .copiedRow")[0] === undefined) {
+      $("#" + settings.tableId + " ." + settings.copyRowClass + ":last").after($tr);
+    }
+    else {
+      $("#" + settings.tableId + " .copiedRow:last").after($tr);
+    }
+
+    // ⑤ 행 추가 콜백 함수 실행
+    if (typeof settings.plusRowCallback == 'function') {
+      settings.plusRowCallback(this);
+    }
+  }
+
+
+
+  function initComponent($tr, i) {
+    var editorFormCnt = 1;		// 각 tr에 존재하는 컴포넌트 name/id 처리시 필요
+    var radioName = "";			// radio 컴포넌트 name/id 처리시 필요
+    var checkName = "";			// radio 컴포넌트 name/id 처리시 필요
+
+    $.each($tr.find("td input"), function (k, v) {
+      var componentType = $(v).attr("data-dsl");
+      var componentId = $(v).attr("id");
+
+      if (!(componentType.search("check") > -1) && !(componentType.search("radio") > -1)) {
+        var newId =  settings.tableId+"_"+($("#" + settings.tableId).find(".copiedRow").length + i) + "_" + editorFormCnt;
+
+        $(v).attr({name: newId, id: newId});
+        $(v).val("");
+
+        // currency 초기화
+        if (componentType.search("currency") > -1) {
+          var parseKey;
+          componentType.replace(/{{([^}}]*)}}/g, function (m, key) {
+            parseKey = key;
+          });
+          var precision = parseKey.split('_');
+
+          $(v).inputmask({
+            'alias': 'decimal',
+            'groupSeparator': ',',
+            'autoGroup': true,
+            'digits': parseInt(precision[1] ? precision[1] : '0'),	// 소수점 처리 (ex. {{currency_3}}일 때)
+            'allowMinus': true
+          });
+        }
+
+        // calendar 초기화
+        else if (componentType.search("calendar") > -1) {
+          $(v).datepicker("destroy").removeClass('hasDatepicker');
+          $(v).datepicker({
+            dateFormat: "yy-mm-dd(D)",
+            changeMonth: true,
+            changeYear: true,
+            yearSuffix: "",
+          });
+        }
+      }
+
+      // radio 초기화 - 기본 형식 고려: {{radio_A_B ...}} → editorForm_0_A, editorForm_0_B, ...
+      else if (componentType.search("radio") > -1) {
+        if ($(v).attr('name') == radioName) {
+          editorFormCnt--;
+        }
+        else {
+          radioName = $(v).attr('name');
+        }
+
+        var newName = settings.tableId+"_"+($("#" + settings.tableId).find(".copiedRow").length + i) + "_" + editorFormCnt;
+        var newId = settings.tableId+"_"+($("#" + settings.tableId).find(".copiedRow").length + i) + "_" + editorFormCnt + "_" + componentId.split("_")[2];
+
+        $(v).attr({name: newName, id: newId, checked: false});
+      }
+
+      // check 초기화 - 기본 형식 고려: {{check_A_B ...}} → editorForm_1_A, editorForm_1_B, ...
+      else if (componentType.search("check") > -1) {
+        var curCheckName = $(v).attr('name').split("_")[0] + "_" + $(v).attr('name').split("_")[1];
+
+        if (curCheckName == checkName) {
+          editorFormCnt--;
+        }
+        else {
+          checkName = curCheckName;
+        }
+
+        var newId = settings.tableId+"_"+($("#" + settings.tableId).find(".copiedRow").length + i) + "_" + editorFormCnt + "_" + componentId.split("_")[2];
+
+        $(v).attr({name: newId, id: newId, checked: false});
+      }
+
+      editorFormCnt++;
+    });
+
+    // select 초기화
+    $.each($tr.find("td select"), function (k, v) {
+      var componentName = $(v).attr("name");		// 기본 형식에서 id 속성이 존재하지 않으므로 name 값을 가져옴
+      var newName = settings.tableId+"_"+($("#" + settings.tableId).find(".copiedRow").length + i) + "_" + editorFormCnt;
+
+      $(v).attr({name: newName, id: newName});
+
+      editorFormCnt++;
+    });
+
+    // textarea 초기화
+    $.each($tr.find("td textarea"), function (k, v) {
+      var componentId = $(v).attr("id");
+      var newId = settings.tableId+"_"+($("#" + settings.tableId).find(".copiedRow").length + i) + "_" + editorFormCnt;
+
+      $(v).attr({name: newId, id: newId});
+      $(v).val("");
+
+      editorFormCnt++;
+    });
+
+    // TODO : cOrg 초기화
+    // TODO : cSum, rSum 초기화
+
+    return $tr;
+  }
+
+
+
+  function minusRow() {
+    // 추가된 행(copiedRow)이 존재하면
+    if ($("#" + settings.tableId + " .copiedRow")[0] !== undefined) {
+      // ① rowspan 처리 후 (optional)
+      if ($("#" + settings.tableId + " ." + settings.rowspanClass)[0] !== undefined) {
+        $.each($("#" + settings.tableId + " ." + settings.rowspanClass), function (k, v) {
+          $(v).attr("rowspan", parseInt($(v).attr("rowspan")) - $("#" + settings.tableId + " ." + settings.copyRowClass).length);
+        });
+      }
+
+      // ① 마지막 행(copiedRow) 삭제
+      for (var i = 0; i < $('.' + settings.copyRowClass).length; i++) {
+        $("#" + settings.tableId + " .copiedRow:last").remove();
+      }
+
+      plusCnt--;
+    }
+
+    // ② 행 삭제 콜백 함수 실행
+    if (typeof settings.minusRowCallback == 'function') {
+      settings.minusRowCallback(this);
+    }
+  }
+};
+
+
+var Integration = Backbone.View.extend({
+	initialize : function(options){
+		this.options = options || {};
+		this.docModel = this.options.docModel;
+		this.variables = this.options.variables;
+		this.infoData = this.options.infoData;
+	},
+	render : function() {
+		var self = this;
+		$('.viewModeHiddenPart').show();
+		debugger;
+				
+			$(".price input, .vat input").on("change",function(){
+					self.calAmount();
+			});
+
+      $(".selectEtc select").on("change", function () {
+        var selectEtc = $(this).val();
+                          
+        if(selectEtc == "기타") {
+          $(this).closest("td").find('.CBRE_defaultInput').show();
+        } 
+      });
+
+			$('#select1').on('change', function(){
+			
+        $('#text span').hide();
+        $('#stmap span').hide();
+        var select1 = $('#select1 select option:selected').val();
+        
+        if(select1 == "CBRE GSA로지스틱스제1호전문투자형사모부동산자투자유한회사"){
+          $('#add2').show();
+          $('#stamp8').show();
+          $('.out1 select').val('(주)하나은행');  // 신탁업자 옵션값 변경
+          $('.out2 select').val('삼정KPMG AAS Inc.');  // 일반사무관리회사 옵션값 변경
+
+          // 펀드명 별 수취계좌 & 입금/출금 계좌 설정
+          $('.CBRE_GSA1_Acc').show();
+          $('.CBRE_GSA1_1_Acc,\
+             .CBRE_GSA1_2_Acc,\
+             .CBRE_GSA1_3_Acc,\
+             .CBRE_GSA1_4_Acc,\
+             .CBRE_GSA1_5_Acc,\
+             .CBRE_GSA1_6_Acc,\
+             .CBRE_GSA2_Acc,\
+             .CBRE_ILC1_Acc,\
+             .CBRE_ILC2_Acc,\
+             .CBRE_ILC1_1_Acc,\
+             .CBRE_1_Acc,\
+             .CBRE_DL_Acc,\
+             .CBRE_defaultInput').hide();
+
+        }else if(select1 == "CBRE GSA로지스틱스제1의1호전문투자형사모부동산모투자유한회사"){
+          $('#add3').show();
+          $('#stamp2').show();
+          $('.out1 select').val('(주)하나은행');  // 신탁업자 옵션값 변경
+          $('.out2 select').val('삼정KPMG AAS Inc.');  // 일반사무관리회사 옵션값 변경
+          
+          // 펀드명 별 수취계좌 & 입금/출금 계좌 설정
+          $('.CBRE_GSA1_1_Acc').show();
+          $('.CBRE_GSA1_Acc,\
+             .CBRE_GSA1_2_Acc,\
+             .CBRE_GSA1_3_Acc,\
+             .CBRE_GSA1_4_Acc,\
+             .CBRE_GSA1_5_Acc,\
+             .CBRE_GSA1_6_Acc,\
+             .CBRE_GSA2_Acc,\
+             .CBRE_ILC1_Acc,\
+             .CBRE_ILC2_Acc,\
+             .CBRE_ILC1_1_Acc,\
+             .CBRE_1_Acc,\
+             .CBRE_DL_Acc,\
+             .CBRE_defaultInput').hide();
+          
+       }else if(select1 == "CBRE GSA로지스틱스제1의2호전문투자형사모부동산모투자유한회사"){
+          $('#add4').show();
+          $('#stamp3').show();
+          $('.out1 select').val('(주)하나은행');  // 신탁업자 옵션값 변경
+          $('.out2 select').val('삼정KPMG AAS Inc.');  // 일반사무관리회사 옵션값 변경
+          
+          // 펀드명 별 수취계좌 & 입금/출금 계좌 설정
+          $('.CBRE_GSA1_2_Acc').show();
+          $('.CBRE_GSA1_Acc,\
+             .CBRE_GSA1_1_Acc,\
+             .CBRE_GSA1_3_Acc,\
+             .CBRE_GSA1_4_Acc,\
+             .CBRE_GSA1_5_Acc,\
+             .CBRE_GSA1_6_Acc,\
+             .CBRE_GSA2_Acc,\
+             .CBRE_ILC1_Acc,\
+             .CBRE_ILC2_Acc,\
+             .CBRE_ILC1_1_Acc,\
+             .CBRE_1_Acc,\
+             .CBRE_DL_Acc,\
+             .CBRE_defaultInput').hide();
+                          
+             if(selectEtc == "기타") {
+               $('.CBRE_defaultInput').show();
+             }
+          
+        }else if(select1 == "CBRE GSA로지스틱스제1의3호전문투자형사모부동산모투자유한회사"){
+          $('#add5').show();
+          $('#stamp4').show();
+          $('.out1 select').val('(주)하나은행');  // 신탁업자 옵션값 변경
+          $('.out2 select').val('삼정KPMG AAS Inc.');  // 일반사무관리회사 옵션값 변경
+          
+          // 펀드명 별 수취계좌 & 입금/출금 계좌 설정
+          $('.CBRE_GSA1_3_Acc').show();
+          $('.CBRE_GSA1_Acc,\
+             .CBRE_GSA1_1_Acc,\
+             .CBRE_GSA1_2_Acc,\
+             .CBRE_GSA1_4_Acc,\
+             .CBRE_GSA1_5_Acc,\
+             .CBRE_GSA1_6_Acc,\
+             .CBRE_GSA2_Acc,\
+             .CBRE_ILC1_Acc,\
+             .CBRE_ILC2_Acc,\
+             .CBRE_ILC1_1_Acc,\
+             .CBRE_1_Acc,\
+             .CBRE_DL_Acc,\
+             .CBRE_defaultInput').hide();
+          
+        }else if(select1 == "CBRE GSA로지스틱스제1의4호전문투자형사모부동산모투자유한회사"){
+          $('#add6').show();
+          $('#stamp5').show();
+          $('.out1 select').val('(주)하나은행');  // 신탁업자 옵션값 변경
+          $('.out2 select').val('삼정KPMG AAS Inc.');  // 일반사무관리회사 옵션값 변경
+          
+          // 펀드명 별 수취계좌 & 입금/출금 계좌 설정
+          $('.CBRE_GSA1_4_Acc').show();
+          $('.CBRE_GSA1_Acc,\
+             .CBRE_GSA1_1_Acc,\
+             .CBRE_GSA1_2_Acc,\
+             .CBRE_GSA1_3_Acc,\
+             .CBRE_GSA1_5_Acc,\
+             .CBRE_GSA1_6_Acc,\
+             .CBRE_GSA2_Acc,\
+             .CBRE_ILC1_Acc,\
+             .CBRE_ILC2_Acc,\
+             .CBRE_ILC1_1_Acc,\
+             .CBRE_1_Acc,\
+             .CBRE_DL_Acc,\
+             .CBRE_defaultInput').hide();
+          
+      }else if(select1 == "CBRE GSA로지스틱스제1의5호전문투자형사모부동산모투자유한회사"){
+          $('#add7').show();
+          $('#stamp6').show();
+          $('.out1 select').val('(주)하나은행');  // 신탁업자 옵션값 변경
+          $('.out2 select').val('삼정KPMG AAS Inc.');  // 일반사무관리회사 옵션값 변경
+          
+          // 펀드명 별 수취계좌 & 입금/출금 계좌 설정
+          $('.CBRE_GSA1_5_Acc').show();
+          $('.CBRE_GSA1_Acc,\
+             .CBRE_GSA1_1_Acc,\
+             .CBRE_GSA1_2_Acc,\
+             .CBRE_GSA1_3_Acc,\
+             .CBRE_GSA1_4_Acc,\
+             .CBRE_GSA1_6_Acc,\
+             .CBRE_GSA2_Acc,\
+             .CBRE_ILC1_Acc,\
+             .CBRE_ILC2_Acc,\
+             .CBRE_ILC1_1_Acc,\
+             .CBRE_1_Acc,\
+             .CBRE_DL_Acc,\
+             .CBRE_defaultInput').hide();
+          
+        }else if(select1 == "CBRE 로지스밸리제1의6호전문투자형사모부동산모투자유한회사"){
+          $('#add8').show();
+          $('#stamp7').show();
+          $('.out1 select').val('(주)하나은행');  // 신탁업자 옵션값 변경
+          $('.out2 select').val('삼정KPMG AAS Inc.');  // 일반사무관리회사 옵션값 변경
+          
+          // 펀드명 별 수취계좌 & 입금/출금 계좌 설정
+          $('.CBRE_GSA1_6_Acc').show();
+          $('.CBRE_GSA1_Acc,\
+             .CBRE_GSA1_1_Acc,\
+             .CBRE_GSA1_2_Acc,\
+             .CBRE_GSA1_3_Acc,\
+             .CBRE_GSA1_4_Acc,\
+             .CBRE_GSA1_5_Acc,\
+             .CBRE_GSA2_Acc,\
+             .CBRE_ILC1_Acc,\
+             .CBRE_ILC2_Acc,\
+             .CBRE_ILC1_1_Acc,\
+             .CBRE_1_Acc,\
+             .CBRE_DL_Acc,\
+             .CBRE_defaultInput').hide();
+          
+        }else if(select1 == "CBRE GSA로지스틱스제2호전문투자형사모부동산자투자유한회사"){
+          $('#add9').show();
+          $('#stamp9').show();
+          $('.out1 select').val('(주)하나은행');  // 신탁업자 옵션값 변경
+          $('.out2 select').val('삼정KPMG AAS Inc.');  // 일반사무관리회사 옵션값 변경
+          
+          // 펀드명 별 수취계좌 & 입금/출금 계좌 설정
+          $('.CBRE_GSA2_Acc').show();
+          $('.CBRE_GSA1_Acc,\
+             .CBRE_GSA1_1_Acc,\
+             .CBRE_GSA1_2_Acc,\
+             .CBRE_GSA1_3_Acc,\
+             .CBRE_GSA1_4_Acc,\
+             .CBRE_GSA1_5_Acc,\
+             .CBRE_GSA1_6_Acc,\
+             .CBRE_ILC1_Acc,\
+             .CBRE_ILC2_Acc,\
+             .CBRE_ILC1_1_Acc,\
+             .CBRE_1_Acc,\
+             .CBRE_DL_Acc,\
+             .CBRE_defaultInput').hide();
+          
+        }else if(select1 == "CBRE 로지스밸리전문투자형사모부동산투자신탁제1호"){
+          $('#add11').show();
+          $('#stamp1').show();
+          $('.out1 select').val('(주)하나은행');  // 신탁업자 옵션값 변경
+          $('.out2 select').val('(주)KB펀드파트너스');  // 일반사무관리회사 옵션값 변경
+          
+          // 펀드명 별 수취계좌 & 입금/출금 계좌 설정
+          $('.CBRE_1_Acc').show();
+          $('.CBRE_GSA1_Acc,\
+             .CBRE_GSA1_1_Acc,\
+             .CBRE_GSA1_2_Acc,\
+             .CBRE_GSA1_3_Acc,\
+             .CBRE_GSA1_4_Acc,\
+             .CBRE_GSA1_5_Acc,\
+             .CBRE_GSA1_6_Acc,\
+             .CBRE_GSA2_Acc,\
+             .CBRE_ILC1_Acc,\
+             .CBRE_ILC2_Acc,\
+             .CBRE_ILC1_1_Acc,\
+             .CBRE_DL_Acc,\
+             .CBRE_defaultInput').hide();
+
+        }
+        else if(select1 == "CBRE ILC전문투자형사모부동산자투자신탁제1호"){
+          $('#add12').show();
+          $('#stamp1').show();
+          $('.out1 select').val('(주)신한은행');  // 신탁업자 옵션값 변경
+          $('.out2 select').val('삼정KPMG AAS Inc.');  // 일반사무관리회사 옵션값 변경
+          
+          // 펀드명 별 수취계좌 & 입금/출금 계좌 설정
+          $('.CBRE_ILC1_Acc').show();
+          $('.CBRE_GSA1_Acc,\
+             .CBRE_GSA1_1_Acc,\
+             .CBRE_GSA1_2_Acc,\
+             .CBRE_GSA1_3_Acc,\
+             .CBRE_GSA1_4_Acc,\
+             .CBRE_GSA1_5_Acc,\
+             .CBRE_GSA1_6_Acc,\
+             .CBRE_GSA2_Acc,\
+             .CBRE_1_Acc,\
+             .CBRE_ILC2_Acc,\
+             .CBRE_ILC1_1_Acc,\
+             .CBRE_DL_Acc,\
+             .CBRE_defaultInput').hide();
+
+        }else if(select1 == "CBRE ILC일반사모부동산모투자신탁제1-1호"){
+          $('#add13').show();
+          $('#stamp1').show();
+          $('.out1 select').val('(주)신한은행');  // 신탁업자 옵션값 변경
+          $('.out2 select').val('삼정KPMG AAS Inc.');  // 일반사무관리회사 옵션값 변경
+          
+          // 펀드명 별 수취계좌 & 입금/출금 계좌 설정
+          $('.CBRE_ILC1_1_Acc').show();
+          $('.CBRE_GSA1_Acc,\
+             .CBRE_GSA1_1_Acc,\
+             .CBRE_GSA1_2_Acc,\
+             .CBRE_GSA1_3_Acc,\
+             .CBRE_GSA1_4_Acc,\
+             .CBRE_GSA1_5_Acc,\
+             .CBRE_GSA1_6_Acc,\
+             .CBRE_GSA2_Acc,\
+             .CBRE_1_Acc,\
+             .CBRE_ILC2_Acc,\
+             .CBRE_ILC1_Acc,\
+             .CBRE_DL_Acc,\
+             .CBRE_defaultInput').hide();
+
+        }else if(select1 == "CBRE DL일반부동산사모투자회사"){
+          $('#add10').show();
+          $('#stamp10').show();
+          $('.out1 select').val('(주)국민은행');  // 신탁업자 옵션값 변경
+          $('.out2 select').val('삼정KPMG AAS Inc.');  // 일반사무관리회사 옵션값 변경
+          
+          // 펀드명 별 수취계좌 & 입금/출금 계좌 설정
+          $('.CBRE_DL_Acc').show();
+          $('.CBRE_GSA1_Acc,\
+             .CBRE_GSA1_1_Acc,\
+             .CBRE_GSA1_2_Acc,\
+             .CBRE_GSA1_3_Acc,\
+             .CBRE_GSA1_4_Acc,\
+             .CBRE_GSA1_5_Acc,\
+             .CBRE_GSA1_6_Acc,\
+             .CBRE_GSA2_Acc,\
+             .CBRE_1_Acc,\
+             .CBRE_ILC2_Acc,\
+             .CBRE_ILC1_Acc,\
+             .CBRE_ILC1_1_Acc,\
+             .CBRE_defaultInput').hide();
+
+        }else if(select1 == "CBRE ILC일반사모부동산자투자신탁제2호"){
+          $('#add11').show();
+          $('#stamp1').show();
+          $('.out1 select').val('(주)신한은행');  // 신탁업자 옵션값 변경
+          $('.out2 select').val('삼정KPMG AAS Inc.');  // 일반사무관리회사 옵션값 변경
+          
+          // 펀드명 별 수취계좌 & 입금/출금 계좌 설정
+          $('.CBRE_ILC2_Acc').show();
+          $('.CBRE_GSA1_Acc,\
+             .CBRE_GSA1_1_Acc,\
+             .CBRE_GSA1_2_Acc,\
+             .CBRE_GSA1_3_Acc,\
+             .CBRE_GSA1_4_Acc,\
+             .CBRE_GSA1_5_Acc,\
+             .CBRE_GSA1_6_Acc,\
+             .CBRE_GSA2_Acc,\
+             .CBRE_1_Acc,\
+             .CBRE_DL_Acc,\
+             .CBRE_ILC1_Acc,\
+             .CBRE_ILC1_1_Acc,\
+             .CBRE_defaultInput').hide();
+          
+        }else{
+          // 펀드명 별 수취계좌 & 입금/출금 계좌 설정
+          $('.CBRE_defaultInput').show();
+          $('.CBRE_GSA1_Acc,\
+            .CBRE_GSA1_1_Acc,\
+            .CBRE_GSA1_2_Acc,\
+            .CBRE_GSA1_3_Acc,\
+            .CBRE_GSA1_4_Acc,\
+            .CBRE_GSA1_5_Acc,\
+            .CBRE_GSA1_6_Acc,\
+            .CBRE_GSA2_Acc,\
+            .CBRE_1_Acc,\
+            .CBRE_DL_Acc,\
+            .CBRE_ILC1_Acc,\
+            .CBRE_ILC1_1_Acc,\
+            .CBRE_ILC2_Acc').hide();
+        }
+      });
+
+			
+		
+		
+		  PlusMinusRow({
+				tableId : "dynamic_table1",
+				plusBtnId : "plus1", 
+				minusBtnId : "minus1",
+				copyRowClass : "copyRow1",
+				copyRowNoClass : "copyRowNo1",
+				minusRowCallback : function() {self.calAmount();},
+				plusRowCallback : function() {self.calAmount();}
+      });
+      PlusMinusRow({
+				tableId : "dynamic_table2",
+				plusBtnId : "plus2", 
+				minusBtnId : "minus2",
+				copyRowClass : "copyRow2",
+				copyRowNoClass : "copyRowNo2"
+      });
+      PlusMinusRow({
+				tableId : "dynamic_table3",
+				plusBtnId : "plus3", 
+				minusBtnId : "minus3",
+				copyRowClass : "copyRow3",
+				copyRowNoClass : "copyRowNo3"
+		  });
+
+		  $('#select2').find('select').on('change',function(){
+					self.checkText1();
+      });
+      // 임스소스
+      $('.editor_slt').css({
+        'width': '100%',
+        'max-width': '100%',
+        'box-sizing': 'border-box'
+      });
+      // 임스소스
+	},
+	
+	
+	calAmount : function(){
+		var cur = 0;
+		var sum_vat = parseFloat((0).toFixed(0));
+		var sum_price = parseFloat((0).toFixed(0));
+		var sum_cur = parseFloat((0).toFixed(0));
+
+		$("#dynamic_table1 tr").each(function(i, e){
+			 if ($(e).find('.price')[0]) {
+				var vat = parseFloat($(e).find('.vat input').val().replace(/\,/g,"")); if (isNaN(vat)) vat = 0;
+				var price = parseFloat($(e).find('.price input').val().replace(/\,/g,"")); if (isNaN(price)) price = 0;
+
+				cur = parseFloat((vat + price).toFixed(0));
+				$(e).find(".cur").text(GO.util.numberWithCommas(cur));
+				
+				sum_vat += vat;
+				sum_price += price;
+				sum_cur += cur;
+			}
+		});
+		$(".sum_vat").text("\\ "+GO.util.numberWithCommas(sum_vat));
+		$(".sum_price").text("\\ "+GO.util.numberWithCommas(sum_price));
+		$(".sum_cur").text("\\ "+GO.util.numberWithCommas(sum_cur));
+	},
+
+	renderViewMode : function(){
+		var self = this;
+		$('.viewModeHiddenPart').hide();
+		
+	},
+	checkText1 : function(){
+		var self= this;
+		var select2 = $('#select2 select').val();
+		
+
+
+		if(select2 == '회계처리'){
+				$('#dynamic_table2').hide();
+				$('#dynamic_table1').show();
+				$('#dynamic_table3').show();
+		}else{
+				$('#dynamic_table2').css('display','');
+				$('#dynamic_table1').show();
+				$('#dynamic_table3').show();
+		}
+
+	},
+	onEditDocument : function(){this.render();},
+	beforeSave :function() {$('.viewModeHiddenPart').hide();
+	$('#text span').hide();
+	$('#stmap span').hide();
+		var select1 = $('#select1').find('select').attr('data-selectval');
+
+		if(select1 == "CBRE GSA로지스틱스제1호전문투자형사모부동산자투자유한회사"){
+					$('#add2').attr('style','display:');
+					$('#stamp8').attr('style','display:');
+			}else if(select1 == "CBRE GSA로지스틱스제1의1호전문투자형사모부동산모투자유한회사"){
+					$('#add3').attr('style','display:');
+					$('#stamp2').attr('style','display:');
+					
+			}else if(select1 == "CBRE GSA로지스틱스제1의2호전문투자형사모부동산모투자유한회사"){
+					$('#add4').attr('style','display:');
+					$('#stamp3').attr('style','display:');
+					
+			}else if(select1 == "CBRE GSA로지스틱스제1의3호전문투자형사모부동산모투자유한회사"){
+					$('#add5').attr('style','display:');
+					$('#stamp4').attr('style','display:');
+					
+			}else if(select1 == "CBRE GSA로지스틱스제1의4호전문투자형사모부동산모투자유한회사"){
+					$('#add6').attr('style','display:');
+					$('#stamp5').attr('style','display:');
+					
+			}else if(select1 == "CBRE GSA로지스틱스제1의5호전문투자형사모부동산모투자유한회사"){
+					$('#add7').attr('style','display:');
+					$('#stamp6').attr('style','display:');
+					
+			}else if(select1 == "CBRE 로지스밸리제1의6호전문투자형사모부동산모투자유한회사"){
+								 
+					$('#add8').attr('style','display:');
+					$('#stamp7').attr('style','display:');
+					
+			}else if(select1 == "CBRE GSA로지스틱스제2호전문투자형사모부동산자투자유한회사"){
+					$('#add9').attr('style','display:');
+					$('#stamp9').attr('style','display:');
+					
+			}else if(select1 == "CBRE 로지스밸리전문투자형사모부동산투자신탁제1호"){
+					$('#add11').attr('style','display:');
+					$('#stamp1').attr('style','display:');
+					
+			}
+			else if(select1 == "CBRE ILC전문투자형사모부동산자투자신탁제1호"){
+					$('#add12').attr('style','display:');
+					$('#stamp1').attr('style','display:');
+				
+			}else if(select1 == "CBRE ILC일반사모부동산모투자신탁제1-1호"){
+					$('#add13').css('display','');
+					$('#stamp1').css('display','');
+			}else if(select1 == "CBRE DL일반부동산사모투자회사"){
+					$('#add10').show();
+					$('#stamp10').show();
+			}else if(select1 == "CBRE ILC일반사모부동산자투자신탁제2호"){
+					$('#add11').show();
+					$('#stamp1').show();
+			}else{
+			
+			}
+	},
+	afterSave :function() {$('.viewModeHiddenPart').hide();
+		this.renderViewMode();
+	},
+	validate :function() {
+			var select1 = $('#select1').find('select').attr('data-selectval')
+			
+			if(select1 == "선택"){
+				
+				$.goError('펀드명을 선택하시기 바랍니다.')
+				return false;
+			}else if(select1 == ""){
+				$.goError('펀드명을 선택하시기 바랍니다.')
+				return false;
+			}else{
+				return true;
+			}
+	},
+	getDocVariables : function(){}
+});
+return Integration;
