@@ -1,0 +1,145 @@
+
+var Integration = Backbone.View.extend({
+
+    initialize : function(options) {
+    
+    this.options = options || {};
+    
+    this.docModel = this.options.docModel;
+    
+    this.variables = this.options.variables;
+    
+    },
+    
+     
+    
+    render : function() {
+    
+    var self = this;
+    
+    if (this.docModel.docStatus == 'CREATE' && this.docModel.docType == 'DRAFT') {
+        
+        self.autoSubject();
+    
+    }
+    
+     
+    
+    if (GO.util.store.get('document.docMode') == 'EDIT') {
+    
+    self.setEvent();
+    
+    }
+    
+    },
+    
+     
+    autoSubject: function() {
+      var userName = $('.userName').find('input').val();  // 기안자
+      var userRank = $('.userRank').find('input').val();  // 직급
+      var userDep = $('.userDep').find('input').val();  // 기안부서
+      
+      $('#subject').val('"시말서(' + userDep + " " + userRank + " " + userName + ')"');
+    },
+    
+     
+    
+    setEvent : function() {
+    
+    var self = this;
+    
+    },
+    
+     
+    
+    renderViewMode : function() {
+    
+    $('.viewModeHiddenPart').hide();
+    
+    },
+    
+     
+    
+    onEditDocument : function() {
+    
+    this.render();
+    
+    },
+    
+     
+    
+    beforeSave : function() {
+    
+    },
+    
+     
+    
+    afterSave : function() {
+    
+    },
+    
+     
+    
+    nvlToEmpty : function(v) {
+    
+    if (v) {
+    
+    return _.isNull(v) ? "" : v;
+    
+    }
+    
+    return "";
+    
+    },
+    
+     
+    
+     
+    
+     
+    validate : function() {
+    
+    var self = this;
+    
+               try {
+    
+                self.finalSignCheck();
+    
+                   return true;
+    
+                 } catch (error) {
+    
+                $.goMessage(error.message)
+    
+                   return false;
+    
+                 }
+    
+    },
+    
+    
+    // 최종결재자 유무 판단
+    
+    finalSignCheck: function() {
+    
+      if($('.sign_type1_inline').eq(2).find('.sign_member').text() == ""){
+      
+      throw new Error("최종 결재자 필수 추가");
+      
+      }
+    
+    },
+    
+    getDocVariables : function() {
+    
+    return _.extend(this.variables, {});
+    
+    }
+    
+    });
+    
+     
+    
+     
+    
+    return Integration;
