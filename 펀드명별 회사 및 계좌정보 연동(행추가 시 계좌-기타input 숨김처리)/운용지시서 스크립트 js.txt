@@ -311,7 +311,9 @@ var Integration = Backbone.View.extend({
                           
         if(selectEtc == "기타") {
           $(this).closest("td").find('.CBRE_defaultInput').show();
-        } 
+        }  else {
+          $(this).closest("td").find('.CBRE_defaultInput').hide();
+        }
       });
 
 			$('#select1').on('change', function(){
