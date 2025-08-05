@@ -56,3 +56,6 @@
 
       self.calTotal(".totalAMT input", ".total_totalAMT input");
     });
+
+
+Uncaught TypeError: $(...).val(...).toFixed is not a function
