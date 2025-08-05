@@ -1,41 +1,32 @@
-calDayPrice : function () {
-  // 일비 정산금액 계산
+calDayPrice: function () {
   $("#dynamic_table4 tr").each(function (i, e) {
-    var selectedUserRank = $(e).find(".userRank select option:selected").val();
+    const selectedUserRank = $(e).find(".userRank select option:selected").val();
 
-    // 각 행에서 일비 기간 날짜 가져오기
-    var startDateStr = $(e).find('.day_period input').eq(0).val();
-    var endDateStr = $(e).find('.day_period input').eq(1).val();
+    // 각 행의 input에서 시작일, 종료일 가져오기
+    const startDateStr = $(e).find(".day_period input").eq(0).val();
+    const endDateStr = $(e).find(".day_period input").eq(1).val();
 
-    var startDate = moment(startDateStr, "YYYY-MM-DD");
-    var endDate = moment(endDateStr, "YYYY-MM-DD");
+    const startDate = new Date(startDateStr);
+    const endDate = new Date(endDateStr);
 
-    // 기본 일수 차이 계산 (양 끝 포함)
-    var dayDiff = endDate.diff(startDate, 'days') + 1;
+    let dayDiff = 0;
 
     // 날짜 유효성 검사
-    if (!startDate.isValid() || !endDate.isValid() || startDate.isAfter(endDate)) {
-      dayDiff = 0;
-    } else {
-      // 주말 제외 계산
-      let weekendCount = 0;
-      let current = startDate.clone();
+    if (!isNaN(startDate) && !isNaN(endDate) && startDate <= endDate) {
+      let current = new Date(startDate);
 
-      while (current.isSameOrBefore(endDate)) {
-        const dayOfWeek = current.day(); // 0 = 일요일, 6 = 토요일
-        if (dayOfWeek === 0 || dayOfWeek === 6) {
-          weekendCount++;
+      while (current <= endDate) {
+        const dayOfWeek = current.getDay(); // 0 = 일요일, 6 = 토요일
+        if (dayOfWeek !== 0 && dayOfWeek !== 6) {
+          dayDiff++;
         }
-        current.add(1, 'days');
+        current.setDate(current.getDate() + 1); // 다음 날로 이동
       }
-
-      dayDiff -= weekendCount;
     }
 
     // 직급에 따라 금액 계산
+    let price = 0;
     if (selectedUserRank) {
-      let price = 0;
-
       if (["주임", "대리", "과장", "차장"].includes(selectedUserRank)) {
         price = 30000 * dayDiff;
       } else if (selectedUserRank === "팀장") {
@@ -45,15 +36,15 @@ calDayPrice : function () {
       } else if (["대표", "소장", "본부장", "이사"].includes(selectedUserRank)) {
         price = 50000 * dayDiff;
       }
-
-      $(e).find(".price4").text(price ? GO.util.numberWithCommas(price) : "");
     }
+
+    $(e).find(".price4").text(price ? GO.util.numberWithCommas(price) : "");
   });
 
-  // 총 합계 계산
-  var sum_price4 = 0;
+  // 총합 계산
+  let sum_price4 = 0;
   $(".price4").each(function () {
-    var val = parseFloat($(this).text().replace(/,/g, ""));
+    const val = parseFloat($(this).text().replace(/,/g, ""));
     if (!isNaN(val)) {
       sum_price4 += val;
     }
