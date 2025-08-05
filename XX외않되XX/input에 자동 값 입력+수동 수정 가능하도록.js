@@ -1,5 +1,15 @@
+let value = $(this).val().replace(/,/g, "");
+if (!isNaN(value) && value !== "") {
+  $(this).val(
+    Number(value).toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    })
+  );
+}
 
-    $(".netAMT input, .WithholdTax input").on("change",function(){
+
+$(".netAMT input, .WithholdTax input").on("change",function(){
       self.calVatTotalAMT();
 
       self.calTotal(".netAMT input", ".total_netAMT input");
