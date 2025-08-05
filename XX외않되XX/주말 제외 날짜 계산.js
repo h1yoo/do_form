@@ -24,9 +24,9 @@
           // price = 35000;
           price = 35000 * dayDiff;
         } else if (["실장", "위원"].includes(selectedUserRank)) {
-          price = 40000;
+          price = 40000 * dayDiff;
         } else if (["대표", "소장", "본부장", "이사"].includes(selectedUserRank)) {
-          price = 50000;
+          price = 50000 * dayDiff;
         }
 
         $(e).find(".price4").text(price ? GO.util.numberWithCommas(price) : "");
