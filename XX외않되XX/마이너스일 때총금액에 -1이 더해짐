@@ -1,0 +1,31 @@
+
+  calTotal : function () {
+    // 각 행 금액 계산
+    $("#dynamic_table1 tr").each(function(i, e){
+      if ($(e).find(".amount")[0]) {
+        var amount = parseInt($(e).find(".amount input").val().replace(/,/g, "")) || 0;
+        var unit = parseInt($(e).find(".unit input").val().replace(/,/g, "")) || 0;
+        
+        var price = amount * unit;
+
+        $(e).find(".price").text(GO.util.numberWithCommas(price.toFixed(0)));
+      }
+    });
+
+    // 총금액 계산
+		var sum_price = 0;
+
+    $(".price").each(function(i,e){
+      sum_price += Number($(e).text().replace(/,/g, ""));
+    });
+    
+		$(".sum_price").text(GO.util.numberWithCommas(sum_price));
+
+    // 지출총금액 계산
+    var total_sum_price = 0;
+    $(".price").each(function(i,e){
+      var cal_total_sum_price = Math.floor(Number($(e).text().replace(/,/g, "")) * 1.1); // 소숫점 버림
+      total_sum_price += cal_total_sum_price;
+    });
+    $(".total_sum_price").text(GO.util.numberWithCommas(total_sum_price));
+  },
