@@ -7,6 +7,7 @@
     
                 var existText = $('.existText').find('input').val();  // 확인할 input값
 
+                // 포함시킬 문구 .includes(" ") 확인
                 if ( existText.includes("특정 문구가 포함됨")) {
                   return true;
 
