@@ -1,0 +1,44 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>JSP 텍스트 저장</title>
+</head>
+<body>
+    <h2>텍스트 입력 후 저장</h2>
+    <form method="post" action="save.jsp">
+        <textarea name="content" rows="10" cols="50" placeholder="여기에 텍스트 입력..."></textarea><br>
+        <button type="submit">저장</button>
+    </form>
+</body>
+</html>!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>JSP 텍스트 저장</title>
+</head>
+<body>
+    <h2>텍스트 입력 후 저장</h2>
+    <form method="post" action="save.jsp">
+        <textarea name="content" rows="10" cols="50" placeholder="여기에 텍스트 입력..."></textarea><br>
+        <button type="submit">저장</button>
+    </form>
+</body>
+</html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.io.*" %>
+<%
+    request.setCharacterEncoding("UTF-8");
+    String content = request.getParameter("content");
+
+    String filePath = application.getRealPath("/gpwns/copy.txt"); // 상대 경로
+    try {
+        FileWriter fw = new FileWriter(filePath, false); // 덮어쓰기    ++ true = 이어쓰기
+        fw.write(content);
+        fw.close();
+        out.println("<p>저장 완료!</p>");
+    } catch (IOException e) {
+        out.println("<p>저장 실패: " + e.getMessage() + "</p>");
+    }
+%>
