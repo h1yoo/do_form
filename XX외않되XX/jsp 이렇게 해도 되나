@@ -6,11 +6,10 @@
     // 메시지 출력용 변수
     String msg = null;
 
-    // POST 방식으로 넘어온 경우에만 저장 실행
     if ("POST".equalsIgnoreCase(request.getMethod())) {
         String content = request.getParameter("content");
         if (content != null && !content.trim().isEmpty()) {
-            String filePath = application.getRealPath("/gpwns/copy.txt"); // 저장 경로
+            String filePath = application.getRealPath("/gpwns/copy.txt");
             try {
                 FileWriter fw = new FileWriter(filePath, false); // false = 덮어쓰기
                 fw.write(content);
@@ -29,16 +28,15 @@
 <head>
     <meta charset="UTF-8">
     <title>JSP 텍스트 저장</title>
+    <script>
+        <% if (msg != null) { %>
+            alert("<%= msg %>");
+        <% } %>
+    </script>
 </head>
 <body>
     <h2>텍스트 입력 후 저장</h2>
 
-    <!-- 메시지 출력 -->
-    <% if (msg != null) { %>
-        <p style="color:green;"><%= msg %></p>
-    <% } %>
-
-    <!-- 입력 폼 -->
     <form method="post" action="1.jsp">
         <textarea name="content" rows="10" cols="50" placeholder="여기에 텍스트 입력..."></textarea><br>
         <button type="submit">저장</button>
