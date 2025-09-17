@@ -4,14 +4,14 @@
     request.setCharacterEncoding("UTF-8");
 
     String msg = null;
-    boolean isPost = "POST".equalsIgnoreCase(request.getMethod());
 
-    if (isPost) {
+    // POST 요청인 경우만 저장 로직 실행
+    if ("POST".equalsIgnoreCase(request.getMethod())) {
         String content = request.getParameter("content");
         if (content != null && !content.trim().isEmpty()) {
             String filePath = application.getRealPath("/gpwns/copy.txt");
             try {
-                FileWriter fw = new FileWriter(filePath, false); // false = 덮어쓰기
+                FileWriter fw = new FileWriter(filePath, false);
                 fw.write(content);
                 fw.close();
                 msg = "저장 완료!";
@@ -21,7 +21,14 @@
         } else {
             msg = "내용이 비어 있습니다.";
         }
+
+        // 저장 후 redirect (쿼리스트링에 msg 붙여서 전달)
+        response.sendRedirect("1.jsp?msg=" + java.net.URLEncoder.encode(msg, "UTF-8"));
+        return; // redirect 했으니 이후 코드는 실행 안함
     }
+
+    // GET 요청일 때만 msg 확인
+    msg = request.getParameter("msg");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -29,14 +36,13 @@
     <meta charset="UTF-8">
     <title>JSP 텍스트 저장</title>
     <script>
-        <% if (isPost && msg != null) { %>
+        <% if (msg != null) { %>
             alert("<%= msg %>");
         <% } %>
     </script>
 </head>
 <body>
     <h2>텍스트 입력 후 저장</h2>
-
     <form method="post" action="1.jsp">
         <textarea name="content" rows="10" cols="50" placeholder="여기에 텍스트 입력..."></textarea><br>
         <button type="submit">저장</button>
