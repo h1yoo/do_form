@@ -3,10 +3,10 @@
 <%
     request.setCharacterEncoding("UTF-8");
 
-    // 메시지 출력용 변수
     String msg = null;
+    boolean isPost = "POST".equalsIgnoreCase(request.getMethod());
 
-    if ("POST".equalsIgnoreCase(request.getMethod())) {
+    if (isPost) {
         String content = request.getParameter("content");
         if (content != null && !content.trim().isEmpty()) {
             String filePath = application.getRealPath("/gpwns/copy.txt");
@@ -29,7 +29,7 @@
     <meta charset="UTF-8">
     <title>JSP 텍스트 저장</title>
     <script>
-        <% if (msg != null) { %>
+        <% if (isPost && msg != null) { %>
             alert("<%= msg %>");
         <% } %>
     </script>
