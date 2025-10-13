@@ -1,3 +1,8 @@
+<td class="BCel" style="">
+  <input type="text" readonly="" style="vertical-align:middle;width:100%;border:0px;box-shadow: inset 0px 0px 0px rgba(150,150,150,0.2)" data-dsl="{{label:draftDate}}" name="draftDate" id="draftDate" value="" data-id="draftDate" data-name="draftDate" data-require="false" data-maxlength="" data-width="" data-defaultstr="" data-editable="false" data-value="2025-10-13(월)" placeholder="">                                 
+</td>
+
+
 autoSubject: function() {
   var draftDate = this.docModel.draftDate;
   console.log("draftDate : ", draftDate);
