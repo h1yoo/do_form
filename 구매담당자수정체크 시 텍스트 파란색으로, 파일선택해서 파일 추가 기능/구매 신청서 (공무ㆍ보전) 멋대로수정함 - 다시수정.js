@@ -578,30 +578,25 @@ function updateAllSums() {
 
 	renderViewMode : function(){$('.viewModeHiddenPart').hide();},
 	onEditDocument : function(){this.render();},
-beforeSave : function() {
-  // $("#divCustomWrapper input.ipt_editor, #divCustomWrapper textarea.txta_editor").each(function(){
-  //   var val = $(this).val().trim();
-  //   var $td = $(this).closest("td");
+  beforeSave : function() {
+    // $("#divCustomWrapper input.ipt_editor, #divCustomWrapper textarea.txta_editor").each(function(){
+    //   var val = $(this).val().trim();
+    //   var $td = $(this).closest("td");
 
-  //   if (val !== "") {
-  //     if ($td.hasClass("buyer-edited")) {
-  //       // 배경은 흰색, 글자만 파란색
-  //       $(this).replaceWith(
-  //         '<span style="color:#0b5fff; font-weight:bold;">' + val + '</span>'
-  //       );
-  //     } else {
-  //       $(this).replaceWith('<span>' + val + '</span>');
-  //     }
-  //   } else {
-  //     $(this).remove();
-  //   }
-  // });
+    //   if (val !== "") {
+    //     if ($td.hasClass("buyer-edited")) {
+    //       // 배경은 흰색, 글자만 파란색
+    //       $(this).replaceWith(
+    //         '<span style="color:#0b5fff; font-weight:bold;">' + val + '</span>'
+    //       );
+    //     } else {
+    //       $(this).replaceWith('<span>' + val + '</span>');
+    //     }
+    //   } else {
+    //     $(this).remove();
+    //   }
+    // });
 },
-
-
-
-
-
 
 	afterSave :function() {$('.viewModeHiddenPart').hide();},
 	validate :function() {return true;},
