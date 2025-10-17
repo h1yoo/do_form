@@ -43,7 +43,7 @@ var Integration = Backbone.View.extend({
 
     // 어떤 그룹인지에 따라 테이블 보여주기
     let prefix = HwaOrWoncheck.includes("화산") ? "hwaCheck" :
-                HwaOrWoncheck.includes("원산") ? "wonCheck" : null;
+                 HwaOrWoncheck.includes("원산") ? "wonCheck" : null;
 
     if (prefix) {
       checks.forEach((val, idx) => {
