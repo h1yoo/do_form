@@ -23,6 +23,7 @@ var Integration = Backbone.View.extend({
 
     },
 
+    // 현재날짜 다음날 자동 선택 함수
     checkDate : function () {
         var startDateStr = $('.period input').eq(0).val();
         var endDateStr = $('.period input').eq(1).val();
@@ -50,6 +51,7 @@ var Integration = Backbone.View.extend({
         }
     },
     
+    // 날짜 계산 함수
     calDay : function () {
         var startDate = moment($('.period input').eq(0).val(), "YYYY-MM-DD");
         var endDate = moment($('.period input').eq(1).val(), "YYYY-MM-DD");
