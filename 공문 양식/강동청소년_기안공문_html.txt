@@ -1,0 +1,428 @@
+<span style="font-family: &quot;맑은 고딕&quot;; font-size: 10pt;"><span><span><span style="font-family: &quot;맑은 고딕&quot;; font-size: 10pt;">
+    
+ 
+    
+    
+    
+    
+<table id="divCustomWrapper">
+	<tbody>
+		<tr>
+			<td style="" class="dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				
+<table class="detailSection" style="margin-bottom:10px;"><colgroup>
+                    <col width="320">
+                    <col width="480">
+                    <col width="320">
+                </colgroup>
+                
+                
+            
+        
+	<tbody>
+		<tr>
+			<td class="BCel noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				
+                   이미지1
+                
+			</td>
+			<td class="BCel noneborder title dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				
+                    구미시강동청소년문화의집
+                
+			</td>
+			<td class="BCel right noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				
+                    이미지2
+                
+			</td>
+		</tr>
+	</tbody>
+</table>
+                                            
+                                                
+                
+            
+        
+    
+<table class="detailSection"><colgroup>
+                            <col width="70px">
+                        </colgroup>           
+                    
+                
+            
+        
+	<tbody>
+		<tr>
+			<td class="BCel noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				<p style="text-align: center; font-family: &quot;malgun gothic&quot;; line-height: 150%; margin-top: 0px; margin-bottom: 0px; font-size: 9pt;"><b style="font-size: 14pt;">수 신 :</b></p>
+			</td>
+			<td class="BCel noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				<p style="font-family: &quot;malgun gothic&quot;; line-height: 150%; margin-top: 0px; margin-bottom: 0px; font-size: 9pt;"><span unselectable="on" contenteditable="false" class="comp_wrap" data-cid="0" data-dsl="{{label:recipient}}" data-wrapper="" style="" data-value="" data-autotype=""><span class="comp_item">수신자</span><span contenteditable="false" class="comp_active" style="display:none;"> <span class="Active_dot1"></span><span class="Active_dot2"></span> <span class="Active_dot3"></span><span class="Active_dot4"></span> </span> <span contenteditable="false" class="comp_hover" data-content-protect-cover="true" data-origin="0"> <a contenteditable="false" class="ic_prototype ic_prototype_trash" data-content-protect-cover="true" data-component-delete-button="true"></a> </span> </span><br></p>
+			</td>
+		</tr>
+		<tr>
+			<td class="BCel noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				<p style="text-align: center; font-family: &quot;malgun gothic&quot;; line-height: 150%; margin-top: 0px; margin-bottom: 0px; font-size: 9pt;"><b style="font-size: 14pt;">참 조 :</b><span style="font-size: 14pt; font-family: &quot;malgun gothic&quot;;">
+                                                                                           
+                                                                </span></p>
+			</td>
+			<td class="BCel noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				<p style="font-family: &quot;malgun gothic&quot;; font-size: 9pt; line-height: 150%; margin-top: 0px; margin-bottom: 0px;"><span unselectable="on" contenteditable="false" class="comp_wrap" data-cid="1" data-dsl="{{text}}" data-wrapper="" style="width: 100%;" data-value="" data-autotype=""><input class="ipt_editor" type="text"><span contenteditable="false" class="comp_active" style="display:none;"> <span class="Active_dot1"></span><span class="Active_dot2"></span> <span class="Active_dot3"></span><span class="Active_dot4"></span> </span> <span contenteditable="false" class="comp_hover" data-content-protect-cover="true" data-origin="1"> <a contenteditable="false" class="ic_prototype ic_prototype_trash" data-content-protect-cover="true" data-component-delete-button="true"></a> </span> </span><br></p>
+			</td>
+		</tr>
+		<tr>
+			<td class="BCel noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				<p style="text-align: center; font-family: &quot;malgun gothic&quot;; line-height: 150%; margin-top: 0px; margin-bottom: 0px; font-size: 9pt;"><b style="font-size: 14pt;">제 목 : </b><span style="font-size: 14pt; font-family: &quot;malgun gothic&quot;;">
+                                                                                           
+                                                                </span></p>
+			</td>
+			<td class="BCel noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				<span unselectable="on" contenteditable="false" class="comp_wrap" data-cid="2" data-dsl="{{text:subject}}" data-wrapper="" style="width: 100%;" data-value="" data-autotype=""><input class="ipt_editor" type="text"><span contenteditable="false" class="comp_active" style="display:none;"> <span class="Active_dot1"></span><span class="Active_dot2"></span> <span class="Active_dot3"></span><span class="Active_dot4"></span> </span> <span contenteditable="false" class="comp_hover" data-content-protect-cover="true" data-origin="2"> <a contenteditable="false" class="ic_prototype ic_prototype_trash" data-content-protect-cover="true" data-component-delete-button="true"></a> </span> </span>
+                           
+                        
+                    
+                
+			</td>
+		</tr>
+	</tbody>
+</table>
+                                                                                            
+             <hr style="height: 1px; background-color: rgb(0, 0, 0); border: 0px;">
+                                                                                              
+                
+            
+        
+    
+<table class="detailSection">
+	<tbody>
+		<tr>
+			<td style="height: 600px !important; vertical-align: top;" class="BCel noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				<span unselectable="on" contenteditable="false" class="comp_wrap" data-cid="3" data-dsl="{{editor}}" data-wrapper="" style="width: 100%;" data-value="" data-autotype=""><span class="comp_editor" style="width: 100%;">에디터(편집기)</span><span contenteditable="false" class="comp_active" style="display:none;"> <span class="Active_dot1"></span><span class="Active_dot2"></span> <span class="Active_dot3"></span><span class="Active_dot4"></span> </span> <span contenteditable="false" class="comp_hover" data-content-protect-cover="true" data-origin="3"> <a contenteditable="false" class="ic_prototype ic_prototype_trash" data-content-protect-cover="true" data-component-delete-button="true"></a> </span> </span>
+                      
+                            
+                        
+                    
+                
+			</td>
+		</tr>
+	</tbody>
+</table>
+   
+<br><br>
+<table class="detailSection"><colgroup><col width="100">
+            <col width="500">
+            <col width="100">
+            </colgroup>
+        
+	<tbody>
+		<tr>
+			<td class="BCel noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				<p style="font-family: &quot;malgun gothic&quot;; font-size: 9pt; line-height: 150%; margin-top: 0px; margin-bottom: 0px;"><br></p>
+			</td>
+			<td colspan="5" class="BCel center noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l" style="font-size: 20px !important; height: 100px">
+				<span style="font-family: &quot;malgun gothic&quot;; font-size: 24pt;"><b>구미시강동청소년문화의집관장</b></span><span id="footerText" style="font-family: &quot;malgun gothic&quot;; font-size: 15pt; line-height: 150%; margin-top: 0px; margin-bottom: 0px;"><img data-filename="A46D916432C34526A4F83016575FFEEF_1.jpeg" src="/go/thumb/attach/original/6fa1e140aa71a12e3a93b7a595a1c40d4ef30e08449c998e1f6a1d44d7197761" data-hostid="TMUzAwMDAwMEItNDI1" data-inline="true" style="width: 100px; height: 100px;" data-id="5325" data-from="DaouOffice"></span>
+			</td>
+			<td iclass="BCel noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l" class="dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				<p id="footerText" style="font-family: &quot;malgun gothic&quot;; font-size: 9pt; line-height: 150%; margin-top: 0px; margin-bottom: 0px;"><br></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<br>
+              <hr style="height : 5px; background-color :gray; margin-bottom: 2px;">
+            
+        
+    
+<table class="detailSection"><colgroup>
+                        <col width="70">
+                        <col width="80">
+                        <col width="80">
+                        <col width="80">
+                        <col width="80">
+                        <col width="80">
+                        <col width="80">
+                        <col width="80">
+                        <col width="150">
+                    </colgroup>           
+                    
+                
+            
+        
+	<tbody custom-official-id="tbody2">
+		<tr id="bottom_data1">
+			<td class="BCel noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				<p style="font-family: &quot;malgun gothic&quot;; line-height: 150%; margin-top: 0px; margin-bottom: 0px; font-size: 9pt;"><span style="font-size: 10pt; font-family: &quot;malgun gothic&quot;;">담당</span></p>
+			</td>
+			<td class="BCel right  noneborder  ApprovalRank dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				<p style="font-family: &quot;malgun gothic&quot;; line-height: 150%; margin-top: 0px; margin-bottom: 0px; font-size: 9pt;"><br></p>
+			</td>
+			<td class="BCel   noneborder ApprovalName dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				<p style="font-family: &quot;malgun gothic&quot;; line-height: 150%; margin-top: 0px; margin-bottom: 0px; font-size: 9pt;"><br></p>
+			</td>
+			<td class="BCel right noneborder   ApprovalRank dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				<p style="font-family: &quot;malgun gothic&quot;; line-height: 150%; margin-top: 0px; margin-bottom: 0px; font-size: 9pt;"><br></p>
+			</td>
+			<td class="BCel  noneborder  ApprovalName dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				<p style="font-family: &quot;malgun gothic&quot;; line-height: 150%; margin-top: 0px; margin-bottom: 0px; font-size: 9pt;"><br></p>
+			</td>
+			<td class="BCel right noneborder   ApprovalRank dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				<p style="font-family: &quot;malgun gothic&quot;; line-height: 150%; margin-top: 0px; margin-bottom: 0px; font-size: 9pt;"><br></p>
+			</td>
+			<td class="BCel  noneborder  ApprovalName dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				<p style="font-family: &quot;malgun gothic&quot;; line-height: 150%; margin-top: 0px; margin-bottom: 0px; font-size: 9pt;"><br></p>
+			</td>
+			<td class="BCel right  noneborder  ApprovalRank dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				<p style="font-family: &quot;malgun gothic&quot;; line-height: 150%; margin-top: 0px; margin-bottom: 0px; font-size: 9pt;"><br></p>
+			</td>
+			<td class="BCel  noneborder  ApprovalName dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				<p style="font-family: &quot;malgun gothic&quot;; line-height: 150%; margin-top: 0px; margin-bottom: 0px; font-size: 9pt;"><br></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+                    
+                <!--             
+<table class="detailSection"><colgroup>
+                    
+                    
+                
+            
+        
+	<tbody custom-official-id="tbody3">
+		<tr id="bottom_data2">
+			<td class="BCel  data2_Title noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l" style="font-size: 12pt !important;">
+				
+			</td>
+			<td style="font-size: 12pt !important;" class="BCel Review noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				<p style="font-family: &quot;malgun gothic&quot;; font-size: 12pt; line-height: 150%; margin-top: 0px; margin-bottom: 0px;"><br></p>
+			</td>
+			<td style="font-size: 12pt !important;" class="BCel Review noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				<p style="font-family: &quot;malgun gothic&quot;; font-size: 12pt; line-height: 150%; margin-top: 0px; margin-bottom: 0px;"><br></p>
+			</td>
+			<td style="font-size: 12pt !important;" class="BCel Review noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				<p style="font-family: &quot;malgun gothic&quot;; font-size: 12pt; line-height: 150%; margin-top: 0px; margin-bottom: 0px;"><br></p>
+			</td>
+			<td style="font-size: 12pt !important;" class="BCel Review noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				<p style="font-family: &quot;malgun gothic&quot;; font-size: 12pt; line-height: 150%; margin-top: 0px; margin-bottom: 0px;"><br></p>
+			</td>
+			<td style="font-size: 12pt !important;" class="BCel Review noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				<p style="font-family: &quot;malgun gothic&quot;; font-size: 12pt; line-height: 150%; margin-top: 0px; margin-bottom: 0px;"><br></p>
+			</td>
+			<td style="font-size: 12pt !important;" class="BCel Review noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				<p style="font-family: &quot;malgun gothic&quot;; font-size: 12pt; line-height: 150%; margin-top: 0px; margin-bottom: 0px;"><br></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+             -->
+                  
+                
+            
+        
+    
+<table class="detailSection"><colgroup>
+                        <col width="80">
+                        <col width="115">
+                        <col width="440">
+                        <col width="165">
+                    </colgroup>
+                  
+                
+            
+        
+	<tbody>
+		<tr>
+			<td class="BCel noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l" style="">
+				<span style="font-family: &quot;malgun gothic&quot;; font-size: 10pt;">
+                                                                                                        
+                                                                                                            시행
+                                                                                                        
+                                                                                                    </span><span style="font-size: 10pt; font-family: &quot;malgun gothic&quot;;">
+                               
+                            
+                        
+                    </span>
+                
+			</td>
+			<td class="BCel noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l" style="width: 170px;">
+				<span style="font-size: 10pt; font-family: &quot;malgun gothic&quot;;">강동청소년문화의집</span>
+                
+			</td>
+			<td class="BCel noneborder  CompleteDate dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l" style="width: 366px;">
+				<span unselectable="on" contenteditable="false" class="comp_wrap" data-cid="4" data-dsl="{{text$width:150$}}" data-wrapper="" style="width: 150px;" data-value="" data-autotype=""><input class="ipt_editor" type="text"><span contenteditable="false" class="comp_active" style="display:none;"> <span class="Active_dot1"></span><span class="Active_dot2"></span> <span class="Active_dot3"></span><span class="Active_dot4"></span> </span> <span contenteditable="false" class="comp_hover" data-content-protect-cover="true" data-origin="4"> <a contenteditable="false" class="ic_prototype ic_prototype_trash" data-content-protect-cover="true" data-component-delete-button="true"></a> </span> </span><span style="font-size: 10pt; font-family: &quot;malgun gothic&quot;;">
+                       
+                        
+                    </span>
+                
+			</td>
+			<td class="BCel noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l" style="">
+				<p style="font-family: &quot;malgun gothic&quot;; line-height: 150%; margin-top: 0px; margin-bottom: 0px; font-size: 9pt;"><br></p>
+			</td>
+		</tr>
+		<tr style="display: none !important;">
+			<td class="ACel dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l" colspan="5">
+				<span unselectable="on" contenteditable="false" class="comp_wrap" data-wrapper=""><span class="sign_type1_inline" data-group-seq="0" data-group-name="기안" data-group-max-count="1" data-group-type="type1" data-is-reception="" style="font-family: &quot;malgun gothic&quot;; font-size: 10pt;">
+                                            <span class="sign_tit_wrap"><span class="sign_tit"><strong><span style="font-size: 10pt; font-family: &quot;malgun gothic&quot;;">기안</span></strong></span></span><span class="sign_member_wrap"><span class="sign_member"><span class="sign_rank_wrap" style="font-family: &quot;malgun gothic&quot;; font-size: 10pt;"><span class="sign_rank" style="font-family: &quot;malgun gothic&quot;;"><span style="font-size: 10pt; font-family: &quot;malgun gothic&quot;;">&nbsp;</span></span>
+                                        </span><span class="sign_wrap" style="font-family: &quot;malgun gothic&quot;;"><span style="font-size: 10pt; font-family: &quot;malgun gothic&quot;;">&nbsp;</span></span><span class="sign_date_wrap"><span class="sign_date" style="font-family: &quot;malgun gothic&quot;;"><span style="font-size: 10pt; font-family: &quot;malgun gothic&quot;;">&nbsp;</span></span></span></span></span></span><span contenteditable="false" class="comp_active" style="display:none;"> <span class="Active_dot1"></span><span class="Active_dot2"></span> <span class="Active_dot3"></span><span class="Active_dot4"></span> </span><span contenteditable="false" class="comp_hover" data-content-protect-cover="true"> <a contenteditable="false" class="ic_prototype ic_prototype_trash" data-content-protect-cover="true" data-component-delete-button="true"></a> </span></span><span style="font-size: 10pt; font-family: &quot;malgun gothic&quot;;">
+                                    </span><br><span unselectable="on" contenteditable="false" class="comp_wrap" data-wrapper=""><span class="sign_type1_inline" data-group-seq="1" data-group-name="결재" data-group-max-count="5" data-group-type="type1" data-is-reception="" style="font-size: 10pt;"><span class="sign_tit_wrap"><span class="sign_tit"><strong><span style="font-size: 10pt; font-family: &quot;malgun gothic&quot;;">결재</span></strong></span></span><span class="sign_member_wrap"><span class="sign_member"><span class="sign_rank_wrap"><span class="sign_rank" style="font-family: &quot;malgun gothic&quot;;"><span style="font-size: 10pt; font-family: &quot;malgun gothic&quot;;">&nbsp;</span></span></span><span class="sign_wrap" style="font-family: &quot;malgun gothic&quot;;"><span style="font-size: 10pt; font-family: &quot;malgun gothic&quot;;">&nbsp;</span></span><span class="sign_date_wrap"><span class="sign_date" style="font-family: &quot;malgun gothic&quot;;"><span style="font-size: 10pt; font-family: &quot;malgun gothic&quot;;">&nbsp;</span></span></span></span></span><span class="sign_member_wrap"><span class="sign_member"><span class="sign_rank_wrap"><span class="sign_rank" style="font-family: &quot;malgun gothic&quot;;"><span style="font-size: 10pt; font-family: &quot;malgun gothic&quot;;">&nbsp;</span></span></span><span class="sign_wrap" style="font-family: &quot;malgun gothic&quot;;"><span style="font-size: 10pt; font-family: &quot;malgun gothic&quot;;">&nbsp;</span></span><span class="sign_date_wrap"><span class="sign_date" style="font-family: &quot;malgun gothic&quot;;"><span style="font-size: 10pt; font-family: &quot;malgun gothic&quot;;">&nbsp;</span></span></span></span></span><span class="sign_member_wrap"><span class="sign_member"><span class="sign_rank_wrap"><span class="sign_rank" style="font-family: &quot;malgun gothic&quot;;"><span style="font-size: 10pt; font-family: &quot;malgun gothic&quot;;">&nbsp;</span></span></span><span class="sign_wrap" style="font-family: &quot;malgun gothic&quot;;"><span style="font-size: 10pt; font-family: &quot;malgun gothic&quot;;">&nbsp;</span></span><span class="sign_date_wrap"><span class="sign_date" style="font-family: &quot;malgun gothic&quot;;"><span style="font-size: 10pt; font-family: &quot;malgun gothic&quot;;">&nbsp;</span></span></span></span></span><span class="sign_member_wrap"><span class="sign_member"><span class="sign_rank_wrap"><span class="sign_rank" style="font-family: &quot;malgun gothic&quot;;"><span style="font-size: 10pt; font-family: &quot;malgun gothic&quot;;">&nbsp;</span></span></span><span class="sign_wrap" style="font-family: &quot;malgun gothic&quot;;"><span style="font-size: 10pt; font-family: &quot;malgun gothic&quot;;">&nbsp;</span></span><span class="sign_date_wrap"><span class="sign_date" style="font-family: &quot;malgun gothic&quot;;"><span style="font-size: 10pt; font-family: &quot;malgun gothic&quot;;">&nbsp;</span></span></span></span></span><span class="sign_member_wrap"><span class="sign_member"><span class="sign_rank_wrap"><span class="sign_rank" style="font-family: &quot;malgun gothic&quot;;"><span style="font-size: 10pt; font-family: &quot;malgun gothic&quot;;">&nbsp;</span></span></span><span class="sign_wrap" style="font-family: &quot;malgun gothic&quot;;"><span style="font-size: 10pt; font-family: &quot;malgun gothic&quot;;">&nbsp;</span></span><span class="sign_date_wrap"><span class="sign_date" style="font-family: &quot;malgun gothic&quot;;"><span style="font-size: 10pt; font-family: &quot;malgun gothic&quot;;">&nbsp;</span></span></span></span></span></span><span contenteditable="false" class="comp_active" style="display:none;"> <span class="Active_dot1"></span><span class="Active_dot2"></span> <span class="Active_dot3"></span><span class="Active_dot4"></span> </span><span contenteditable="false" class="comp_hover" data-content-protect-cover="true"> <a contenteditable="false" class="ic_prototype ic_prototype_trash" data-content-protect-cover="true" data-component-delete-button="true"></a> </span></span><br><br><span style="font-size: 10pt; font-family: &quot;malgun gothic&quot;;">
+                                    
+                                
+                            
+                        
+                    </span>
+                
+			</td>
+		</tr>
+	</tbody>
+</table>
+                
+            
+        
+    
+<table class="detailSection"><colgroup><col width="80">
+                    <col width="180">
+                    <col width="80">
+                    <col width="180">
+                    <col width="80">
+                    <col width="">
+                    </colgroup>
+                
+            
+        
+	<tbody>
+		<tr>
+			<td class="BCel noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l" style="">
+				<span style="font-family: &quot;malgun gothic&quot;; font-size: 10pt;">우편번호</span><span style="font-size: 10pt; font-family: &quot;malgun gothic&quot;;">
+                        
+                    </span>
+                
+			</td>
+			<td class="BCel noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l" style="">
+				<span style="font-family: &quot;malgun gothic&quot;; font-size: 10pt;">39465</span>
+                
+			</td>
+			<td class="BCel noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l" style="">
+				<span style="font-family: &quot;malgun gothic&quot;; font-size: 10pt;">주 소</span><span style="font-size: 10pt; font-family: &quot;malgun gothic&quot;;">
+                        
+                    </span>
+                
+			</td>
+			<td class="BCel noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l" colspan="3" style="">
+				<span style="font-family: &quot;malgun gothic&quot;; font-size: 10pt;">경상북도 구미시 간동읍 신당4로 1길 56 / www.kangdongyouth.kr</span>
+                
+			</td>
+		</tr>
+		<tr>
+			<td class="BCel noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l" style="">
+				<span style="font-family: &quot;malgun gothic&quot;; font-size: 10pt;">전화번호</span><span style="font-size: 10pt; font-family: &quot;malgun gothic&quot;;">
+                        
+                        
+                    </span>
+                
+			</td>
+			<td class="BCel noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l" style="">
+				<span style="font-family: &quot;malgun gothic&quot;; font-size: 10pt;">054)475-0924</span>
+                
+			</td>
+			<td class="BCel noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l" style="">
+				<span style="font-family: &quot;malgun gothic&quot;; font-size: 10pt;">팩스번호</span><span style="font-size: 10pt; font-family: &quot;malgun gothic&quot;;">
+                        
+                        
+                    </span>
+                
+			</td>
+			<td class="BCel noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l" style="">
+				<span style="font-family: &quot;malgun gothic&quot;; font-size: 10pt;">054)475-0925</span>
+                
+			</td>
+			<td class="BCel noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l" style="">
+				<span style="font-family: &quot;malgun gothic&quot;; font-size: 10pt;">e-mail</span><span style="font-size: 10pt; font-family: &quot;malgun gothic&quot;;">
+                        
+                        
+                    </span>
+                
+			</td>
+			<td class="BCel noneborder dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l" style="">
+				
+                    
+    kangdongyouth<span style="font-family: &quot;malgun gothic&quot;; font-size: 10pt;">@naver.com</span>
+                
+			</td>
+		</tr>
+	</tbody>
+</table>
+                                                               
+                                                                                                
+                                                                                                
+                                                                                                <!-- Page Wrapping (end) --><!-- Style Start --><style type="text/css">
+#footerText img {
+    right: 30px !important;
+    /* left: 610px !important; */
+    bottom: 20px !important;
+    position: relative;
+    z-index: -1;
+}
+                                                                                                        #divCustomWrapper div.inaRowRight { flex:1; text-align: right;}
+                                                                                                        #divCustomWrapper { word-break: break-all; font-family: malgun gothic; width:800px !important; height: auto !important; }
+                                                                                                        #divCustomWrapper * { max-width: 800px !important; }
+                                                                                                        #divCustomWrapper .detailSection { width:800px !important; clear:both; vertical-align: baseline; }
+                                                                                                        #divCustomWrapper .detailSection2 { width:600px !important; clear:both; vertical-align: baseline; }
+                                                                                                        #divCustomWrapper table { border-collapse: collapse; word-break:break-all; margin-top:-1px !important;}
+                                                                                                        #divCustomWrapper td.ACel { font-size: 9pt !important; height:27px; border: 1px solid black !important; text-align: center !important; padding: 0px 3px 0px 3px; background: #eee; font-weight: bold;}
+                                                                                                        #divCustomWrapper td.BCel { font-size: 9pt !important; height:27px; border: 1px solid black !important; text-align: left; padding: 0px 3px 0px 3px; /*top right bottom left*/}
+                                                                                                        #divCustomWrapper td.title { text-align: center; font-size: 20pt !important; font-weight: bold; height:90px !important; }
+                                                                                                        #divCustomWrapper td.draftSection { vertical-align: top; padding: 0px;}
+                                                                                                        #divCustomWrapper td.noneborder { border: none !important; }
+                                                                                                        #divCustomWrapper td.nbb { border-bottom: none !important; }
+                                                                                                        #divCustomWrapper td.nbt { border-top: none !important; }
+                                                                                                        #divCustomWrapper td.nbbt { border-bottom: none !important; border-top: none !important;}
+                                                                                                        #divCustomWrapper td.center { text-align: center; }
+                                                                                                        #divCustomWrapper td.right { text-align: right; }
+                                                                                                        #divCustomWrapper td.left { text-align: left; }
+                                                                                                        #divCustomWrapper td.editor { height: 470px; vertical-align: top;}                                      
+                                                                                                        #divCustomWrapper .div_button { word-break:break-all; padding: 3px; margin-top:2px; margin-bottom:2px !important; height: 22px; vertical-align: middle; }
+                                                                                                        #divCustomWrapper a.button { background: rgb(102, 102, 102); color: rgb(255, 255, 255); padding: 2px 5px; border-radius: 3px; }
+                                                                                                        p.freeP{font-size: 9pt; margin-top: 5px !important;}
+                                                                                                        </style><style type="text/css">
+                                                                                                        @media print {
+                                                                                                        .viewModeHiddenPart {display: none;}
+                                                                                                        ul,li,ol,th,td,p,div,body {-webkit-print-color-adjust:exact;}
+                                                                                                        #divCustomWrapper {margin-left:auto !important; margin-right:auto !important;}
+                                                                                                        <!-- #divCustomWrapper td.ACel {border:none\9 !important; outline:black solid 0.5px\9 !important;}#divCustomWrapper             td.BCel {border:none\9 !important; outline:black solid 0.5px\9 !important;} -->
+                                                                                                        }
+                                                                                                        </style>
+                                                                                                                    
+                                                                                                                
+                                                                                                            
+                                                                                                        
+                                                                                                    
+                                                                                                
+                                                                                            
+                                                                                        
+                                                                                    
+                                                                                
+                                                                            
+                                                                        
+                                                                    
+                                                                
+                                                            
+                                                        
+                                                    
+                                                
+                                            
+                                        
+                                    
+                                
+                            
+                        
+                    
+                
+			</td>
+		</tr>
+	</tbody>
+</table>
+                                                                                                        </span><p style="font-family: &quot;맑은 고딕&quot;; font-size: 10pt; line-height: 150%; margin-top: 0px; margin-bottom: 0px;"><br></p></span><p style="font-family: &quot;맑은 고딕&quot;; font-size: 10pt; line-height: 150%; margin-top: 0px; margin-bottom: 0px;"><br></p></span>
+                                                                            
+                                                                        
+                                                                    <p style="font-family: &quot;맑은 고딕&quot;; font-size: 10pt; line-height: 150%; margin-top: 0px; margin-bottom: 0px;"><br></p></span>

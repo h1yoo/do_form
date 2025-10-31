@@ -1,0 +1,125 @@
+   var $ = require("jquery");
+   var app = require("app");
+   var Backbone = require("backbone");
+   
+   var Integration = Backbone.View.extend({
+		initialize : function(options) {
+			this.options = options || {};
+			this.docModel = this.options.docModel;
+			this.variables = this.options.variables;
+		},
+
+		render : function() {
+			var self = this;
+			if (this.docModel.docStatus == 'CREATE' && this.docModel.docType == 'DRAFT') {
+
+			}
+
+			if (GO.util.store.get('document.docMode') == 'EDIT') {
+				self.setEvent();
+				
+			}
+		},
+		
+
+		setEvent : function() {
+			var self = this;
+
+		},
+		
+
+		renderViewMode : function() {
+	        var self = this;
+	        self.beforeSave();
+		},
+
+		onEditDocument : function() {
+			this.render();
+		},
+
+		beforeSave : function() {
+		  var self = this;
+		  
+		  var ApprovalRank = [];
+		  var ApprovalName = [];
+		  var ReviewRank = [];
+		  var ReviewName = [];
+		  
+		  // 기안
+		  $.each($('.sign_type1_inline').eq(0), function (index1, item1) { 
+			  $.each($(item1).find('.sign_member'), function (index2, item2) {
+				 var rank = $(item2).find('.sign_rank').text();
+				 var name = $(item2).find('.sign_name').text();	 		 
+				 ApprovalRank.push(rank);
+				 ApprovalName.push(name);
+			  })
+		  })
+
+		  // 결재
+		  $.each($('.sign_type1_inline').eq(1), function (index1, item1) { 
+			  $.each($(item1).find('.sign_member'), function (index2, item2) {
+				 var rank = $(item2).find('.sign_rank').text();
+				 var name = $(item2).find('.sign_name').text();	 		 
+				 ApprovalRank.push(rank);
+				 ApprovalName.push(name);
+			  })
+		  })
+		  
+  
+		  $("#bottom_data1 .ApprovalRank").each(function(i, e){
+			 var Rank = ApprovalRank[i] == undefined ? '' :  ApprovalRank[i]
+			  $(e).text(Rank)
+		  })
+		  
+		  $("#bottom_data1 .ApprovalName").each(function(i, e){
+			  var Name = ApprovalName[i] == undefined ? '' :  ApprovalName[i]
+			  $(e).text(Name)
+		  })
+		  
+		  // 합의
+		  $.each($('.sign_type1_inline').eq(2), function (index1, item1) { 
+			  $.each($(item1).find('.sign_member'), function (index2, item2) {
+					 var rank = $(item2).find('.sign_rank').text();
+					 var name = $(item2).find('.sign_name').text();			 
+					 ReviewRank.push(rank);
+					 ReviewName.push(name);
+			  })
+		  })
+		  
+		  if(ReviewRank.length >= 1 ){
+			  $('.data2_Title').text('협조자')
+		  }else{
+			  $('.data2_Title').text('');
+			  $('#bottom_data2').hide();
+		  }
+		  
+		  $("#bottom_data2 .Review").each(function(i, e){
+			 var Rank = ReviewRank[i] == undefined ? '' :  ReviewRank[i]
+			 var Name = ReviewName[i] == undefined ? '' :  ReviewName[i]
+			  $(e).text(Rank+" "+Name)
+		  })
+		  
+		},
+
+		afterSave : function() {
+			
+		},
+
+		nvlToEmpty : function(v) {
+			if (v) {
+				return _.isNull(v) ? "" : v;
+			}
+			return "";
+		},
+
+		validate : function() {
+			var self = this;
+			return true;
+		},
+
+		getDocVariables : function() {
+			return _.extend(this.variables, {});
+		}
+	});
+
+	return Integration;
