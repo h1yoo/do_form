@@ -1,0 +1,103 @@
+var Integration = Backbone.View.extend({
+	initialize: function (options) {
+		this.options = options || {};
+		this.docModel = this.options.docModel;
+		this.variables = this.options.variables;
+		this.infoData = this.options.infoData;
+	},
+	render: function () {
+		/* docStatus == 'Create'or 'TempSave' 일때 불리는 함수. (2.0.0 이전의 쓰던 연동코드를  구현) */
+	},
+
+	renderViewMode: function () {
+		/* 읽기모드에서 함수가 필요한 경우 구현 */
+
+		var html1 = "";
+		var html2 = "";
+
+		$('.sign_type1_inline').each(function (index2, item) {
+
+			$(item).find('.sign_member').each(function (index, item) {
+				if (index2 == 0) {
+
+					var i1 = $(item).find('.sign_rank').text();
+					var i2 = $(item).find('.sign_name').text();
+					var i3 = $(item).find('.sign_stamp img').attr("src");
+					var i4 = $(item).find('.sign_date').text();
+					var i5 = "";
+
+					if(i3 == undefined){
+						i5 = `<div>${i2}</div>`;
+					}else{
+						i5 = `<div style="text-align: center;"><img src="${i3}" style="height: 35px;"></div>`;
+					}
+
+					html1 += `
+								<div style="display: flex; align-items: center; margin-right: 30px;">
+
+									<div style="margin-right: 5px;">${i1}</div>
+									<div>
+										<div>${i4}</div>
+										${i5}
+									</div>
+
+								</div>
+							 `;
+
+				} else {
+
+					var i1 = $(item).find('.sign_rank').text();
+					var i2 = $(item).find('.sign_name').text();
+					var i3 = $(item).find('.sign_stamp img').attr("src");
+					var i4 = $(item).find('.sign_date').text();
+					var i5 = "";
+
+					if(i3 == undefined){
+						i5 = `<div>${i2}</div>`;
+					}else{
+						i5 = `<div><img src="${i3}" style="height: 35px;"></div>`;
+					}
+
+					html2 += `
+								<div style="display: flex; align-items: center; margin-right: 30px;">
+
+									<div style="margin-right: 5px;">${i1}</div>
+									<div>
+										<div>${i4}</div>
+										${i5}
+									</div>
+
+								</div>
+							 `;
+							 
+				}
+			});
+
+		});
+
+		$('#ttt').html(html1)
+		$('#ttt2').html(html2)
+
+	},
+
+	onEditDocument: function () {
+		/* '수정 ' 버튼을 눌렀을때 실행. */
+	},
+
+	beforeSave: function () {
+	},
+
+	
+	afterSave: function () {
+	},
+
+	validate: function () {
+
+		return true;
+	},
+
+	getDocVariables: function () {
+		/* getDocVariables 사용 하려면 return 소스 코드 구현 */
+	}
+});
+return Integration;
