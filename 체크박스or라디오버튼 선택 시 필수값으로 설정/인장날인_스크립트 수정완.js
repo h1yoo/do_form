@@ -75,6 +75,11 @@
 					$('.contractDate').eq(0).find('input').attr('placeholder', '필수값 입니다.');
 					$('.contractDate').eq(1).find('input').attr('data-require', true);
 					$('.contractDate').eq(1).find('input').attr('placeholder', '필수값 입니다.');
+				} else {
+					$('.contractDate').eq(0).find('input').attr('data-require', false);
+					$('.contractDate').eq(0).find('input').attr('placeholder', '');
+					$('.contractDate').eq(1).find('input').attr('data-require', false);
+					$('.contractDate').eq(1).find('input').attr('placeholder', '');
 				}
 
 			},
