@@ -1,0 +1,230 @@
+var $ = require("jquery");
+var app = require("app");
+var Backbone = require("backbone");
+var _ = require('underscore');
+
+
+/* ------------------------------------------ PlusMinusRow.js Start ------------------------------------------ */
+
+var PlusMinusRow = function (options) {
+  // 사용자가 정의하지 않은 일부 옵션 변수의 기본값
+  var defaults = {
+    maxRow: 0,
+    copyRowNoSize: 1
+  };
+
+  var options = {
+    tableId: options.tableId,
+    plusBtnId: options.plusBtnId,
+    minusBtnId: options.minusBtnId,
+    copyRowClass: options.copyRowClass,
+    copyRowNoClass: options.copyRowNoClass,
+    rowNo: options.rowNo,
+    maxRow: options.maxRow,
+    maxNo: options.maxNo,
+    rowspanClass: options.rowspanClass,
+    plusRowCallback: options.plusRowCallback,
+    minusRowCallback: options.minusRowCallback
+  };
+
+  var settings = $.extend({}, defaults, options);
+
+
+  // 행 추가 수행 횟수 계산
+  var plusCnt;
+
+  if ($("#" + settings.tableId + " .copiedRow")[0] === undefined) {
+    plusCnt = 1;
+  }
+  else {
+    if (!$($("#" + settings.tableId + " ." + settings.copyRowClass + " td")[0]).attr("rowspan")) {
+      plusCnt = $("#" + settings.tableId + " .copiedRow").length + 1;
+    }
+    else {
+      var rowCnt = parseInt($($("#" + settings.tableId + " ." + settings.copyRowClass + " td")[0]).attr("rowspan"));
+      plusCnt = ($("#" + settings.tableId + " .copiedRow").length + rowCnt) / rowCnt;
+    }
+  }
+
+  // 입력한 행 수만큼 추가
+  $("." + settings.rowNo).on('change', function () {
+    $("#" + settings.tableId + " .copiedRow").remove();
+    plusCnt=1;
+
+    var row_no = parseInt($("." + settings.rowNo+ " input").val());
+
+    for(var i=0; i<row_no-1; i++){
+      plusRow();
+      plusCnt++;
+    }
+  });
+
+  
+  // 행 추가 클릭
+  $("#" + settings.plusBtnId).on('click', function () {
+    if ($("#" + settings.tableId + " ." + settings.copyRowClass).length + $("#" + settings.tableId + " .copiedRow").length < settings.maxRow || settings.maxRow == 0) {
+      if (settings.maxNo !== undefined) {
+        if (parseInt($("#" + settings.tableId + " ." + settings.copyRowNoClass + ":last").text()) < settings.maxNo) {
+          plusRow();
+          plusCnt++;
+        }
+      }
+      else {
+        plusRow();
+        plusCnt++;
+      }
+    }
+  });
+
+  // 행 삭제
+  $("#" + settings.minusBtnId).on('click', minusRow);
+
+
+
+  function plusRow() {
+    var $tr = $("#" + settings.tableId + " ." + settings.copyRowClass).clone(true);
+
+    /* 
+    ---------------------------------------------------------
+    🟩 수정됨 — 기존 코드에서는 펀드명이 “선택”이 아니면 무조건 hide 해서
+    기타 input(.CBRE_defaultInput)이 사라지는 문제가 있었음.
+    ---------------------------------------------------------
+    */
+
+    var selectedEtc = $tr.find(".selectEtc select").val();
+
+    if (selectedEtc !== "기타") {
+      $tr.find(".CBRE_defaultInput").hide();
+    } else {
+      $tr.find(".CBRE_defaultInput").show();
+    }
+
+    // rowspan 처리
+    if ($("#" + settings.tableId + " ." + settings.rowspanClass)[0] !== undefined) {
+      $.each($("#" + settings.tableId + " ." + settings.rowspanClass), function (k, v) {
+        $(v).attr("rowspan", parseInt($(v).attr("rowspan")) + $tr.length);
+      });
+
+      $.each($tr.find("td[rowspan]"), function (k, v) {
+        if ($(v).hasClass(settings.rowspanClass)) {
+          $(v).remove();
+        }
+      });
+    }
+
+    // 순번 처리
+    if ($("#" + settings.tableId + " ." + settings.copyRowNoClass)[0] !== undefined) {
+      var copyRowNoCnt = $tr.find("." + settings.copyRowNoClass).length;
+      for (var i = 0; i < copyRowNoCnt; i++) {
+        var newNo;
+        if (!$tr.find("." + settings.copyRowNoClass).attr('rowspan')) {
+          newNo = parseInt($($tr.find("." + settings.copyRowNoClass)[i]).text()) + settings.copyRowNoSize * plusCnt * $tr.length;
+        } else {
+          newNo = parseInt($($tr.find("." + settings.copyRowNoClass)[i]).text()) + settings.copyRowNoSize * plusCnt;
+        }
+        $($tr.find("." + settings.copyRowNoClass)[i]).text(newNo);
+      }
+    }
+
+    // 초기화
+    var i = 1;
+    $.each($tr, function (k, v) {
+      $(v).removeClass(settings.copyRowClass);
+      $(v).addClass('copiedRow');
+      initComponent($(v), i++);
+    });
+
+    // 테이블에 추가
+    if ($("#" + settings.tableId + " .copiedRow")[0] === undefined) {
+      $("#" + settings.tableId + " ." + settings.copyRowClass + ":last").after($tr);
+    }
+    else {
+      $("#" + settings.tableId + " .copiedRow:last").after($tr);
+    }
+
+    // 콜백 실행
+    if (typeof settings.plusRowCallback == 'function') {
+      settings.plusRowCallback(this);
+    }
+  }
+
+
+
+  function initComponent($tr, i) {
+    var editorFormCnt = 1;
+    var radioName = "";
+    var checkName = "";
+
+    $.each($tr.find("td input"), function (k, v) {
+      var componentType = $(v).attr("data-dsl");
+      var componentId = $(v).attr("id");
+
+      if (!(componentType.search("check") > -1) && !(componentType.search("radio") > -1)) {
+        var newId =  settings.tableId+"_"+($("#" + settings.tableId).find(".copiedRow").length + i) + "_" + editorFormCnt;
+        $(v).attr({name: newId, id: newId});
+        $(v).val("");
+
+        if (componentType.search("currency") > -1) {
+          var parseKey;
+          componentType.replace(/{{([^}}]*)}}/g, function (m, key) {
+            parseKey = key;
+          });
+          var precision = parseKey.split('_');
+
+          $(v).inputmask({
+            'alias': 'decimal',
+            'groupSeparator': ',',
+            'autoGroup': true,
+            'digits': parseInt(precision[1] ? precision[1] : '0'),
+            'allowMinus': true
+          });
+        }
+
+        else if (componentType.search("calendar") > -1) {
+          $(v).datepicker("destroy").removeClass('hasDatepicker');
+          $(v).datepicker({
+            dateFormat: "yy-mm-dd(D)",
+            changeMonth: true,
+            changeYear: true,
+            yearSuffix: "",
+          });
+        }
+      }
+
+      else if (componentType.search("radio") > -1) {
+        if ($(v).attr('name') == radioName) {
+          editorFormCnt--;
+        }
+        else {
+          radioName = $(v).attr('name');
+        }
+
+        var newName = settings.tableId+"_"+($("#" + settings.tableId).find(".copiedRow").length + i) + "_" + editorFormCnt;
+        var newId = settings.tableId+"_"+($("#" + settings.tableId).find(".copiedRow").length + i) + "_" + editorFormCnt + "_" + componentId.split("_")[2];
+
+        $(v).attr({name: newName, id: newId, checked: false});
+      }
+
+      else if (componentType.search("check") > -1) {
+        var curCheckName = $(v).attr('name').split("_")[0] + "_" + $(v).attr('name').split("_")[1];
+
+        if (curCheckName == checkName) {
+          editorFormCnt--;
+        }
+        else {
+          checkName = curCheckName;
+        }
+
+        var newId = settings.tableId+"_"+($("#" + settings.tableId).find(".copiedRow").length + i) + "_" + editorFormCnt + "_" + componentId.split("_")[2];
+
+        $(v).attr({name: newId, id: newId, checked: false});
+      }
+
+      editorFormCnt++;
+    });
+
+    // select 초기화
+    $.each($tr.find("td select"), function (k, v) {
+      var newName = settings.tableId+"_"+($("#" + settings.tableId).find(".copiedRow").length + i) + "_" + editorFormCnt;
+      $(v).attr({name: newName, id: newName});
+      e
