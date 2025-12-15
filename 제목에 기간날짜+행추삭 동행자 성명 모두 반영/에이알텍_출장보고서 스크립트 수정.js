@@ -302,7 +302,7 @@ var Integration = Backbone.View.extend({
         plusRowCallback : function() {}
     });
 
-    $(".projNum input, .period input, .companionName input").on("change",function(){
+    $(".projNum input, .period input, .travelerName input, .companionName input").on("change",function(){
       self.autoSubject();
     });
     // $("[data-dsl]'{{period}}]").on("period:change",function(){
@@ -315,7 +315,7 @@ var Integration = Backbone.View.extend({
     var values = [];
     var projNum = $(".projNum input").val() || "";
     var today = moment(); // 오늘 날짜
-    var drafter = this.options.docModel.drafterName; // 출장자 본인 성명
+    var travelerName = $(".travelerName input").val(); // 출장자 본인 성명
   
     // 시작 / 종료일
     var startDate = moment($(".period input").eq(0).val(), "YYYY-MM-DD"); if(!startDate.isValid()) startDate = today;
@@ -338,7 +338,7 @@ var Integration = Backbone.View.extend({
       projNum + "_" +
       startDate.format("YYYY-MM-DD") + "~" +
       endDate.format("YYYY-MM-DD") + "_" +
-      drafter +
+      travelerName +
       (values.length ? "_" + values.join(', ') : "")
     );
   },
