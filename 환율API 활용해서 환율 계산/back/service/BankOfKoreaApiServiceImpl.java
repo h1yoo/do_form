@@ -15,7 +15,7 @@ public class BankOfKoreaApiServiceImpl implements BankOfKoreaApiService {
     @Override
     public String getStatisticSearch(String queryString) {
         // TODO Auto-generated method stub
-        String apiUrl = "https://ecos.bok.or.kr/api/StatisticSearch/SSQIDPZW9IQ1N0231X8S/json";
+        String apiUrl = "https://ecos.bok.or.kr/api/StatisticSearch/개인키/json";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> entity = new HttpEntity<>(headers);
@@ -25,3 +25,4 @@ public class BankOfKoreaApiServiceImpl implements BankOfKoreaApiService {
     }
 
 }
+
