@@ -344,19 +344,21 @@ var Integration = Backbone.View.extend({
 
   calCost : function () {
     var self = this;
-    var subtotal = 0;
     var sum_subtotal = 0;
-    
+  
     $("#dynamic_table1 tr").each(function(i, e){
       if ($(e).find(".foodExp1")[0]) {
-        var foodExp1 = parseInt($(e).find(".foodExp1 input").val().replace(/,/g, "")) || 0; // 조식
-        var foodExp2 = parseInt($(e).find(".foodExp2 input").val().replace(/,/g, "")) || 0; // 중식
-        var foodExp3 = parseInt($(e).find(".foodExp3 input").val().replace(/,/g, "")) || 0; // 석식
+        var foodExp1 = parseInt($(e).find(".foodExp1 input").val().replace(/,/g, "")) || 0;
+        var foodExp2 = parseInt($(e).find(".foodExp2 input").val().replace(/,/g, "")) || 0;
+        var foodExp3 = parseInt($(e).find(".foodExp3 input").val().replace(/,/g, "")) || 0;
         
-        subtotal = foodExp1 + foodExp2 + foodExp3;
+        var subtotal = foodExp1 + foodExp2 + foodExp3;
+  
+        $(e).find(".subtotal").text(
+          GO.util.numberWithCommas(subtotal)
+        );
+  
         sum_subtotal += subtotal;
-
-        $(e).find(".subtotal").text(GO.util.numberWithCommas(sum_subtotal.toFixed(0)));
       }
     });
     
