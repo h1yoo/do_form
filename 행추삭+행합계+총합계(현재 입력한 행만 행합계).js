@@ -324,14 +324,6 @@ var Integration = Backbone.View.extend({
 		$(".price input, .tax input").on("change",function(){
       self.calSum();
 
-      var price = parseFloat($(e).find('.price input').val().replace(/\,/g,""));
-      if (isNaN(price) || price == 0) price = 0;
-      $(this).find(".price input").val(GO.util.numberWithCommas(price.toFixed(0)));  // 현재 행 합계
-
-      var tax = parseFloat($(e).find('.tax input').val().replace(/\,/g,""));
-      if (isNaN(tax) || tax == 0) tax = 0;
-      $(this).find(".tax input").val(GO.util.numberWithCommas(tax.toFixed(0)));  // 현재 행 합계
-
       let value = $(this).val().replace(/,/g, "");
       if (!isNaN(value) && value !== "") {
           $(this).val(Number(value).toLocaleString()); // 숫자로 변환 후 콤마 추가
