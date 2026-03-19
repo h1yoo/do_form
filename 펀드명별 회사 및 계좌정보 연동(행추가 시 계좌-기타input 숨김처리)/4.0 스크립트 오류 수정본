@@ -316,7 +316,7 @@ var Integration = Backbone.View.extend({
     });
 
 		$('#select1').on('change', function(){
-      // 기존 펀드별 select 제어 로직 (생략하지 않음)
+      // 기존 펀드별 select 제어 로직
         $('#text span').hide();
         $('#stmap span').hide();
         var select1 = $('#select1 select option:selected').val();
