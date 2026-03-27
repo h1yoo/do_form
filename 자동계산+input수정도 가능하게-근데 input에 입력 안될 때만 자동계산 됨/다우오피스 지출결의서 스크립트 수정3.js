@@ -3,6 +3,7 @@ var app = require("app");
 var Backbone = require("backbone");
 var _ = require('underscore');
 
+
 /* ------------------------------------------ PlusMinusRow.js Start ------------------------------------------ */
 
 var PlusMinusRow = function (options) {
@@ -24,7 +25,7 @@ var PlusMinusRow = function (options) {
     copyRowNoClass: options.copyRowNoClass,				// 순번(No) 열(td)의 class
     copyRowNoSize: options.copyRowNoSize,				// 순번(No) 증가량 :int
 
-  	rowNo: options.rowNo,								// 입력한 행 수만큼 추가
+	rowNo: options.rowNo,								// 입력한 행 수만큼 추가
     maxRow: options.maxRow,								// 행 추가 최대 개수 :int
     maxNo: options.maxNo,								// 행 추가 최대 순번(No) :int
 
@@ -93,9 +94,6 @@ var PlusMinusRow = function (options) {
 
   function plusRow() {
     var $tr = $("#" + settings.tableId + " ." + settings.copyRowClass).clone(true); // 추가할 행 복사 (이벤트도)
-
-    // 자동 계산 부분 초기화
-    $tr.find(".totalPrice").text("");  // 초기 텍스트 제거
 
     // ① rowspan 처리 (optional)
     if ($("#" + settings.tableId + " ." + settings.rowspanClass)[0] !== undefined) {
@@ -285,82 +283,107 @@ var PlusMinusRow = function (options) {
   }
 };
 
-var Integration = Backbone.View.extend({
-  initialize : function(options){
-    this.options = options || {};
-    this.docModel = this.options.docModel;
-    this.variables = this.options.variables;
-    this.infoData = this.options.infoData;
-  },
-  
-  render : function() {
-    var self = this;
-    $('.viewModeHiddenPart').show();
 
+var Integration = Backbone.View.extend({
+	initialize : function(options){
+		this.options = options || {};
+		this.docModel = this.options.docModel;
+		this.variables = this.options.variables;
+		this.infoData = this.options.infoData;
+	},
+	
+	render : function() {
+		var self = this;
+		$('.viewModeHiddenPart').show();
+		
 		//행 추가/삭제
 		PlusMinusRow({
-      tableId : "dynamic_table1",
-      plusBtnId : "plus1", 
-      minusBtnId : "minus1",
-      copyRowClass : "copyRow1",
-      copyRowNoClass : "copyRowNo1",
-      rowspanClass : "rowspanTd1",
-      minusRowCallback : function() {
-        self.calPrice();
-      },
-      plusRowCallback : function() {}
+				tableId : "dynamic_table1",
+				plusBtnId : "plus1", 
+				minusBtnId : "minus1",
+				copyRowClass : "copyRow1",
+				copyRowNoClass : "copyRowNo1",
+				rowspanClass : "rowspanTd1",
+				minusRowCallback : function() {
+          self.calSumPrice('.price1 input', '.sum_price1');
+          self.calSumPrice('.price2 input', '.sum_price2');
+          self.calSumPrice('.price3 input', '.sum_price3');
+          self.calSumPrice('.price4 input', '.sum_price4');
+          self.calSumPrice('.price5 input', '.sum_price5');
+        },
+				plusRowCallback : function() {}
     });
 
-    $(".price input, .tax input, .cur select").on("change",function(){
-      let rawValue = $(this).val().replace(/,/g, "");
-      if (!isNaN(rawValue) && rawValue !== "") {
-          $(this).val(Number(rawValue).toLocaleString());
-      }
-  
-      self.calPrice();
-    });
-  },
-  
-  calPrice : function () {
-    var sum_price = 0;
-    var sum_tax = 0;
-    var sum_totalPrice = 0;
 
-    $("#dynamic_table1 tr").each(function(i, e){
-
-      if ($(e).find('.price')[0]) {
-
-        var cur = $(e).find(".cur select option:selected").val();  // 통화 단위
-        var price = parseFloat($(e).find('.price input').val().replace(/\,/g,"")); if (isNaN(price)) price = 0;
-        var tax = parseFloat($(e).find('.tax input').val().replace(/\,/g,""));  if (isNaN(tax)) tax = price * 0.1;
-        var totalPrice = price + tax;
-
-        // 소수점 자리수 결정
-        var decimalPoint = (cur === "\\") ? 0 : 2;
-
-        // 현재 행 화면 업데이트
-        $(e).find(".tax input").val(GO.util.numberWithCommas(tax.toFixed(decimalPoint)));
-        $(e).find(".totalPrice").text(GO.util.numberWithCommas(totalPrice.toFixed(decimalPoint)));
-
-        // 합계 누적
-        sum_price += price;
-        sum_tax += tax;
-        sum_totalPrice += totalPrice;
+    $(".price1 input").on("change", function () {
+      self.calSumPrice('.price1 input', '.sum_price1');
+      
+      let value = $(this).val().replace(/,/g, "");
+      if (!isNaN(value) && value !== "") {
+          $(this).val(Number(value).toLocaleString()); // 숫자로 변환 후 콤마 추가
       }
     });
 
-    $(".sum_price").text(GO.util.numberWithCommas(sum_price.toFixed(2)));
-    $(".sum_tax").text(GO.util.numberWithCommas(sum_tax.toFixed(2)));
-    $(".sum_totalPrice").text(GO.util.numberWithCommas(sum_totalPrice.toFixed(2)));
+    $(".price2 input").on("change", function () {
+      self.calSumPrice('.price2 input', '.sum_price2');
+      
+      let value = $(this).val().replace(/,/g, "");
+      if (!isNaN(value) && value !== "") {
+          $(this).val(Number(value).toLocaleString()); // 숫자로 변환 후 콤마 추가
+      }
+    });
+
+    $(".price3 input").on("change", function () {
+      self.calSumPrice('.price3 input', '.sum_price3');
+      
+      let value = $(this).val().replace(/,/g, "");
+      if (!isNaN(value) && value !== "") {
+          $(this).val(Number(value).toLocaleString()); // 숫자로 변환 후 콤마 추가
+      }
+    });
+
+    $(".price4 input").on("change", function () {
+      self.calSumPrice('.price4 input', '.sum_price4');
+      
+      let value = $(this).val().replace(/,/g, "");
+      if (!isNaN(value) && value !== "") {
+          $(this).val(Number(value).toLocaleString()); // 숫자로 변환 후 콤마 추가
+      }
+    });
+
+    $(".price5 input").on("change", function () {
+      self.calSumPrice('.price5 input', '.sum_price5');
+      
+      let value = $(this).val().replace(/,/g, "");
+      if (!isNaN(value) && value !== "") {
+          $(this).val(Number(value).toLocaleString()); // 숫자로 변환 후 콤마 추가
+      }
+    });
+	},
+
+  // 총합계
+  calSumPrice : function (priceEl, sumPriceEl) {
+        var sum_price = 0;
+
+        $(priceEl).each(function () {
+          var val = parseFloat($(this).val().replace(/,/g, ""));
+          if (!isNaN(val)) {
+            sum_price += val;
+          }
+      });
+
+      if (sum_price == 0 || isNaN(sum_price)) {
+        sum_price = "";
+      }
+  
+      $(sumPriceEl).text(GO.util.numberWithCommas(sum_price));
   },
 
-  _convertCurrencyFormat : function(value) {  return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");},
-
-  renderViewMode : function(){$('.viewModeHiddenPart').hide();},
-  onEditDocument : function(){this.render();},
-  beforeSave :function() {$('.viewModeHiddenPart').hide();},
-  afterSave :function() {$('.viewModeHiddenPart').hide();},
-  validate :function() {return true;},
-  getDocVariables : function(){}
+	renderViewMode : function(){$('.viewModeHiddenPart').hide();},
+	onEditDocument : function(){this.render();},
+	beforeSave :function() {$('.viewModeHiddenPart').hide();},
+	afterSave :function() {$('.viewModeHiddenPart').hide();},
+	validate :function() {return true;},
+	getDocVariables : function(){}
 });
 return Integration;
