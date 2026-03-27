@@ -332,7 +332,7 @@ var Integration = Backbone.View.extend({
 
         var cur = $(e).find(".cur select option:selected").val();  // 통화 단위
         var price = parseFloat($(e).find('.price input').val().replace(/\,/g,"")); if (isNaN(price)) price = 0;
-        var tax = parseFloat($(e).find('.tax input').val().replace(/\,/g,""));  if (isNaN(tax) || tax == 0) tax = price * 0.1;
+        var tax = parseFloat($(e).find('.tax input').val().replace(/\,/g,""));  if (isNaN(tax)) tax = price * 0.1;
         var totalPrice = price + tax;
 
         // 소수점 자리수 결정
