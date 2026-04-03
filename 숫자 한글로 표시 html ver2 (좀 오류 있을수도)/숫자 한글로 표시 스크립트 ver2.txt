@@ -1,0 +1,92 @@
+// 숫자 → 한글 금액 변환 유틸리티
+function numberToKorean(num) {
+    if (!num || isNaN(num)) return '';
+
+    const digits   = ['', '일', '이', '삼', '사', '오', '육', '칠', '팔', '구'];
+    const units    = ['', '십', '백', '천'];
+    const bigUnits = ['', '만', '억', '조'];
+
+    const number = Math.floor(Number(num));
+    if (number === 0) return '일금. 영원정';
+
+    function convertGroup(n) {
+        let result = '';
+        for (let i = 3; i >= 0; i--) {
+            const digit = Math.floor(n / Math.pow(10, i)) % 10;
+            if (digit === 0) continue;
+            result += digits[digit] + units[i]; // '일' 생략 없이 항상 출력
+        }
+        return result;
+    }
+
+    let result = '';
+    for (let i = 3; i >= 0; i--) {
+        const groupValue = Math.floor(number / Math.pow(10000, i)) % 10000;
+        if (groupValue === 0) continue;
+        result += convertGroup(groupValue) + bigUnits[i];
+    }
+
+    return `( 일금. ${result}원정 )`;
+}
+
+var Integration = Backbone.View.extend({
+    initialize: function (options) {
+        this.options = options || {};
+        this.docModel = this.options.docModel;
+        this.variables = this.options.variables;
+        this.infoData = this.options.infoData;
+    },
+    render: function () {
+        /* docStatus == 'Create' or 'TempSave' 일때 불리는 함수 */
+        var self = this;
+
+        // console.log('렌더 함수 접근!')
+
+        $(document).on('input change keyup keydown', '#pay input', function () {
+            var rawValue = ($(this).val() || '').replace(/,/g, '');
+            var numValue = Number(rawValue);
+
+            // 빈값이거나 0 이하면 한글금액 초기화
+            if (!rawValue || isNaN(numValue) || numValue <= 0) {
+                $('#payKr').text('');
+                return;
+            }
+
+            $('#payKr').text(numberToKorean(rawValue));
+        });
+
+        // 초기값 처리
+        var initialValue = ($('#pay input').val() || '').replace(/,/g, '');
+        if (initialValue && Number(initialValue) > 0) {
+            $('#payKr').text(numberToKorean(initialValue));
+        }
+    },
+
+    renderViewMode: function () {
+        /* 읽기모드: 저장된 숫자값을 한글로 표시 */
+        var rawValue = $('#pay input').val().replace(/,/g, '');
+        $('#payKr').text(numberToKorean(rawValue));
+    },
+
+    onEditDocument: function () {
+        /* '수정 ' 버튼을 눌렀을때 실행. */
+    },
+
+    beforeSave: function () {
+    },
+
+    afterSave: function () {
+    },
+
+    validate: function () {
+        return true;
+    },
+
+    getDocVariables: function () {
+        /* getDocVariables 사용 하려면 return 소스 코드 구현 */
+    }
+});
+return Integration;
+
+
+
