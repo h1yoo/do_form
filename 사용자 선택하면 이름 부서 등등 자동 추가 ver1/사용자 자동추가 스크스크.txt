@@ -29,6 +29,7 @@
 					 self.minusRow('.copiedRow1');
 				 })
 				 
+    		// Name : 사용자명. Department : 해당 사용자 부서, Position : 해당 사용자 직위, EmpNo : 해당 사용자 사번 (>> 직위는 안가져와지는 거 같음(?)) 
 				$('.Name input, .Department input, .Position input, .EmpNo input').on('click', function(){
 					self.employPopup($(this).closest('tr'));
 				})
