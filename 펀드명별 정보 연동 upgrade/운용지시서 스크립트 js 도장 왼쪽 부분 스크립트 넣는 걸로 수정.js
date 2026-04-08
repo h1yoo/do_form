@@ -463,7 +463,7 @@ var Integration = Backbone.View.extend({
 
   // 펀드명별 정보 자동 입력
   checkFundOpt : function() {
-    // $('#stamp img').hide();  // 펀드 사용인감도장 싹 화면에 안 보이게 숨기기 >> 안먹음 (주석처림)
+    // $('#stamp img').hide();  // 펀드 사용인감도장 싹 화면에 안 보이게 숨기기 >> 안먹음 (주석처리)
     var select1 = $('#select1 select option:selected').val();
 
     // 실행 로직 > 선택된 펀드이름(key)으로 JSON 해당 펀드의 설정값(value) 가져옴 > 객체 매핑
