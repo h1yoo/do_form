@@ -5,98 +5,98 @@ let fundMap = {
       office: "KB펀드파트너스", // 일반사무관리회사
       activeAcc: ".CBRE_GSA1_Acc",  // 펀드명 별 드롭박스 부분 (각각 클래스로 묶음)
       stampImgLeftStr: "BRE GSA로지스틱스제1호전문투자형사모부동산자투자유한회사\n이사 CBRE 인베스트먼트매니지먼트자산운용주식회사",
-      stampImgSrc: '<img id="stamp1" data-appcode="dop-employee-approval" data-filename="1f0d3cd8-423e-4714-bbbe-9529e7e3ed11.png" src="/api/thumb/attach/original/dop-employee-approval/PMS_SITE-1IUQFZO00I6NL/20260407/67f2300b-7865-4c39-a9d4-80325589d642" data-inline="true" style="width: 87px; height: 90px;" data-id="1490990465326067712" data-from="DaouOffice">',
+      stampImg: '<img id="stamp1" data-appcode="dop-employee-approval" data-filename="1f0d3cd8-423e-4714-bbbe-9529e7e3ed11.png" src="/api/thumb/attach/original/dop-employee-approval/PMS_SITE-1IUQFZO00I6NL/20260407/67f2300b-7865-4c39-a9d4-80325589d642" data-inline="true" style="width: 87px; height: 90px;" data-id="1490990465326067712" data-from="DaouOffice">',
   },
   "CBRE GSA로지스틱스제2호전문투자형사모부동산자투자유한회사": {
       trustee: "하나은행",      // 신탁업자
       office: "KB펀드파트너스", // 일반사무관리회사
       activeAcc: ".CBRE_GSA2_Acc",  // 펀드명 별 계좌 드롭박스 부분 (각각 클래스로 묶음)
       stampImgLeftStr: "CBRE GSA로지스틱스제2호전문투자형사모부동산자투자유한회사\n이사 CBRE 인베스트먼트매니지먼트자산운용주식회사",
-      stampImgSrc: '<img id="stamp2" data-appcode="dop-employee-approval" data-filename="08b7d286-c225-4704-a367-936b3643473b.png" src="/api/thumb/attach/original/dop-employee-approval/PMS_SITE-1IUQFZO00I6NL/20260407/f821df9d-6fa2-4933-958d-41151c0c1cb9" data-inline="true" style="width: 88px; height: 90px;" data-id="1490990465820995584" data-from="DaouOffice">',
+      stampImg: '<img id="stamp2" data-appcode="dop-employee-approval" data-filename="08b7d286-c225-4704-a367-936b3643473b.png" src="/api/thumb/attach/original/dop-employee-approval/PMS_SITE-1IUQFZO00I6NL/20260407/f821df9d-6fa2-4933-958d-41151c0c1cb9" data-inline="true" style="width: 88px; height: 90px;" data-id="1490990465820995584" data-from="DaouOffice">',
   },
   "CBRE GSA로지스틱스제1의1호전문투자형사모부동산모투자유한회사": {
       trustee: "하나은행",      // 신탁업자
       office: "KB펀드파트너스", // 일반사무관리회사
       activeAcc: ".CBRE_GSA1_1_Acc",  // 펀드명 별 계좌 드롭박스 부분 (각각 클래스로 묶음)
       stampImgLeftStr: "CBRE GSA로지스틱스제1의1호전문투자형사모부동산모투자유한회사\n이사 CBRE 인베스트먼트매니지먼트자산운용주식회사",
-      stampImgSrc: '<img id="stamp3" data-appcode="dop-employee-approval" data-filename="2c47e39e-4c7b-4ca6-ace8-92b948dbef7b.jpeg" src="/api/thumb/attach/original/dop-employee-approval/PMS_SITE-1IUQFZO00I6NL/20260407/a6735b63-34b1-46c4-8d49-c9a9a315fa5f" data-inline="true" style="width: 88px; height: 90px;" data-id="1490990466269786112" data-from="DaouOffice">',
+      stampImg: '<img id="stamp3" data-appcode="dop-employee-approval" data-filename="2c47e39e-4c7b-4ca6-ace8-92b948dbef7b.jpeg" src="/api/thumb/attach/original/dop-employee-approval/PMS_SITE-1IUQFZO00I6NL/20260407/a6735b63-34b1-46c4-8d49-c9a9a315fa5f" data-inline="true" style="width: 88px; height: 90px;" data-id="1490990466269786112" data-from="DaouOffice">',
   },
   "CBRE GSA로지스틱스제1의2호전문투자형사모부동산모투자유한회사": {
       trustee: "하나은행",      // 신탁업자
       office: "KB펀드파트너스", // 일반사무관리회사
       activeAcc: ".CBRE_GSA1_2_Acc",  // 펀드명 별 계좌 드롭박스 부분 (각각 클래스로 묶음)
       stampImgLeftStr: "CBRE GSA로지스틱스제1의2호전문투자형사모부동산모투자유한회사\n이사 CBRE 인베스트먼트매니지먼트자산운용주식회사",
-      stampImgSrc: '<img id="stamp4" data-appcode="dop-employee-approval" data-filename="63160ca0-17d3-4021-ae5f-6815660f8cd1.jpeg" src="/api/thumb/attach/original/dop-employee-approval/PMS_SITE-1IUQFZO00I6NL/20260407/5d81b472-0e19-435c-b153-d8e058275a55" data-inline="true" style="width: 87px; height: 90px;" data-id="1490990466752131072" data-from="DaouOffice">',
+      stampImg: '<img id="stamp4" data-appcode="dop-employee-approval" data-filename="63160ca0-17d3-4021-ae5f-6815660f8cd1.jpeg" src="/api/thumb/attach/original/dop-employee-approval/PMS_SITE-1IUQFZO00I6NL/20260407/5d81b472-0e19-435c-b153-d8e058275a55" data-inline="true" style="width: 87px; height: 90px;" data-id="1490990466752131072" data-from="DaouOffice">',
   },
   "CBRE GSA로지스틱스제1의3호전문투자형사모부동산모투자유한회사": {
       trustee: "하나은행",      // 신탁업자
       office: "KB펀드파트너스", // 일반사무관리회사
       activeAcc: ".CBRE_GSA1_3_Acc",  // 펀드명 별 계좌 드롭박스 부분 (각각 클래스로 묶음)
       stampImgLeftStr: "CBRE GSA로지스틱스제1의3호전문투자형사모부동산모투자유한회사\n이사 CBRE 인베스트먼트매니지먼트자산운용주식회사",
-      stampImgSrc: '<img id="stamp5" data-appcode="dop-employee-approval" data-filename="e722d9fc-72d5-4b17-8436-7fcd3caddb6c.jpeg" src="/api/thumb/attach/original/dop-employee-approval/PMS_SITE-1IUQFZO00I6NL/20260407/0ee856b9-ee15-485e-a6af-412e2721ec7a" data-inline="true" style="width: 92px; height: 90px;" data-id="1490990467226087424" data-from="DaouOffice">',
+      stampImg: '<img id="stamp5" data-appcode="dop-employee-approval" data-filename="e722d9fc-72d5-4b17-8436-7fcd3caddb6c.jpeg" src="/api/thumb/attach/original/dop-employee-approval/PMS_SITE-1IUQFZO00I6NL/20260407/0ee856b9-ee15-485e-a6af-412e2721ec7a" data-inline="true" style="width: 92px; height: 90px;" data-id="1490990467226087424" data-from="DaouOffice">',
   },
   "CBRE GSA로지스틱스제1의4호전문투자형사모부동산모투자유한회사": {
       trustee: "하나은행",      // 신탁업자
       office: "KB펀드파트너스", // 일반사무관리회사
       activeAcc: ".CBRE_GSA1_4_Acc",  // 펀드명 별 계좌 드롭박스 부분 (각각 클래스로 묶음)
       stampImgLeftStr: "CBRE GSA로지스틱스제1의4호전문투자형사모부동산모투자유한회사\n이사 CBRE 인베스트먼트매니지먼트자산운용주식회사",
-      stampImgSrc: '<img id="stamp6" data-appcode="dop-employee-approval" data-filename="dcc7ccf8-a8c3-48b3-a7a0-c3f89357c951.jpeg" src="/api/thumb/attach/original/dop-employee-approval/PMS_SITE-1IUQFZO00I6NL/20260407/09f9e53f-c4cc-4989-ba1c-102edafeed96" data-inline="true" style="width: 88px; height: 90px;" data-id="1490990467704238080" data-from="DaouOffice">',
+      stampImg: '<img id="stamp6" data-appcode="dop-employee-approval" data-filename="dcc7ccf8-a8c3-48b3-a7a0-c3f89357c951.jpeg" src="/api/thumb/attach/original/dop-employee-approval/PMS_SITE-1IUQFZO00I6NL/20260407/09f9e53f-c4cc-4989-ba1c-102edafeed96" data-inline="true" style="width: 88px; height: 90px;" data-id="1490990467704238080" data-from="DaouOffice">',
   },
   "CBRE GSA로지스틱스제1의5호전문투자형사모부동산모투자유한회사": {
       trustee: "하나은행",      // 신탁업자
       office: "KB펀드파트너스", // 일반사무관리회사
       activeAcc: ".CBRE_GSA1_5_Acc",  // 펀드명 별 계좌 드롭박스 부분 (각각 클래스로 묶음)
       stampImgLeftStr: "CBRE GSA로지스틱스제1의5호전문투자형사모부동산모투자유한회사\n이사 CBRE 인베스트먼트매니지먼트자산운용주식회사",
-      stampImgSrc: '<img id="stamp7" data-appcode="dop-employee-approval" data-filename="dabd0fcb-d49c-4726-bde9-a9d5ea630a40.jpeg" src="/api/thumb/attach/original/dop-employee-approval/PMS_SITE-1IUQFZO00I6NL/20260407/fe470e39-1a55-45eb-8f37-cc812e62a944" data-inline="true" style="width: 89px; height: 90px;" data-id="1490990468215943168" data-from="DaouOffice">',
+      stampImg: '<img id="stamp7" data-appcode="dop-employee-approval" data-filename="dabd0fcb-d49c-4726-bde9-a9d5ea630a40.jpeg" src="/api/thumb/attach/original/dop-employee-approval/PMS_SITE-1IUQFZO00I6NL/20260407/fe470e39-1a55-45eb-8f37-cc812e62a944" data-inline="true" style="width: 89px; height: 90px;" data-id="1490990468215943168" data-from="DaouOffice">',
   },
   "CBRE 로지스밸리제1의6호전문투자형사모부동산모투자유한회사": {
       trustee: "하나은행",      // 신탁업자
       office: "KB펀드파트너스", // 일반사무관리회사
       activeAcc: ".CBRE_GSA1_6_Acc",  // 펀드명 별 계좌 드롭박스 부분 (각각 클래스로 묶음)
       stampImgLeftStr: "CBRE 로지스밸리제1의6호전문투자형사모부동산모투자유한회사\n이사 CBRE 인베스트먼트매니지먼트자산운용주식회사",
-      stampImgSrc: '<img id="stamp8" data-appcode="dop-employee-approval" data-filename="6f387150-38ec-4bd0-98a7-2625e99921ab.png" src="/api/thumb/attach/original/dop-employee-approval/PMS_SITE-1IUQFZO00I6NL/20260407/a177c8db-a917-4c0a-b0c1-19ca936f1aa6" data-inline="true" style="width: 89px; height: 90px;" data-id="1490990468736036864" data-from="DaouOffice">',
+      stampImg: '<img id="stamp8" data-appcode="dop-employee-approval" data-filename="6f387150-38ec-4bd0-98a7-2625e99921ab.png" src="/api/thumb/attach/original/dop-employee-approval/PMS_SITE-1IUQFZO00I6NL/20260407/a177c8db-a917-4c0a-b0c1-19ca936f1aa6" data-inline="true" style="width: 89px; height: 90px;" data-id="1490990468736036864" data-from="DaouOffice">',
   },
   "CBRE ILC전문투자형사모부동산자투자신탁제1호": {
       trustee: "하나은행",      // 신탁업자
       office: "KB펀드파트너스", // 일반사무관리회사
       activeAcc: ".CBRE_ILC1_Acc",  // 펀드명 별 계좌 드롭박스 부분 (각각 클래스로 묶음)
       stampImgLeftStr: "CBRE 인베스트먼트매니지먼트자산운용주식회사\n서울특별시 종로구 종로 47, 19층(공평동, 에스씨은행본점빌딩)\nT. 02 398 1555 /  F. 02 398 1556",
-      stampImgSrc: '<img id="stamp9" data-appcode="dop-employee-approval" data-filename="36788fa1-13d1-4afd-9ad7-6c018b7c501f.png" src="/api/thumb/attach/original/dop-employee-approval/PMS_SITE-1IUQFZO00I6NL/20260407/091ac85f-97ee-4a5d-a64b-363a33154361" data-inline="true" style="width: 96px; height: 90px;" data-id="1490990469201604608" data-from="DaouOffice">',
+      stampImg: '<img id="stamp9" data-appcode="dop-employee-approval" data-filename="36788fa1-13d1-4afd-9ad7-6c018b7c501f.png" src="/api/thumb/attach/original/dop-employee-approval/PMS_SITE-1IUQFZO00I6NL/20260407/091ac85f-97ee-4a5d-a64b-363a33154361" data-inline="true" style="width: 96px; height: 90px;" data-id="1490990469201604608" data-from="DaouOffice">',
   },
   "CBRE ILC일반사모부동산자투자신탁제2호": {
       trustee: "하나은행",      // 신탁업자
       office: "KB펀드파트너스", // 일반사무관리회사
       activeAcc: ".CBRE_ILC2_Acc",  // 펀드명 별 계좌 드롭박스 부분 (각각 클래스로 묶음)
       stampImgLeftStr: "CBRE 인베스트먼트매니지먼트자산운용주식회사\n서울특별시 종로구 종로 47, 19층(공평동, 에스씨은행본점빌딩)\nT. 02 398 1555 /  F. 02 398 1556",
-      stampImgSrc: '<img id="stamp9" data-appcode="dop-employee-approval" data-filename="36788fa1-13d1-4afd-9ad7-6c018b7c501f.png" src="/api/thumb/attach/original/dop-employee-approval/PMS_SITE-1IUQFZO00I6NL/20260407/091ac85f-97ee-4a5d-a64b-363a33154361" data-inline="true" style="width: 96px; height: 90px;" data-id="1490990469201604608" data-from="DaouOffice">',
+      stampImg: '<img id="stamp9" data-appcode="dop-employee-approval" data-filename="36788fa1-13d1-4afd-9ad7-6c018b7c501f.png" src="/api/thumb/attach/original/dop-employee-approval/PMS_SITE-1IUQFZO00I6NL/20260407/091ac85f-97ee-4a5d-a64b-363a33154361" data-inline="true" style="width: 96px; height: 90px;" data-id="1490990469201604608" data-from="DaouOffice">',
   },
   "CBRE ILC일반사모부동산모투자신탁제1-1호": {
       trustee: "하나은행",      // 신탁업자
       office: "KB펀드파트너스", // 일반사무관리회사
       activeAcc: ".CBRE_ILC1_1_Acc",  // 펀드명 별 계좌 드롭박스 부분 (각각 클래스로 묶음)
       stampImgLeftStr: "CBRE 인베스트먼트매니지먼트자산운용주식회사\n서울특별시 종로구 종로 47, 19층(공평동, 에스씨은행본점빌딩)\nT. 02 398 1555 /  F. 02 398 1556",
-      stampImgSrc: '<img id="stamp9" data-appcode="dop-employee-approval" data-filename="36788fa1-13d1-4afd-9ad7-6c018b7c501f.png" src="/api/thumb/attach/original/dop-employee-approval/PMS_SITE-1IUQFZO00I6NL/20260407/091ac85f-97ee-4a5d-a64b-363a33154361" data-inline="true" style="width: 96px; height: 90px;" data-id="1490990469201604608" data-from="DaouOffice">',
+      stampImg: '<img id="stamp9" data-appcode="dop-employee-approval" data-filename="36788fa1-13d1-4afd-9ad7-6c018b7c501f.png" src="/api/thumb/attach/original/dop-employee-approval/PMS_SITE-1IUQFZO00I6NL/20260407/091ac85f-97ee-4a5d-a64b-363a33154361" data-inline="true" style="width: 96px; height: 90px;" data-id="1490990469201604608" data-from="DaouOffice">',
   },
   "CBRE DL일반부동산사모투자회사": {
       trustee: "하나은행",      // 신탁업자
       office: "KB펀드파트너스", // 일반사무관리회사
       activeAcc: ".CBRE_DL_Acc",  // 펀드명 별 계좌 드롭박스 부분 (각각 클래스로 묶음)
       stampImgLeftStr: "CBRE DL일반부동산사모투자회사\n이사 CBRE 인베스트먼트매니지먼트자산운용주식회사",
-      stampImgSrc: '<img id="stamp10" data-appcode="dop-employee-approval" data-filename="f3f4ad59-7491-4aae-b583-8886cd7d1e0b.png" src="/api/thumb/attach/original/dop-employee-approval/PMS_SITE-1IUQFZO00I6NL/20260407/0dd8d604-42c7-41d6-bac2-0863da25db35" data-inline="true" style="width: 96px; height: 90px;" data-id="1490990469717504000" data-from="DaouOffice">',
+      stampImg: '<img id="stamp10" data-appcode="dop-employee-approval" data-filename="f3f4ad59-7491-4aae-b583-8886cd7d1e0b.png" src="/api/thumb/attach/original/dop-employee-approval/PMS_SITE-1IUQFZO00I6NL/20260407/0dd8d604-42c7-41d6-bac2-0863da25db35" data-inline="true" style="width: 96px; height: 90px;" data-id="1490990469717504000" data-from="DaouOffice">',
   },
   "CBRE 로지스밸리전문투자형사모부동산투자신탁제1호": {
       trustee: "하나은행",      // 신탁업자
       office: "KB펀드파트너스", // 일반사무관리회사
       activeAcc: ".CBRE_1_Acc",  // 펀드명 별 계좌 드롭박스 부분 (각각 클래스로 묶음)
       stampImgLeftStr: "CBRE 인베스트먼트매니지먼트자산운용주식회사\n서울특별시 종로구 종로 47, 19층(공평동, 에스씨은행본점빌딩)\nT. 02 398 1555 /  F. 02 398 1556",
-      stampImgSrc: '<img id="stamp9" data-appcode="dop-employee-approval" data-filename="36788fa1-13d1-4afd-9ad7-6c018b7c501f.png" src="/api/thumb/attach/original/dop-employee-approval/PMS_SITE-1IUQFZO00I6NL/20260407/091ac85f-97ee-4a5d-a64b-363a33154361" data-inline="true" style="width: 96px; height: 90px;" data-id="1490990469201604608" data-from="DaouOffice">',
+      stampImg: '<img id="stamp9" data-appcode="dop-employee-approval" data-filename="36788fa1-13d1-4afd-9ad7-6c018b7c501f.png" src="/api/thumb/attach/original/dop-employee-approval/PMS_SITE-1IUQFZO00I6NL/20260407/091ac85f-97ee-4a5d-a64b-363a33154361" data-inline="true" style="width: 96px; height: 90px;" data-id="1490990469201604608" data-from="DaouOffice">',
   },
   "CBRE NLC 부동산일반사모투자회사": {
       trustee: "하나은행",      // 신탁업자
       office: "KB펀드파트너스", // 일반사무관리회사
       activeAcc: ".CBRE_NLC",  // 펀드명 별 계좌 드롭박스 부분 (각각 클래스로 묶음)
       stampImgLeftStr: "CBRE NLC 부동산일반사모투자회사\n이사 CBRE 인베스트먼트매니지먼트자산운용주식회사",
-      stampImgSrc: '<img id="stamp11" data-appcode="dop-employee-approval" data-filename="c32ea40a-77b0-48e6-b8c5-8473e795f94b.png" src="/api/thumb/attach/original/dop-employee-approval/PMS_SITE-1IUQFZO00I6NL/20260407/dee18211-7694-409a-94ae-b30a28616f6c" data-inline="true" style="width: 94px; height: 90px;" data-id="1490990470199848960" data-from="DaouOffice">',
+      stampImg: '<img id="stamp11" data-appcode="dop-employee-approval" data-filename="c32ea40a-77b0-48e6-b8c5-8473e795f94b.png" src="/api/thumb/attach/original/dop-employee-approval/PMS_SITE-1IUQFZO00I6NL/20260407/dee18211-7694-409a-94ae-b30a28616f6c" data-inline="true" style="width: 94px; height: 90px;" data-id="1490990470199848960" data-from="DaouOffice">',
   },
 };
 ////////////////////////////////////////////////////////////
@@ -474,7 +474,7 @@ var Integration = Backbone.View.extend({
       $('[class^="CBRE_"]').hide();
 
       // 해당 계좌 도장 이미지를 #stamp에 보여주기
-      $('#stamp').html(targetAcc.stampImgSrc);
+      $('#stamp').html(targetAcc.stampImg);
 
       // 해당 계좌 드롭박스만 보여주기
       $(targetAcc.activeAcc).show();
