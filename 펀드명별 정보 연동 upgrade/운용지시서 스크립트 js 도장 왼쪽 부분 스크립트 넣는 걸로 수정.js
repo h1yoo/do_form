@@ -556,7 +556,7 @@ var Integration = Backbone.View.extend({
 	beforeSave :function() {
     $('.viewModeHiddenPart').hide();
     $('#text span').hide();
-    $('#stmap span').hide();
+    $('#stamp span').hide();
 
     // 기타 input hide 하지 않음
 	},
