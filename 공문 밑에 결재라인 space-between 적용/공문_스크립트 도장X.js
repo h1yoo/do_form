@@ -22,6 +22,15 @@ var Integration = Backbone.View.extend({
 
 					var i1 = $(item).find('.sign_rank').text();
 					var i2 = $(item).find('.sign_name').text();
+					// var i3 = $(item).find('.sign_stamp img').attr("src");
+					// var i4 = $(item).find('.sign_date').text();
+					// var i5 = "";
+
+					// if(i3 == undefined){
+					// 	i5 = ``;
+					// }else{
+					// 	i5 = `<div style="text-align: center;"><img src="${i3}" style="height: 35px;"></div>`;
+					// }
 
 					html1 += `
 								<div style="display: flex; align-items: center; margin-right: 30px;">
@@ -36,6 +45,15 @@ var Integration = Backbone.View.extend({
 
 					var i1 = $(item).find('.sign_rank').text();
 					var i2 = $(item).find('.sign_name').text();
+					// var i3 = $(item).find('.sign_stamp img').attr("src");
+					// var i4 = $(item).find('.sign_date').text();
+					// var i5 = "";
+
+					// if(i3 == undefined){
+					// 	i5 = ``;
+					// }else{
+					// 	i5 = `<div style="text-align: center;"><img src="${i3}" style="height: 35px;"></div>`;
+					// }
 
 					html2 += `
 								<div style="display: flex; align-items: center; margin-right: 30px;">
