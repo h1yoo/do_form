@@ -5,12 +5,11 @@ var _ = require('underscore');
 
 // 2. 직급별 단가 테이블 데이터 정의 (상단이나 함수 내부에 위치)
 const RANK_PRICE_MAP = {
-  "주임": 30000, "대리": 30000, "과장": 30000, "차장": 30000,
+  "팀원": 30000, "주임": 30000, "대리": 30000, "과장": 30000, "차장": 30000,
   "팀장": 35000,
-  "실장": 40000, "위원": 40000,
-  "대표": 50000, "소장": 50000, "본부장": 50000, "이사": 50000
+  "실장": 40000, "사업부장": 40000, "부장": 40000, "국장": 40000, "위원": 40000,
+  "대표": 50000, "소장": 50000, "본부장": 50000, "이사": 50000, "김영호 이사": 50000,
 };
-
 
 /* ------------------------------------------ PlusMinusRow.js Start ------------------------------------------ */
 
@@ -24,7 +23,7 @@ var PlusMinusRow = function (options) {
   // 사용자가 정의할 수 있는 옵션 변수
   var options = {
     tableId: options.tableId,							// 행 추가/삭제 수행 테이블 id (*필수)
-  
+	
     plusBtnId: options.plusBtnId,						// 행 추가 버튼 id (*필수)
     minusBtnId: options.minusBtnId,						// 행 삭제 버튼 id (*필수)
 
@@ -33,7 +32,7 @@ var PlusMinusRow = function (options) {
     copyRowNoClass: options.copyRowNoClass,				// 순번(No) 열(td)의 class
     copyRowNoSize: options.copyRowNoSize,				// 순번(No) 증가량 :int
 
-  rowNo: options.rowNo,								// 입력한 행 수만큼 추가
+	rowNo: options.rowNo,								// 입력한 행 수만큼 추가
     maxRow: options.maxRow,								// 행 추가 최대 개수 :int
     maxNo: options.maxNo,								// 행 추가 최대 순번(No) :int
 
@@ -65,15 +64,15 @@ var PlusMinusRow = function (options) {
 
   //입력한 행 수만큼 추가
   $("." + settings.rowNo).on('change', function () {
-  $("#" + settings.tableId + " .copiedRow").remove();
-  plusCnt=1;
+	$("#" + settings.tableId + " .copiedRow").remove();
+	plusCnt=1;
 
-  var row_no = parseInt($("." + settings.rowNo+ " input").val());
+	var row_no = parseInt($("." + settings.rowNo+ " input").val());
 
-  for(var i=0; i<row_no-1; i++){
-    plusRow();
-    plusCnt++;
-  }
+	for(var i=0; i<row_no-1; i++){
+		plusRow();
+		plusCnt++;
+	}
   });
   
 
@@ -296,30 +295,30 @@ var PlusMinusRow = function (options) {
 
 
 var Integration = Backbone.View.extend({
-  initialize : function(options){
-    this.options = options || {};
-    this.docModel = this.options.docModel;
-    this.variables = this.options.variables;
-    this.infoData = this.options.infoData;
-  },
-  
-  render : function() {
-    var self = this;
-    $('.viewModeHiddenPart').show();
-    
-    //행 추가/삭제
-    PlusMinusRow({
-        tableId : "dynamic_table1",
-        plusBtnId : "plus1", 
-        minusBtnId : "minus1",
-        copyRowClass : "copyRow1",
-        copyRowNoClass : "copyRowNo1",
-        rowspanClass : "rowspanTd1",
-        minusRowCallback : function() {
+	initialize : function(options){
+		this.options = options || {};
+		this.docModel = this.options.docModel;
+		this.variables = this.options.variables;
+		this.infoData = this.options.infoData;
+	},
+	
+	render : function() {
+		var self = this;
+		$('.viewModeHiddenPart').show();
+		
+		//행 추가/삭제
+		PlusMinusRow({
+				tableId : "dynamic_table1",
+				plusBtnId : "plus1", 
+				minusBtnId : "minus1",
+				copyRowClass : "copyRow1",
+				copyRowNoClass : "copyRowNo1",
+				rowspanClass : "rowspanTd1",
+				minusRowCallback : function() {
           self.calSumPrice(".price1 input", ".sum_price1");
           self.calTotalPrice();
         },
-        plusRowCallback : function() {}
+				plusRowCallback : function() {}
     });
     PlusMinusRow({
             tableId : "dynamic_table2",
@@ -373,6 +372,19 @@ var Integration = Backbone.View.extend({
             },
             plusRowCallback : function() {}
     });
+    PlusMinusRow({
+            tableId : "dynamic_table6",
+            plusBtnId : "plus6", 
+            minusBtnId : "minus6",
+            copyRowClass : "copyRow6",
+            copyRowNoClass : "copyRowNo6",
+            rowspanClass : "rowspanTd6",
+            minusRowCallback : function() {
+              self.calSumPrice(".price6 input", ".sum_price6");
+              // self.calTotalPrice();
+            },
+            plusRowCallback : function() {}
+    });
 
     $('.price1 input').on('change', function() {
       self.calSumPrice(".price1 input", ".sum_price1");
@@ -389,7 +401,7 @@ var Integration = Backbone.View.extend({
       self.calTotalPrice();
     });
 
-    $('.price4 input, .copyRow4 select').on('change', function() {
+    $('.price4 input, .copyRow4 select, .day_period input').on('change', function() {
       self.calDayPrice();
       self.calTotalPrice();
     });
@@ -398,44 +410,43 @@ var Integration = Backbone.View.extend({
       self.calSumPrice(".price5 input", ".sum_price5");
       self.calTotalPrice();
     });
-  },
+
+    $('.price6 input').on('change', function() {
+      self.calSumPrice(".price6 input", ".sum_price6");
+      // self.calTotalPrice();
+    });
+	},
 
   calDayPrice : function () {
-    var sum_price4 = 0;
-    
     // 일비 정산금액 계산
     $("#dynamic_table4 tr").each(function (i, e) {
-      // 복사용 숨겨진 행(copyRow)이 있다면 계산에서 제외하기 위해 :visible 사용 권장
-      if (!$(e).is(':visible')) return;
-
       var selectedUserRank = $(e).find(".userRank select option:selected").val();
 
-      // 데이터 맵에서 금액 찾기 (없으면 0)
-      var price = RANK_PRICE_MAP[selectedUserRank] || 0;
+      // 일비 기간 날짜
+      var startDateStr = $(e).find('.day_period input').eq(0).val();
+      var endDateStr = $(e).find('.day_period input').eq(1).val();
+      
+      var startDate = new Date(startDateStr);
+      var endDate = new Date(endDateStr);
 
-      if (price > 0) {
-          // 표준 toLocaleString 사용 (GO.util 에러 방지 및 안정성 확보)
-          $(e).find(".price4").text(price.toLocaleString());
-          sum_price4 += price;
-      } else {
-          $(e).find(".price4").text("");
+      // 기본 일수 차이 계산 (양 끝 포함)
+      var dayDiff = 0;
+
+      // 날짜 유효성 검사
+      if (!isNaN(startDate) && !isNaN(endDate) && startDate <= endDate) {
+        let current = new Date(startDate);
+
+        while (current <= endDate) {
+          dayDiff++;
+          current.setDate(current.getDate() + 1); // 다음 날로 이동
+        }
       }
 
-      // if (selectedUserRank) {
-      //   let price = 0;
+      if (selectedUserRank) {
+        let price = RANK_PRICE_MAP[selectedUserRank] || 0;
 
-      //   if (["주임", "대리", "과장", "차장"].includes(selectedUserRank)) {
-      //     price = 30000;
-      //   } else if (selectedUserRank === "팀장") {
-      //     price = 35000;
-      //   } else if (["실장", "위원"].includes(selectedUserRank)) {
-      //     price = 40000;
-      //   } else if (["대표", "소장", "본부장", "이사"].includes(selectedUserRank)) {
-      //     price = 50000;
-      //   }
-
-      //   $(e).find(".price4").text(price ? GO.util.numberWithCommas(price) : "");
-      // }
+        $(e).find(".price4").text(price * dayDiff > 0 ? GO.util.numberWithCommas(price * dayDiff) : price);
+      }
     });
 
     // 총 합계 계산
@@ -471,100 +482,17 @@ var Integration = Backbone.View.extend({
       var sum_price4 = parseFloat($(".sum_price4").text().replace(/,/g, "")) || 0;
       var sum_price5 = parseFloat($(".sum_price5").text().replace(/,/g, "")) || 0;
       var totalPrice = sum_price1 + sum_price2 + sum_price3 + sum_price4 + sum_price5;
-
-      // $(priceEl).each(function () {
-      //   var val = parseFloat($(this).text().replace(/,/g, ""));
-      //   if (!isNaN(val)) {
-      //     totalPrice += val;
-      //   }
-      // });
   
       $(".totalPrice").text(GO.util.numberWithCommas(totalPrice));
   },
 
-  // 적용환율1 원화환산
-  calExWon1 : function (exRateEl, foreignPriceValEl, calWonEl) {
-    var self = this;
-    var exRate = 0;
-        
-    $("#dynamic_table1 tr").each(function(i, e){
-            if ($(e).find(foreignPriceValEl)[0]) {
-                exRate = parseFloat($(exRateEl).val().replace(/\,/g,"")).toFixed(2);
-                var foreignPriceStr = $(e).find(foreignPriceValEl).val() || "0";
-                var foreignPrice = parseFloat(foreignPriceStr.replace(/\,/g,"")).toFixed(2);
-                
-                var calWon = 0;
-                if (foreignPrice == 0 || foreignPrice == "" || exRate == 0 || exRate == "") { calWon = 0; }
-                else {
-                  var calWon = exRate * foreignPrice;
-                  if (isNaN(calWon)) { calWon = 0; }
-                }
-
-                $(e).find(calWonEl).text(GO.util.numberWithCommas(calWon.toFixed(0)));
-      }
-    });
-  },
-  // 적용환율2 원화환산
-  calExWon2 : function (exRateEl, foreignPriceValEl, calWonEl) {
-    var self = this;
-    var exRate = 0;
-        
-    $("#dynamic_table2 tr").each(function(i, e){
-            if ($(e).find(foreignPriceValEl)[0]) {
-              exRate = parseFloat($(exRateEl).val().replace(/\,/g,"")).toFixed(2) || 0;
-              var foreignPriceStr = $(e).find(foreignPriceValEl).val() || "0";
-              var foreignPrice = parseFloat(foreignPriceStr.replace(/\,/g,"")).toFixed(2);
-              
-              var calWon = 0;
-                if (foreignPrice == 0 || foreignPrice == "" || exRate == 0 || exRate == "") { calWon = 0; }
-                else {
-                  var calWon = exRate * foreignPrice;
-                  if (isNaN(calWon)) { calWon = 0; }
-                }
-
-              $(e).find(calWonEl).text(GO.util.numberWithCommas(calWon.toFixed(0)));
-      }
-    });
-  },
-
-  calWholeCost : function () {
-    var self = this;
-    var wholeCost;
-
-    var corp_sum1 = parseFloat(
-      $("#corpCardCost .corp_sum_won input").length
-        ? $("#corpCardCost .corp_sum_won input").val()
-        : $("#corpCardCost .corp_sum_won").text()
-    .replace(/,/g, "")) || 0;
-    var pers_sum1 = parseFloat(
-      $("#corpCardCost .pers_sum_won input").length
-        ? $("#corpCardCost .pers_sum_won input").val()
-        : $("#corpCardCost .pers_sum_won").text()
-    .replace(/,/g, "")) || 0;
-  
-    var sum2 = parseFloat(
-      $("#dynamic_table1 .sum_calWon input").length
-        ? $("#dynamic_table1 .sum_calWon input").val()
-        : $("#dynamic_table1 .sum_calWon").text()
-    .replace(/,/g, "")) || 0;
-  
-    var sum3 = parseFloat(
-      $("#dynamic_table2 .sum_calWon input").length
-        ? $("#dynamic_table2 .sum_calWon input").val()
-        : $("#dynamic_table2 .sum_calWon").text()
-    .replace(/,/g, "")) || 0;
-  
-    var wholeCost = corp_sum1 + pers_sum1 + sum2 + sum3;
-  
-    $(".wholeCost").text( GO.util.numberWithCommas(wholeCost) );
-  },
     
 
-  renderViewMode : function(){$('.viewModeHiddenPart').hide();},
-  onEditDocument : function(){this.render();},
-  beforeSave :function() {$('.viewModeHiddenPart').hide();},
-  afterSave :function() {$('.viewModeHiddenPart').hide();},
-  validate :function() {return true;},
-  getDocVariables : function(){}
+	renderViewMode : function(){$('.viewModeHiddenPart').hide();},
+	onEditDocument : function(){this.render();},
+	beforeSave :function() {$('.viewModeHiddenPart').hide();},
+	afterSave :function() {$('.viewModeHiddenPart').hide();},
+	validate :function() {return true;},
+	getDocVariables : function(){}
 });
 return Integration;
