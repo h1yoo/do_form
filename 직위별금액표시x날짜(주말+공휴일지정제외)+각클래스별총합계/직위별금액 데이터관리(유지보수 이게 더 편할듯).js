@@ -445,8 +445,8 @@ var Integration = Backbone.View.extend({
       if (selectedUserRank) {
         let price = RANK_PRICE_MAP[selectedUserRank] || 0;
 
-        // $(e).find(".price4").val(price * dayDiff > 0 ? GO.util.numberWithCommas(price * dayDiff) : price); // 기간 선택 ㅇ나했을 때 직위별 금액 들어가게 설정
-        $(e).find(".price4").val(price * dayDiff > 0 ? GO.util.numberWithCommas(price * dayDiff) : "");  // 기간 선택 안하면 값 빈값으로 설정
+        // $(e).find(".price4 input").val(price * dayDiff > 0 ? GO.util.numberWithCommas(price * dayDiff) : price); // 기간 선택 ㅇ나했을 때 직위별 금액 들어가게 설정
+        $(e).find(".price4 input").val(price * dayDiff > 0 ? GO.util.numberWithCommas(price * dayDiff) : "");  // 기간 선택 안하면 값 빈값으로 설정
       }
     });
 
