@@ -453,8 +453,8 @@ var Integration = Backbone.View.extend({
     // 총 합계 계산
     var sum_price4 = 0;
 
-    $(".price4").each(function () {
-      var val = parseFloat($(this).text().replace(/,/g, ""));
+    $(".price4 input").each(function () {
+      var val = parseFloat($(this).val().replace(/,/g, ""));
       if (!isNaN(val)) {
         sum_price4 += val;
       }
