@@ -102,9 +102,6 @@ var PlusMinusRow = function (options) {
   function plusRow() {
     var $tr = $("#" + settings.tableId + " ." + settings.copyRowClass).clone(true); // 추가할 행 복사 (이벤트도)
 
-    // 자동 계산 부분 초기화
-    $tr.find(".price4").text("");  // 초기 텍스트 제거
-
     // ① rowspan 처리 (optional)
     if ($("#" + settings.tableId + " ." + settings.rowspanClass)[0] !== undefined) {
       $.each($("#" + settings.tableId + " ." + settings.rowspanClass), function (k, v) {
