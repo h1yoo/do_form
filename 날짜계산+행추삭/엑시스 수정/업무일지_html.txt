@@ -1,0 +1,253 @@
+<span><span><span><span><span><span><span style="font-family: &quot;맑은 고딕&quot;; font-size: 10pt;">
+  
+<div id="divCustomWrapper" style="font-family: &quot;맑은 고딕&quot;; font-size: 10pt; line-height: 150%; margin-top: 0px; margin-bottom: 0px;">
+    <!-- ========================= TITLE ========================= -->
+    
+  
+<table class="__se_tbl" style="width: 800px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); word-break: break-all;">
+	<tbody>
+		<tr>
+			<td colspan="2" style="border: 0px; height: 90px; text-align: center; vertical-align: middle; font-size: 22px; font-weight: bold; padding: 3px !important;" class="dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				
+          업무일지<br><br>
+        
+			</td>
+		</tr>
+		<tr>
+			<td style="border: 0px; width: 271px; vertical-align: top; height: 0px; padding: 0px !important;" class="dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				
+<table class="__se_tbl" style="width: 271px; border: 1px solid rgb(0, 0, 0); background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; color: rgb(0, 0, 0); font-size: 9pt;">
+	<tbody>
+		<tr>
+			<td style="width: 100px; background: rgb(221, 221, 221); border: 1px solid rgb(0, 0, 0); height: 22px; text-align: center; font-weight: bold; vertical-align: middle; padding: 3px !important;">
+				
+          문서번호
+        
+			</td>
+			<td style="width: 171px; border: 1px solid rgb(0, 0, 0); height: 22px; vertical-align: middle; padding: 3px !important;">
+				<span unselectable="on" contenteditable="false" class="comp_wrap" data-cid="0" data-dsl="{{label:docNo}}" data-wrapper="" style="" data-value="" data-autotype=""><span class="comp_item">문서번호</span><span contenteditable="false" class="comp_active" style="display:none;"> <span class="Active_dot1"></span><span class="Active_dot2"></span> <span class="Active_dot3"></span><span class="Active_dot4"></span> </span> <span contenteditable="false" class="comp_hover" data-content-protect-cover="true" data-origin="0"> <a contenteditable="false" class="ic_prototype ic_prototype_trash" data-content-protect-cover="true" data-component-delete-button="true"></a> </span> </span>
+        
+			</td>
+		</tr>
+		<tr>
+			<td style="background: rgb(221, 221, 221); border: 1px solid rgb(0, 0, 0); height: 22px; text-align: center; font-weight: bold; vertical-align: middle; padding: 3px !important;">
+				
+          작성부서
+        
+			</td>
+			<td style="border: 1px solid rgb(0, 0, 0); height: 22px; vertical-align: middle; padding: 3px !important;">
+				<span unselectable="on" contenteditable="false" class="comp_wrap" data-cid="1" data-dsl="{{label:draftDept}}" data-wrapper="" style="" data-value="" data-autotype=""><span class="comp_item">기안부서</span><span contenteditable="false" class="comp_active" style="display:none;"> <span class="Active_dot1"></span><span class="Active_dot2"></span> <span class="Active_dot3"></span><span class="Active_dot4"></span> </span> <span contenteditable="false" class="comp_hover" data-content-protect-cover="true" data-origin="1"> <a contenteditable="false" class="ic_prototype ic_prototype_trash" data-content-protect-cover="true" data-component-delete-button="true"></a> </span> </span>
+        
+			</td>
+		</tr>
+		<tr>
+			<td style="background: rgb(221, 221, 221); border: 1px solid rgb(0, 0, 0); height: 22px; text-align: center; font-weight: bold; vertical-align: middle; padding: 3px !important;">
+				
+          작 성&nbsp;자
+        
+			</td>
+			<td style="border: 1px solid rgb(0, 0, 0); height: 22px; vertical-align: middle; padding: 3px !important;">
+				<span unselectable="on" contenteditable="false" class="comp_wrap" data-cid="2" data-dsl="{{label:draftUser}}" data-wrapper="" style="" data-value="" data-autotype=""><span class="comp_item">기안자</span><span contenteditable="false" class="comp_active" style="display:none;"> <span class="Active_dot1"></span><span class="Active_dot2"></span> <span class="Active_dot3"></span><span class="Active_dot4"></span> </span> <span contenteditable="false" class="comp_hover" data-content-protect-cover="true" data-origin="2"> <a contenteditable="false" class="ic_prototype ic_prototype_trash" data-content-protect-cover="true" data-component-delete-button="true"></a> </span> </span>
+        
+			</td>
+		</tr>
+		<tr>
+			<td style="background: rgb(221, 221, 221); border: 1px solid rgb(0, 0, 0); height: 22px; text-align: center; font-weight: bold; vertical-align: middle; padding: 3px !important;">
+				
+          작 성&nbsp;일
+        
+			</td>
+			<td style="border: 1px solid rgb(0, 0, 0); height: 22px; vertical-align: middle; padding: 3px !important;">
+				<span unselectable="on" contenteditable="false" class="comp_wrap" data-cid="3" data-dsl="{{label:draftDate}}" data-wrapper="" style="" data-value="" data-autotype=""><span class="comp_item">기안일</span><span contenteditable="false" class="comp_active" style="display:none;"> <span class="Active_dot1"></span><span class="Active_dot2"></span> <span class="Active_dot3"></span><span class="Active_dot4"></span> </span> <span contenteditable="false" class="comp_hover" data-content-protect-cover="true" data-origin="3"> <a contenteditable="false" class="ic_prototype ic_prototype_trash" data-content-protect-cover="true" data-component-delete-button="true"></a> </span> </span>
+        
+			</td>
+		</tr>
+	</tbody>
+</table>
+        
+			</td>
+			<td style="border: 0px; text-align: right; vertical-align: top; height: 0px; padding: 0px !important;" class="dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				<span unselectable="on" contenteditable="false" class="comp_wrap" data-wrapper=""><span class="sign_type1_inline" data-group-seq="0" data-group-name="작성" data-group-max-count="1" data-group-type="type1" data-is-reception=""><span class="sign_tit_wrap"><span class="sign_tit"><strong>작성</strong></span></span><span class="sign_member_wrap"><span class="sign_member"><span class="sign_rank_wrap"><span class="sign_rank" style="font-family: &quot;맑은 고딕&quot;; font-size: 9pt;">&nbsp;</span></span><span class="sign_wrap" style="font-family: &quot;맑은 고딕&quot;; font-size: 9pt;">&nbsp;</span><span class="sign_date_wrap"><span class="sign_date" style="font-family: &quot;맑은 고딕&quot;; font-size: 9pt;">&nbsp;</span></span></span></span></span><span contenteditable="false" class="comp_active" style="display:none;"> <span class="Active_dot1"></span><span class="Active_dot2"></span> <span class="Active_dot3"></span><span class="Active_dot4"></span> </span><span contenteditable="false" class="comp_hover" data-content-protect-cover="true"> <a contenteditable="false" class="ic_prototype ic_prototype_trash" data-content-protect-cover="true" data-component-delete-button="true"></a> </span></span>&nbsp;<span unselectable="on" contenteditable="false" class="comp_wrap" data-wrapper=""><span class="sign_type1_inline" data-group-seq="1" data-group-name="승인" data-group-max-count="10" data-group-type="type1" data-is-reception="" style="font-size: 9pt; font-family: &quot;맑은 고딕&quot;, &quot;malgun gothic&quot;, dotum, arial, tahoma;"><span class="sign_tit_wrap"><span class="sign_tit" style="height: 255px;"><strong>승인</strong></span></span><span class="sign_member_wrap"><span class="sign_member"><span class="sign_rank_wrap"><span class="sign_rank" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span></span><span class="sign_wrap" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span><span class="sign_date_wrap"><span class="sign_date" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span></span></span></span><span class="sign_member_wrap"><span class="sign_member"><span class="sign_rank_wrap"><span class="sign_rank" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span></span><span class="sign_wrap" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span><span class="sign_date_wrap"><span class="sign_date" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span></span></span></span><span class="sign_member_wrap"><span class="sign_member"><span class="sign_rank_wrap"><span class="sign_rank" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span></span><span class="sign_wrap" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span><span class="sign_date_wrap"><span class="sign_date" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span></span></span></span><span class="sign_member_wrap"><span class="sign_member"><span class="sign_rank_wrap"><span class="sign_rank" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span></span><span class="sign_wrap" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span><span class="sign_date_wrap"><span class="sign_date" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span></span></span></span><span class="sign_member_wrap"><span class="sign_member"><span class="sign_rank_wrap"><span class="sign_rank" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span></span><span class="sign_wrap" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span><span class="sign_date_wrap"><span class="sign_date" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span></span></span></span><span class="sign_member_wrap"><span class="sign_member"><span class="sign_rank_wrap"><span class="sign_rank" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span></span><span class="sign_wrap" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span><span class="sign_date_wrap"><span class="sign_date" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span></span></span></span><span class="sign_member_wrap"><span class="sign_member"><span class="sign_rank_wrap"><span class="sign_rank" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span></span><span class="sign_wrap" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span><span class="sign_date_wrap"><span class="sign_date" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span></span></span></span><span class="sign_member_wrap"><span class="sign_member"><span class="sign_rank_wrap"><span class="sign_rank" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span></span><span class="sign_wrap" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span><span class="sign_date_wrap"><span class="sign_date" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span></span></span></span><span class="sign_member_wrap"><span class="sign_member"><span class="sign_rank_wrap"><span class="sign_rank" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span></span><span class="sign_wrap" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span><span class="sign_date_wrap"><span class="sign_date" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span></span></span></span><span class="sign_member_wrap"><span class="sign_member"><span class="sign_rank_wrap"><span class="sign_rank" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span></span><span class="sign_wrap" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span><span class="sign_date_wrap"><span class="sign_date" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span></span></span></span></span><span contenteditable="false" class="comp_active" style="display:none;"> <span class="Active_dot1"></span><span class="Active_dot2"></span> <span class="Active_dot3"></span><span class="Active_dot4"></span> </span><span contenteditable="false" class="comp_hover" data-content-protect-cover="true"> <a contenteditable="false" class="ic_prototype ic_prototype_trash" data-content-protect-cover="true" data-component-delete-button="true"></a> </span></span>&nbsp;&nbsp;&nbsp;<span unselectable="on" contenteditable="false" class="comp_wrap" data-wrapper=""><span class="sign_type1_inline" data-group-seq="2" data-group-name="결재" data-group-max-count="1" data-group-type="type1" data-is-reception="" style="font-size: 9pt; font-family: &quot;맑은 고딕&quot;, &quot;malgun gothic&quot;, dotum, arial, tahoma;"><span class="sign_tit_wrap"><span class="sign_tit" style="height: 127px;"><strong>결재</strong></span></span><span class="sign_member_wrap"><span class="sign_member" style="font-size: 9pt;"><span class="sign_rank_wrap"><span class="sign_rank" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span></span><span class="sign_wrap" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span><span class="sign_date_wrap"><span class="sign_date" style="font-size: 9pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma;">&nbsp;</span></span></span></span></span><span contenteditable="false" class="comp_active" style="display:none;"> <span class="Active_dot1"></span><span class="Active_dot2"></span> <span class="Active_dot3"></span><span class="Active_dot4"></span> </span><span contenteditable="false" class="comp_hover" data-content-protect-cover="true"> <a contenteditable="false" class="ic_prototype ic_prototype_trash" data-content-protect-cover="true" data-component-delete-button="true"></a> </span></span><br><br>
+        
+			</td>
+		</tr>
+	</tbody>
+</table>
+  
+    <!-- ========================= 근무형태 ========================= -->
+    
+  
+<table class="sectionTable" style="width:800px; margin: 10px 0 0 0; border-collapse:collapse; font-size:12px; font-family:malgun gothic,dotum,arial,tahoma;"><colgroup><col width="120"><col width="680"></colgroup>
+      
+    
+	<tbody>
+		<tr>
+			<td class="thCell dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l" style="text-align:center;">
+				
+          
+  근무 형태
+        
+			</td>
+			<td class="tdCell dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l" style="text-align:left;">
+				<span unselectable="on" contenteditable="false" class="comp_wrap" data-cid="4" data-dsl="{{check_사무실_외근_현장_재택_기타}}" data-wrapper="" style="" data-value="" data-autotype=""><input class="editor_opt" type="checkbox" name="" value="사무실"><label class="editor_label">사무실</label><input class="editor_opt" type="checkbox" name="" value="외근"><label class="editor_label">외근</label><input class="editor_opt" type="checkbox" name="" value="현장"><label class="editor_label">현장</label><input class="editor_opt" type="checkbox" name="" value="재택"><label class="editor_label">재택</label><input class="editor_opt" type="checkbox" name="" value="기타"><label class="editor_label">기타</label><span contenteditable="false" class="comp_active" style="display:none;"> <span class="Active_dot1"></span><span class="Active_dot2"></span> <span class="Active_dot3"></span><span class="Active_dot4"></span> </span> <span contenteditable="false" class="comp_hover" data-content-protect-cover="true" data-origin="4"> <a contenteditable="false" class="ic_prototype ic_prototype_trash" data-content-protect-cover="true" data-component-delete-button="true"></a> </span> </span>
+          
+        
+			</td>
+		</tr>
+	</tbody>
+</table>
+  
+    <!-- ========================= 업무내용 테이블 ========================= -->
+    
+  
+<table id="worklogTable" class="sectionTable" style="width:800px; margin:10px 0 0 0; border-collapse:collapse; font-size:12px; font-family:malgun gothic,dotum,arial,tahoma;"><colgroup>
+        <col width="40">
+        <col width="90">
+        <col width="80">
+        <col width="180">
+        <col width="150">
+        <col width="150">
+        <col width="90">
+      </colgroup>
+      
+    
+	<tbody id="dynamic_table1">
+		<tr>
+			<td colspan="5" style="border: 0px; font-weight: bold; padding: 6px 0px;" class="dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				
+          
+  업무 내용
+        
+			</td>
+			<td colspan="2" class="viewModeHiddenPart dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l" style="border: 0px; text-align: right; padding: 6px 0px;">
+				<a class="btnMini" id="plus1">추가</a>
+            <a class="btnMini" id="minus1">삭제</a>
+          
+        
+			</td>
+		</tr>
+		<tr>
+			<td class="thCell dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l" "="">
+          번호
+        
+			</td><td class="thCell dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+          
+  프로젝트명
+        
+			</td><td class="thCell dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+          
+  업무구분
+        
+			</td><td class="thCell dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+          
+  상세내용
+        
+			</td><td class="thCell dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+          시작(업무실행)
+        
+			</td><td class="thCell dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+          
+  종료(업무종료)
+        
+			</td><td class="thCell dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+          
+  소요시간
+        
+			</td>
+		</tr><!-- 복제 기준 행 -->
+        
+      
+		<tr class="copyRow1"><td class="tdCell center copyRowNo1 dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l" "="">
+				
+          
+  1
+        
+			</td>
+			<td class="tdCell dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				<span unselectable="on" contenteditable="false" class="comp_wrap" data-cid="5" data-dsl="{{text:projectName}}" data-wrapper="" style="width: 100%;" data-value="" data-autotype=""><input class="ipt_editor" type="text"><span contenteditable="false" class="comp_active" style="display:none;"> <span class="Active_dot1"></span><span class="Active_dot2"></span> <span class="Active_dot3"></span><span class="Active_dot4"></span> </span> <span contenteditable="false" class="comp_hover" data-content-protect-cover="true" data-origin="5"> <a contenteditable="false" class="ic_prototype ic_prototype_trash" data-content-protect-cover="true" data-component-delete-button="true"></a> </span> </span>
+          
+        
+			</td>
+			<td class="tdCell dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				<span unselectable="on" contenteditable="false" class="comp_wrap" data-cid="6" data-dsl="{{cSel_제안_실행_후속조치}}" data-wrapper="" style="" data-value="" data-autotype=""><select class="editor_slt" style="width:100%"><option selected="selected">제안</option><option>실행</option><option>후속조치</option></select><span contenteditable="false" class="comp_active" style="display:none;"> <span class="Active_dot1"></span><span class="Active_dot2"></span> <span class="Active_dot3"></span><span class="Active_dot4"></span> </span> <span contenteditable="false" class="comp_hover" data-content-protect-cover="true" data-origin="6"> <a contenteditable="false" class="ic_prototype ic_prototype_trash" data-content-protect-cover="true" data-component-delete-button="true"></a> </span> </span>
+          
+        
+			</td>
+			<td class="tdCell dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l" style="vertical-align:top;">
+				<span unselectable="on" contenteditable="false" class="comp_wrap" data-cid="7" data-dsl="{{textarea:detail}}" data-wrapper="" style="width: 100%;" data-value="" data-autotype=""><textarea class="txta_editor"></textarea><span contenteditable="false" class="comp_active" style="display:none;"> <span class="Active_dot1"></span><span class="Active_dot2"></span> <span class="Active_dot3"></span><span class="Active_dot4"></span> </span> <span contenteditable="false" class="comp_hover" data-content-protect-cover="true" data-origin="7"> <a contenteditable="false" class="ic_prototype ic_prototype_trash" data-content-protect-cover="true" data-component-delete-button="true"></a> </span> </span>
+          
+        
+			</td>
+			<td class="tdCell center startTime dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				<span unselectable="on" contenteditable="false" class="comp_wrap" data-cid="8" data-dsl="{{time}}" data-wrapper="" style="" data-value="" data-autotype=""><select class="editor_slt"><option value="00" selected="selected">00</option><option value="01">01</option></select>시<select class="editor_slt"><option value="00" selected="selected">00</option><option value="01">01</option></select>분<span contenteditable="false" class="comp_active" style="display:none;"> <span class="Active_dot1"></span><span class="Active_dot2"></span> <span class="Active_dot3"></span><span class="Active_dot4"></span> </span> <span contenteditable="false" class="comp_hover" data-content-protect-cover="true" data-origin="8"> <a contenteditable="false" class="ic_prototype ic_prototype_trash" data-content-protect-cover="true" data-component-delete-button="true"></a> </span> </span><br>
+			</td>
+			<td class="tdCell center endTime dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				<span unselectable="on" contenteditable="false" class="comp_wrap" data-cid="9" data-dsl="{{time}}" data-wrapper="" style="" data-value="" data-autotype=""><select class="editor_slt"><option value="00" selected="selected">00</option><option value="01">01</option></select>시<select class="editor_slt"><option value="00" selected="selected">00</option><option value="01">01</option></select>분<span contenteditable="false" class="comp_active" style="display:none;"> <span class="Active_dot1"></span><span class="Active_dot2"></span> <span class="Active_dot3"></span><span class="Active_dot4"></span> </span> <span contenteditable="false" class="comp_hover" data-content-protect-cover="true" data-origin="9"> <a contenteditable="false" class="ic_prototype ic_prototype_trash" data-content-protect-cover="true" data-component-delete-button="true"></a> </span> </span><br>
+			</td>
+			<td class="tdCell cal_time center dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				<span unselectable="on" contenteditable="false" class="comp_wrap" data-cid="10" data-dsl="{{text}}" data-wrapper="" style="width: 100%;" data-value="" data-autotype=""><input class="ipt_editor" type="text"><span contenteditable="false" class="comp_active" style="display:none;"> <span class="Active_dot1"></span><span class="Active_dot2"></span> <span class="Active_dot3"></span><span class="Active_dot4"></span> </span> <span contenteditable="false" class="comp_hover" data-content-protect-cover="true" data-origin="10"> <a contenteditable="false" class="ic_prototype ic_prototype_trash" data-content-protect-cover="true" data-component-delete-button="true"></a> </span> </span>
+          
+        
+			</td>
+		</tr><!-- 합계 -->
+        
+      
+		<tr>
+			<td class="thCell dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l" colspan="6" style="text-align: center; width: 721px;">
+				
+          
+  합계(총 소요시간)
+        
+			</td>
+			<td class="tdCell cal_sum_time center dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l">
+				<span unselectable="on" contenteditable="false" class="comp_wrap" data-cid="11" data-dsl="{{text}}" data-wrapper="" style="width: 100%;" data-value="" data-autotype=""><input class="ipt_editor" type="text"><span contenteditable="false" class="comp_active" style="display:none;"> <span class="Active_dot1"></span><span class="Active_dot2"></span> <span class="Active_dot3"></span><span class="Active_dot4"></span> </span> <span contenteditable="false" class="comp_hover" data-content-protect-cover="true" data-origin="11"> <a contenteditable="false" class="ic_prototype ic_prototype_trash" data-content-protect-cover="true" data-component-delete-button="true"></a> </span> </span>
+          
+        
+			</td>
+		</tr>
+	</tbody>
+</table>
+  
+    <!-- ========================= 작성안내 ========================= -->
+    
+  
+<table class="sectionTable" style="width:800px; margin:10px 0 0 0; border-collapse:collapse; font-size:12px; font-family:malgun gothic,dotum,arial,tahoma;">
+	<tbody>
+		<tr>
+			<td class="tdCell dext_table_border_t dext_table_border_r dext_table_border_b dext_table_border_l" style="padding:12px;">
+				<b>작성 안내</b><br>
+            · 본 근무일지는 프로젝트별 업무 투입시간을 기록하여 업무 기여도 및 원가·손익 산정의 기초자료로 활용합니다.<br>
+            · 하루 근무시간을 기준으로 업무 수행 시간대별로 작성하며, 업무가 변경될 때마다 행을 추가하여 시작시간과 종료시간을 입력해 주세요.<br>·&nbsp;업무구분은 <span data-start="604" data-end="619" style="font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; font-size: 9pt;">수주 전 단계는 제안</span>, <span data-start="622" data-end="641" style="font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; font-size: 9pt;">계약 이후 수행 업무는 실행</span>, <span data-start="644" data-end="673" style="font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; font-size: 9pt;">프로젝트 종료 이후 후속 대응 업무는 후속조치</span>로 선택합니다.<br>
+            · 상세내용은 업무시간 동안 실제 수행한 내용을 <span data-start="711" data-end="738" style="font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; font-size: 9pt;">동사·수량 중심으로 1줄로 구체적으로 작성</span>합니다.<br>&nbsp;( 예: 전시 인터랙션 시나리오 장표 3P 정리 및 레퍼런스 10종 첨부 / 동물 사자 모델링 수정 1건 / 현장 프로젝트 장비 12대 및 서버 5대 세팅 후 점검 등 )
+        
+			</td>
+		</tr>
+	</tbody>
+</table>
+  </div><style type="text/css">
+    #divCustomWrapper{ word-break:break-all; }
+    #divCustomWrapper table{ border-collapse:collapse; }
+    #divCustomWrapper .thCell{
+      border:1px solid #000; background:#eee; font-weight:bold;
+      text-align:center; padding:6px 6px; height:28px; font-size:9pt;
+    }
+    #divCustomWrapper .tdCell{
+      border:1px solid #000; background:#fff;
+      padding:6px 6px; height:28px; font-size:9pt; vertical-align:middle;
+    }
+    #divCustomWrapper .center{ text-align:center; }
+    #divCustomWrapper .btnMini{
+      display:inline-block; background:#666; color:#fff; padding:2px 10px;
+      border-radius:3px; font-size:9pt; text-decoration:none;
+    }
+    /* #divCustomWrapper select.editor_slt{
+      width:100%; max-width:100%; box-sizing:border-box;
+    } */
+    #divCustomWrapper input.ipt_editor, #divCustomWrapper input.ipt_editor_num{
+      font-size:9pt;
+    }
+    @media print{
+      .viewModeHiddenPart{ display:none; }
+      #divCustomWrapper{ margin-left:auto !important; margin-right:auto !important; }
+    }
+  </style><p style="font-family: &quot;맑은 고딕&quot;; font-size: 10pt; line-height: 150%; margin-top: 0px; margin-bottom: 0px;"><br></p></span><p style="font-family: &quot;맑은 고딕&quot;; font-size: 10pt; line-height: 150%; margin-top: 0px; margin-bottom: 0px;"><br></p></span><p style="font-family: &quot;맑은 고딕&quot;; font-size: 10pt; line-height: 150%; margin-top: 0px; margin-bottom: 0px;"><br></p></span><p style="font-family: &quot;맑은 고딕&quot;; font-size: 10pt; line-height: 150%; margin-top: 0px; margin-bottom: 0px;"><br></p></span><p style="font-family: &quot;맑은 고딕&quot;; font-size: 10pt; line-height: 150%; margin-top: 0px; margin-bottom: 0px;"><br></p></span><p style="font-family: &quot;맑은 고딕&quot;; font-size: 10pt; line-height: 150%; margin-top: 0px; margin-bottom: 0px;"><br></p></span><p style="font-family: &quot;맑은 고딕&quot;; font-size: 10pt; line-height: 150%; margin-top: 0px; margin-bottom: 0px;"><br></p></span>
