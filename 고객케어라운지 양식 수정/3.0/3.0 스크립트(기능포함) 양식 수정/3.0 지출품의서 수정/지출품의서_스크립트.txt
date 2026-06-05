@@ -1,0 +1,306 @@
+    var Integration = Backbone.View.extend({
+         initialize : function(options) {
+             this.options = options || {};
+             this.docModel = this.options.docModel;
+             this.variables = this.options.variables;
+         },
+
+         render : function() {
+             var self = this;
+             $('.copyRow1').hide();
+
+
+             if (this.docModel.docStatus == 'CREATE' && this.docModel.docType == 'DRAFT') {
+                 self.addRow('.copyRow1', 'copiedRow1', '.copiedRow1', '.rowNo1');
+            
+             }
+
+             if (GO.util.store.get('document.docMode') == 'EDIT') {
+                 self.setEvent();
+             }
+              $('#plus1').on('click', function(){
+                  self.addRow('.copyRow1', 'copiedRow1', '.copiedRow1', '.rowNo1');
+     
+              })
+              
+              $('#minus1').on('click', function(){
+                  self.minusRow('.copiedRow1');
+                  self.calTotalAmount();
+              })
+              			$('.QTY input, .UnitPrice input, .Amount input').on('change',function(){
+				self.calculator($(this).closest('tr'), '.QTY input', '.UnitPrice input', '.Amount input');
+				self.calVAT($(this).closest('tr'));
+				self.calTotalAmount();
+			})
+
+              
+
+         },
+		calculator : function(trEl, inputEl1, inputEl2, resultEl) {
+				var self = this;
+				var value1 = Number($(trEl).find(inputEl1).val().replace(/,/g, ""));
+				var value2 = Number($(trEl).find(inputEl2).val().replace(/,/g, ""));
+				var result = value1 * value2 ;
+				
+				$(trEl).find(resultEl).val(result);	
+			},
+         calVAT : function(trEl) {
+             var self = this;
+             var result = 0;
+             var amount = Number($(trEl).find('.Amount input').val().replace(/,/g, ""));
+             var vat = amount * 0.1;
+             
+             $(trEl).find('.VAT input').val(vat);
+         },
+         
+         calTotalAmount : function() {
+             var self = this;
+                 var TotalAmount = 0;
+                 var TotalVAT = 0;
+                 $('.Amount input').each(function(i,e){
+                     console.log($(e).val().replace(/,/g, ""));
+                     TotalAmount += Number($(e).val().replace(/,/g, ""));
+                 })
+                 
+                 $('.VAT input').each(function(i,e){
+                     TotalVAT += Number($(e).val().replace(/,/g, ""));
+                 })
+                 
+                 var finalAmount = TotalAmount + TotalVAT;
+                 $('.TotalAmount input').val(TotalAmount);
+                 $('.TotalVAT input').val(TotalVAT);
+                 $('.FinalAmount input').val(finalAmount);
+         },
+
+         setEvent : function() {
+             var self = this;
+         },
+
+         renderViewMode : function() {
+             $('.viewModeHiddenPart').hide();
+         },
+
+         onEditDocument : function() {
+             this.render();
+         },
+
+         beforeSave : function() {
+         },
+
+         afterSave : function() {
+         },
+
+         nvlToEmpty : function(v) {
+             if (v) {
+                 return _.isNull(v) ? "" : v;
+             }
+             return "";
+         },
+
+         validate : function() {
+             var self = this;
+             return true;
+         },
+         addRowspan : function(el) {
+             var self = this;
+             var rowspan = parseFloat($(el).attr('rowspan'));
+             $(el).attr('rowspan', rowspan + 1);
+         },
+         
+         minusRowspan : function(el) {
+             var self = this;
+             var rowspan = parseFloat($(el).attr('rowspan'));
+             if(rowspan>2){
+                 $(el).attr('rowspan', rowspan - 1);
+             }
+         },
+         
+         addRow : function(copyRow, copiedRowName, copiedClass, rowNo){
+             var self = this;
+             var $tr = $(copyRow).clone(true);
+             $tr.show();
+             $tr.attr('class', copiedRowName);
+             var $cloneTr = self.getTemplateByClone($tr);
+             
+             if($(copiedClass).length == 0){
+                 $(copyRow+":last").after($cloneTr);
+                 $cloneTr.find(rowNo).text($(copiedClass).length);
+             }
+             $(copiedClass+":last").after($cloneTr);
+             $cloneTr.find(rowNo).text($(copiedClass).length);
+         },
+
+         minusRow : function(e){
+             var self = this;
+             if ($(e).length > 1) {
+                 $(e).last().remove();
+             }
+         },
+
+ /* 행 추가 로직 START */
+         getTemplateByClone : function(template , opt){
+             var self = this;
+             var $tr = $(template).clone(true);
+             if (opt && opt.numbering) {
+                 $tr.find("td").eq(opt.idx).text(opt.val);
+             }
+             $tr.find('input[data-dsl*="cSum"]').each(function(){
+                 self.bindCsumComponent(this);
+             });
+             $tr.find('input[data-dsl*="currency"]').each(function(){
+                 self.bindCurrencyComponent(this);
+             });
+             $tr.find('input[data-dsl*="number"]').each(function(){
+                 self.bindNumberComponent(this);
+             });
+             $tr.find('input[data-dsl*="calendar"]').each(function(i, item){
+                 var uniqueId = _.uniqueId('editorForm_');
+                 $(item).attr({"name": uniqueId, "id": uniqueId});
+                 self.bindCalendarComponent(this);
+             });
+
+             $tr.find('select[data-dsl*="cSel"]').each(function(i, item){
+                 var uniqueId = _.uniqueId('editorForm_');
+                 $(item).attr({"name": uniqueId,"id": uniqueId});
+                 self.bindCselComponent(self);
+             });
+             
+             $tr.find('select[data-dsl*="select"]').each(function(i, item){
+                 var uniqueId = _.uniqueId('editorForm_');
+                 $(item).attr({"name": uniqueId, "id": uniqueId});
+             });            
+             
+             $tr.find('input[data-dsl="{{text}}"]').each(function(i, item){
+                 var uniqueId = _.uniqueId('editorForm_');
+                 $(item).attr({"name": uniqueId, "id": uniqueId})
+             });
+             
+             $tr.find('input[data-dsl="{{textarea}}"]').each(function(i, item){
+                 var uniqueId = _.uniqueId('editorForm_');
+                 $(item).attr({"name": uniqueId, "id": uniqueId})
+             });
+             
+             $tr.find('textarea[data-dsl="{{textarea}}"]').each(function(i, item){
+                 var uniqueId = _.uniqueId('editorForm_');
+                 $(item).attr({"name": uniqueId, "id": uniqueId})
+             });
+             
+             return $tr;
+         },
+         bindCselComponent : function(target){
+             if ($(target).attr('data-selectval')) {
+                 $(target).val($(target).attr('data-selectval'));
+             } else {
+                 $(target).find("option:first").attr("selected", "selected");
+             }
+             $(target).off('change');
+             $(target).on('change',function(){
+                 var selectVal = $(target).find(':selected').val();
+                 $(target).attr('data-selectval',selectVal);
+             });
+         },
+         bindCurrencyComponent : function(target){
+             $(target).removeAttr('inputmask');
+             var dslKey = $(target).attr('data-dsl');
+             var parseKey;
+             dslKey.replace(/{{([^}}]*)}}/g,function(m,key){
+                 parseKey = key;
+             });
+
+             var precision = parseKey.split('_');
+             
+             $(target).inputmask({
+                 'alias': 'decimal',
+                 'groupSeparator': ',', 
+                 'autoGroup': true,
+                 'digits' : parseInt(precision[1] ? precision[1] : '0'),
+                 'allowMinus' : true
+             });
+         },
+
+         bindNumberComponent : function(target){
+             $(target).css('ime-mode', 'disabled');
+             $(target).off('keydown');
+             $(target).on('keydown',function(e){
+                 //Delete, Backspace, Tab, Esc, Enter, decimal point, period, ,
+                  if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190, 188, 189]) !== -1 ||
+                          // Ctrl+A 허용
+                         (e.keyCode == 65 && e.ctrlKey === true) || 
+                          // home, end, left, right 허용
+                         (e.keyCode >= 35 && e.keyCode <= 39)) {
+                              return;
+                  }
+                  
+                  var valid = false; //^[0-9]+$/.test(String.fromCharCode(e.keyCode)); 오른쪽 숫자키가 안됨. String.fromCharCode()로 변경하면서 문제 발생(소문자로 변경됨)
+                  if( ( e.keyCode >=48 && e.keyCode <= 57 ) || ( e.keyCode >=96 && e.keyCode <= 105 ) ){
+                      valid=true;
+                  }else{
+                      e.preventDefault();
+                  }
+                  
+                  if(e.shiftKey && valid){
+                      e.preventDefault();
+                  }
+             });
+         },
+         bindCalendarComponent : function(target){
+             $(target).removeClass('hasDatepicker')
+             $(target).datepicker({
+                 dateFormat : "yy-mm-dd(D)",
+                 changeMonth: true,
+                 changeYear : true,
+                 yearRange : 'c-100:c+10',
+                 yearSuffix: "",
+                 onSelect: function( selectedDate ) {
+                     $(target).trigger('change');
+                 },
+                 beforeShow : function(elplaceholder, object) {
+                     object.dpDiv.attr("data-layer", "");
+                     var isBeforeCallback = true;
+                     $(document).trigger("showLayer.goLayer", isBeforeCallback);
+                 },
+                 onClose : function() {
+                     var isBeforeCallback = true;
+                     $(document).trigger("hideLayer.goLayer", isBeforeCallback);
+                 }
+             });
+         },
+         bindCsumComponent : function(target){
+             $(target).removeAttr('inputmask');
+             var name = $(target).attr('name');
+             var dslKey = $(target).attr('data-dsl');
+             var parseKey;
+             dslKey.replace(/{{([^}}]*)}}/g,function(m,key){
+                 parseKey = key;
+             });
+             var precisionValue = '0'
+             if (parseKey.search('_') >= 0) {
+                 precisionValue = parseKey.split('_')[1].split(':')[0];	
+             }
+             $(target).inputmask({
+                     'alias': 'decimal', 
+                     'groupSeparator': ',', 
+                     'autoGroup': true,
+                     'digits' : parseInt(precisionValue),
+                     'allowMinus' : true
+                 });
+             $(target).off('focusout');
+             $(target).on('focusout',function(){
+                 var sum = 0;
+                 _.each( $('form input[data-dsl*="cSum"][name='+ name +']'), function(item){
+                     var value = $(item).val().replace(/\,/g,"");
+                     var num = parseFloat(value) || 0;
+                     sum += num;
+                 }, this);
+                 sum = parseFloat(sum.toFixed(precisionValue));
+                 $('form input[data-dsl*="rSum"][name='+ name +']').val(GO.util.formatNumber(sum));
+             });
+         },
+         /* 행 추가 로직 END */
+
+         getDocVariables : function() {
+             return _.extend(this.variables, {});
+         }
+     });
+
+     return Integration;
