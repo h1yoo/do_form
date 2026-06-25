@@ -1,3 +1,8 @@
+var $ = require("jquery");
+var app = require("app");
+var Backbone = require("backbone");
+var _ = require('underscore');
+
 /* ------------------------------------------ PlusMinusRow.js 부분 행 추가 삭제 기능 사용 시 수정 금지 ------------------------------------------ */
 /* ------------------------------------------ PlusMinusRow.js Start ------------------------------------------ */
 var PlusMinusRow = function (options) {
@@ -290,44 +295,29 @@ var Integration = Backbone.View.extend({
         copyRowNoClass : "copyRowNo1",
         rowspanClass : "rowspanTd1",
         minusRowCallback : function() {
-          self.calAmount();
+          self.calSumPrice();
         },
         plusRowCallback : function() {}
   		});
        
      
-    $(".QTY input, .UnitPrice input, .Amount input, .VAT input, .TotalAmount input, .TotalVAT input, .FinalAmount input").on("change",function(){
-      self.calAmount();
+    $(".price input").on("change",function(){
+      self.calSumPrice();
     });
 	},
   
-	calAmount : function () {
+	calSumPrice : function () {
 		var self = this;
-		var TotalAmount = 0;
-		var TotalVAT = 0;
+		var total_price = 0;
 
-		$("#dynamic_table1 tr").each(function(i, e){
-       if ($(e).find('.QTY')[0]) {
+    $(".price input").each(function () {
+      var val = parseInt($(this).val().replace(/,/g, ""));
+      if (!isNaN(val)) {
+        total_price += val;
+      }
+    });
 
-        var QTY = parseFloat($(e).find('.QTY input').val().replace(/\,/g,"")); if (isNaN(QTY)) QTY = 0; // 수량
-        var UnitPrice = parseFloat($(e).find('.UnitPrice input').val().replace(/\,/g,"")); if (isNaN(UnitPrice)) UnitPrice = 0; // 단가
-
-        var Amount = QTY * UnitPrice || 0;
-        var VAT = Amount * 0.1 || 0;
-        
-        TotalAmount += parseFloat((Amount).toFixed(2));
-        TotalVAT += parseFloat((VAT).toFixed(2));
-
-        $(e).find(".Amount input").val(GO.util.numberWithCommas(Amount.toFixed(0)));  // 현재 행 합계
-        $(e).find(".VAT input").val(GO.util.numberWithCommas(VAT.toFixed(0)));  // 현재 행 합계
-			}
-		});
-    
-		var FinalAmount = TotalAmount + TotalVAT; if (isNaN(FinalAmount)) FinalAmount = 0;
-
-		$(".TotalAmount input").val(GO.util.numberWithCommas(TotalAmount));
-		$(".TotalVAT input").val(GO.util.numberWithCommas(TotalVAT));
-		$(".FinalAmount input").val(GO.util.numberWithCommas(FinalAmount));
+    $(".total_price").text(GO.util.numberWithCommas(total_price));
   },
 
   _convertCurrencyFormat : function(value) { 	return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");},

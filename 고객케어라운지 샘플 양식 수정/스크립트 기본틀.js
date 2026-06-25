@@ -1,3 +1,8 @@
+var $ = require("jquery");
+var app = require("app");
+var Backbone = require("backbone");
+var _ = require('underscore');
+
 /* ------------------------------------------ PlusMinusRow.js 부분 행 추가 삭제 기능 사용 시 수정 금지 ------------------------------------------ */
 /* ------------------------------------------ PlusMinusRow.js Start ------------------------------------------ */
 var PlusMinusRow = function (options) {
@@ -283,24 +288,26 @@ var Integration = Backbone.View.extend({
 		
 		//행 추가/삭제
 		PlusMinusRow({
-				tableId : "dynamic_table1",
-				plusBtnId : "plus1", 
-				minusBtnId : "minus1",
-				copyRowClass : "copyRow1",
-        copyRowNoClass : "copyRowNo1",
-        rowspanClass : "rowspanTd1",
-        minusRowCallback : function() {
-          self.calAmount();
-        },
-        plusRowCallback : function() {}
-  		});
-       
+      tableId : "dynamic_table1",
+      plusBtnId : "plus1", 
+      minusBtnId : "minus1",
+      copyRowClass : "copyRow1",
+      copyRowNoClass : "copyRowNo1",
+      rowspanClass : "rowspanTd1",
+      minusRowCallback : function() {self.calAmount();},
+      plusRowCallback : function() {}
+    });
      
-    $(".QTY input, .UnitPrice input, .Amount input, .VAT input, .TotalAmount input, .TotalVAT input, .FinalAmount input").on("change",function(){
+    $(".QTY input, .UnitPrice input").on("change",function(){
+      self.calAmount();
+    });
+     
+    $(".Amount input, .VAT input").on("change",function(){
       self.calAmount();
     });
 	},
   
+  // 각 행 계산
 	calAmount : function () {
 		var self = this;
 		var TotalAmount = 0;
@@ -329,8 +336,20 @@ var Integration = Backbone.View.extend({
 		$(".TotalVAT input").val(GO.util.numberWithCommas(TotalVAT));
 		$(".FinalAmount input").val(GO.util.numberWithCommas(FinalAmount));
   },
+	
+  // // 맨 마지막 행 합계 계산
+	// calSumAmount : function (priceEl, sumPriceEl) {
+	// 	var sum_price = 0;
 
-  _convertCurrencyFormat : function(value) { 	return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");},
+  //   $(priceEl).each(function () {
+  //     var val = parseInt($(this).val().replace(/,/g, ""));
+  //     if (!isNaN(val)) {
+  //       sum_price += val;
+  //     }
+  //   });
+
+  //   $(sumPriceEl).text(GO.util.numberWithCommas(sum_price));
+	// },
 
 	renderViewMode : function(){$('.viewModeHiddenPart').hide();},
 	onEditDocument : function(){this.render();},

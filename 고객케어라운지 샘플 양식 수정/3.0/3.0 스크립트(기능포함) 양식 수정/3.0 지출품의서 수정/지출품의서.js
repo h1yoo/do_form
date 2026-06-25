@@ -1,3 +1,8 @@
+var $ = require("jquery");
+var app = require("app");
+var Backbone = require("backbone");
+var _ = require('underscore');
+
 /* ------------------------------------------ PlusMinusRow.js 부분 행 추가 삭제 기능 사용 시 수정 금지 ------------------------------------------ */
 /* ------------------------------------------ PlusMinusRow.js Start ------------------------------------------ */
 var PlusMinusRow = function (options) {

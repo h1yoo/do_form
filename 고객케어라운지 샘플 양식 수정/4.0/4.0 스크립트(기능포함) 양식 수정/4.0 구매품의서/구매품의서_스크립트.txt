@@ -10,7 +10,7 @@ var PlusMinusRow = function (options) {
   // 사용자가 정의할 수 있는 옵션 변수
   var options = {
     tableId: options.tableId,							// 행 추가/삭제 수행 테이블 id (*필수)
-	
+
     plusBtnId: options.plusBtnId,						// 행 추가 버튼 id (*필수)
     minusBtnId: options.minusBtnId,						// 행 삭제 버튼 id (*필수)
 
@@ -19,7 +19,6 @@ var PlusMinusRow = function (options) {
     copyRowNoClass: options.copyRowNoClass,				// 순번(No) 열(td)의 class
     copyRowNoSize: options.copyRowNoSize,				// 순번(No) 증가량 :int
 
-	rowNo: options.rowNo,								// 입력한 행 수만큼 추가
     maxRow: options.maxRow,								// 행 추가 최대 개수 :int
     maxNo: options.maxNo,								// 행 추가 최대 순번(No) :int
 
@@ -49,18 +48,6 @@ var PlusMinusRow = function (options) {
     }
   }
 
-  //입력한 행 수만큼 추가
-  $("." + settings.rowNo).on('change', function () {
-	$("#" + settings.tableId + " .copiedRow").remove();
-	plusCnt=1;
-
-	var row_no = parseInt($("." + settings.rowNo+ " input").val());
-
-	for(var i=0; i<row_no-1; i++){
-		plusRow();
-		plusCnt++;
-	}
-  });
 
   // 행 추가 수행
   $("#" + settings.plusBtnId).on('click', function () {
@@ -83,8 +70,13 @@ var PlusMinusRow = function (options) {
   // 행 삭제 수행
   $("#" + settings.minusBtnId).on('click', minusRow);
 
+
+
   function plusRow() {
     var $tr = $("#" + settings.tableId + " ." + settings.copyRowClass).clone(true); // 추가할 행 복사 (이벤트도)
+    
+    // ※ 자동 계산되는 금액 부분이 input이 아닌 경우 아래 행 추가 (자동 계산 부분 초기화) >> input인 경우 아래 행 삭제 필요 !!
+    $tr.find(".cur").text("");  // 초기 텍스트 제거 >> input인 경우 해당 부분 주석 처리 필요
 
     // ① rowspan 처리 (optional)
     if ($("#" + settings.tableId + " ." + settings.rowspanClass)[0] !== undefined) {
@@ -139,6 +131,8 @@ var PlusMinusRow = function (options) {
       settings.plusRowCallback(this);
     }
   }
+
+
 
   function initComponent($tr, i) {
     var editorFormCnt = 1;		// 각 tr에 존재하는 컴포넌트 name/id 처리시 필요
@@ -238,11 +232,14 @@ var PlusMinusRow = function (options) {
 
       editorFormCnt++;
     });
+
     // TODO : cOrg 초기화
     // TODO : cSum, rSum 초기화
 
     return $tr;
   }
+
+
 
   function minusRow() {
     // 추가된 행(copiedRow)이 존재하면
@@ -270,73 +267,60 @@ var PlusMinusRow = function (options) {
 };
 /* ------------------------------------------ PlusMinusRow.js End ------------------------------------------ */
 
+
 var Integration = Backbone.View.extend({
-	initialize : function(options){
-		this.options = options || {};
-		this.docModel = this.options.docModel;
-		this.variables = this.options.variables;
-		this.infoData = this.options.infoData;
-	},    
-	render : function() {
-		var self = this;
-		$('.viewModeHiddenPart').show();
-		
-		//행 추가/삭제
-		PlusMinusRow({
-				tableId : "dynamic_table1",
-				plusBtnId : "plus1", 
-				minusBtnId : "minus1",
-				copyRowClass : "copyRow1",
-        copyRowNoClass : "copyRowNo1",
-        rowspanClass : "rowspanTd1",
-        minusRowCallback : function() {
-          self.calAmount();
-        },
-        plusRowCallback : function() {}
-  		});
-       
-     
-    $(".QTY input, .UnitPrice input, .Amount input, .VAT input, .TotalAmount input, .TotalVAT input, .FinalAmount input").on("change",function(){
-      self.calAmount();
-    });
-	},
-  
-	calAmount : function () {
-		var self = this;
-		var TotalAmount = 0;
-		var TotalVAT = 0;
+		initialize : function(options){
+			this.options = options || {};
+			this.docModel = this.options.docModel;
+			this.variables = this.options.variables;
+			this.infoData = this.options.infoData;
+		},
 
-		$("#dynamic_table1 tr").each(function(i, e){
-       if ($(e).find('.QTY')[0]) {
-
-        var QTY = parseFloat($(e).find('.QTY input').val().replace(/\,/g,"")); if (isNaN(QTY)) QTY = 0; // 수량
-        var UnitPrice = parseFloat($(e).find('.UnitPrice input').val().replace(/\,/g,"")); if (isNaN(UnitPrice)) UnitPrice = 0; // 단가
-
-        var Amount = QTY * UnitPrice || 0;
-        var VAT = Amount * 0.1 || 0;
-        
-        TotalAmount += parseFloat((Amount).toFixed(2));
-        TotalVAT += parseFloat((VAT).toFixed(2));
-
-        $(e).find(".Amount input").val(GO.util.numberWithCommas(Amount.toFixed(0)));  // 현재 행 합계
-        $(e).find(".VAT input").val(GO.util.numberWithCommas(VAT.toFixed(0)));  // 현재 행 합계
-			}
-		});
+		render : function() {
+			var self = this;
+			$('.viewModeHiddenPart').show();
+			$(".amount input").on("change",function(){self.calAmount();});
+			$(".price input").on("change",function(){self.calAmount();});
+			
+			PlusMinusRow({
+          tableId : "dynamic_table1",
+          plusBtnId : "plus1",
+          minusBtnId : "minus1",
+          copyRowClass : "copyRow1",
+					copyRowNoClass : "copyRowNo1",
+					rowspanClass : "rowspanTr1",
+          minusRowCallback : function() {
+            self.calAmount();
+            },
+          plusRowCallback : function() {}
+			 });
+		},
     
-		var FinalAmount = TotalAmount + TotalVAT; if (isNaN(FinalAmount)) FinalAmount = 0;
+    calAmount : function () {
+      var self = this;
+      var cur = 0;
+      var sum_cur = 0;
 
-		$(".TotalAmount input").val(GO.util.numberWithCommas(TotalAmount));
-		$(".TotalVAT input").val(GO.util.numberWithCommas(TotalVAT));
-		$(".FinalAmount input").val(GO.util.numberWithCommas(FinalAmount));
-  },
-
-  _convertCurrencyFormat : function(value) { 	return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");},
-
-	renderViewMode : function(){$('.viewModeHiddenPart').hide();},
-	onEditDocument : function(){this.render();},
-	beforeSave :function() {$('.viewModeHiddenPart').hide();},
-	afterSave :function() {$('.viewModeHiddenPart').hide();},
-	validate :function() {return true;},
-	getDocVariables : function(){}
-});
-return Integration;
+    //수량, 단가, 금액 -> 합계
+      $("#dynamic_table1 tr").each(function(i, e){
+          if ($(e).find('.amount')[0]) {
+          var amount = parseFloat($(e).find('.amount input').val().replace(/\,/g,""));  if (isNaN(amount)) amount = 0;
+          var price = parseFloat($(e).find('.price input').val().replace(/\,/g,""));  if (isNaN(price)) price = 0;
+          
+          cur = parseFloat((amount * price).toFixed(2));
+          $(e).find(".cur").text(self._convertCurrencyFormat(cur));
+          sum_cur =  parseFloat((sum_cur + cur).toFixed(2));
+        }  
+      });
+      $(".sum_cur").text(self._convertCurrencyFormat(sum_cur));
+    },
+  
+    _convertCurrencyFormat : function(value) { 	return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");},
+				
+		renderViewMode : function(){$('.viewModeHiddenPart').hide();},
+		onEditDocument : function(){this.render();},
+		beforeSave :function() {$('.viewModeHiddenPart').hide();},
+		afterSave :function() {$('.viewModeHiddenPart').hide();},
+		validate :function() {return true;},getDocVariables : function(){}
+	});
+	return Integration;

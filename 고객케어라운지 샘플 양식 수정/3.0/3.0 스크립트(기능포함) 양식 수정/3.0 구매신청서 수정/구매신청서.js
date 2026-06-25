@@ -3,9 +3,8 @@ var app = require("app");
 var Backbone = require("backbone");
 var _ = require('underscore');
 
-
+/* ------------------------------------------ PlusMinusRow.js 부분 행 추가 삭제 기능 사용 시 수정 금지 ------------------------------------------ */
 /* ------------------------------------------ PlusMinusRow.js Start ------------------------------------------ */
-
 var PlusMinusRow = function (options) {
   // 사용자가 정의하지 않은 일부 옵션 변수의 기본값
   var defaults = {
@@ -16,7 +15,7 @@ var PlusMinusRow = function (options) {
   // 사용자가 정의할 수 있는 옵션 변수
   var options = {
     tableId: options.tableId,							// 행 추가/삭제 수행 테이블 id (*필수)
-
+	
     plusBtnId: options.plusBtnId,						// 행 추가 버튼 id (*필수)
     minusBtnId: options.minusBtnId,						// 행 삭제 버튼 id (*필수)
 
@@ -25,6 +24,7 @@ var PlusMinusRow = function (options) {
     copyRowNoClass: options.copyRowNoClass,				// 순번(No) 열(td)의 class
     copyRowNoSize: options.copyRowNoSize,				// 순번(No) 증가량 :int
 
+	  rowNo: options.rowNo,								// 입력한 행 수만큼 추가
     maxRow: options.maxRow,								// 행 추가 최대 개수 :int
     maxNo: options.maxNo,								// 행 추가 최대 순번(No) :int
 
@@ -54,6 +54,18 @@ var PlusMinusRow = function (options) {
     }
   }
 
+  //입력한 행 수만큼 추가
+  $("." + settings.rowNo).on('change', function () {
+	$("#" + settings.tableId + " .copiedRow").remove();
+	plusCnt=1;
+
+	var row_no = parseInt($("." + settings.rowNo+ " input").val());
+
+	for(var i=0; i<row_no-1; i++){
+		plusRow();
+		plusCnt++;
+	}
+  });
 
   // 행 추가 수행
   $("#" + settings.plusBtnId).on('click', function () {
@@ -76,10 +88,11 @@ var PlusMinusRow = function (options) {
   // 행 삭제 수행
   $("#" + settings.minusBtnId).on('click', minusRow);
 
-
-
   function plusRow() {
     var $tr = $("#" + settings.tableId + " ." + settings.copyRowClass).clone(true); // 추가할 행 복사 (이벤트도)
+    
+    // ※ 자동 계산되는 금액 부분이 input이 아닌 경우 아래 행 추가 (자동 계산 부분 초기화) >> input인 경우 아래 행 삭제 필요 !!
+    $tr.find(".cur").text("");  // 초기 텍스트 제거 >> input인 경우 해당 부분 주석 처리 필요
 
     // ① rowspan 처리 (optional)
     if ($("#" + settings.tableId + " ." + settings.rowspanClass)[0] !== undefined) {
@@ -134,8 +147,6 @@ var PlusMinusRow = function (options) {
       settings.plusRowCallback(this);
     }
   }
-
-
 
   function initComponent($tr, i) {
     var editorFormCnt = 1;		// 각 tr에 존재하는 컴포넌트 name/id 처리시 필요
@@ -235,14 +246,11 @@ var PlusMinusRow = function (options) {
 
       editorFormCnt++;
     });
-
     // TODO : cOrg 초기화
     // TODO : cSum, rSum 초기화
 
     return $tr;
   }
-
-
 
   function minusRow() {
     // 추가된 행(copiedRow)이 존재하면
@@ -268,7 +276,7 @@ var PlusMinusRow = function (options) {
     }
   }
 };
-
+/* ------------------------------------------ PlusMinusRow.js End ------------------------------------------ */
 
 var Integration = Backbone.View.extend({
 		initialize : function(options){
@@ -277,51 +285,57 @@ var Integration = Backbone.View.extend({
 			this.variables = this.options.variables;
 			this.infoData = this.options.infoData;
 		},
+
 		render : function() {
 			var self = this;
 			$('.viewModeHiddenPart').show();
-			$(".amount input").on("change",function(){self.calAmount();});
-			$(".price input").on("change",function(){self.calAmount();});
 			
-			PlusMinusRow({
-			        tableId : "dynamic_table",
-			        plusBtnId : "plus",
-			        minusBtnId : "minus",
-			        copyRowClass : "copyRow",
-			        minusRowCallback : function() {self.calAmount();},
-			        plusRowCallback : function() {self.calAmount();}
-			 });
+      //행 추가/삭제
+      PlusMinusRow({
+        tableId : "dynamic_table1",
+        plusBtnId : "plus1", 
+        minusBtnId : "minus1",
+        copyRowClass : "copyRow1",
+        copyRowNoClass : "copyRowNo1",
+        rowspanClass : "rowspanTd1",
+        minusRowCallback : function() {
+          self.calAmount();
+        },
+        plusRowCallback : function() {}
+      });
+       
+			$(".amount input, .price input").on("change",function(){
+        self.calAmount();
+      });
 		},
-	    calAmount : function () {
-	    	var self = this;
-	    	var cur = 0; //금액
-		    var total_amount = 0; 
-		    var total_price = 0; 
-			var total_cur = 0; 
 
-			//수량, 단가, 금액 -> 합계
-	    	$("#dynamic_table tr").each(function(i, e){
-	    		 if ($(e).find('.amount')[0]) {
-	    			var amount = parseFloat($(e).find('.amount input').val().replace(/\,/g,""));
-	    			var price = parseFloat($(e).find('.price input').val().replace(/\,/g,""));
-	    	
-	    			if (isNaN(amount)) amount = 0;
-	    			if (isNaN(price)) price = 0;
-	    			
-	    			cur = parseFloat((amount * price).toFixed(2));
-	    			$(e).find(".cur").text(self._convertCurrencyFormat(cur));
-	    			
-	    			total_amount = parseFloat((total_amount + amount).toFixed(2));
-					total_price = parseFloat((total_price + price).toFixed(2));
-					total_cur = parseFloat((total_cur + cur).toFixed(2));
-	    		}  
-	    	});
-	    	$(".total_amount").text(self._convertCurrencyFormat(total_amount));
-	    	$(".total_price").text(self._convertCurrencyFormat(total_price));
-	    	$(".total_cur").text(self._convertCurrencyFormat(total_cur));
-	    },
-		
-	    _convertCurrencyFormat : function(value) { 	return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");},
+    calAmount : function () {
+      var self = this;
+      var cur = 0; //금액
+      var total_amount = 0; 
+      var total_price = 0; 
+      var total_cur = 0; 
+
+      //수량, 단가, 금액 -> 합계
+      $("#dynamic_table1 tr").each(function(i, e){
+          if ($(e).find('.amount')[0]) {
+          var amount = parseFloat($(e).find('.amount input').val().replace(/\,/g,""));  if (isNaN(amount)) amount = 0;
+          var price = parseFloat($(e).find('.price input').val().replace(/\,/g,""));  if (isNaN(price)) price = 0;
+          
+          cur = parseFloat((amount * price).toFixed(2));
+          $(e).find(".cur").text(self._convertCurrencyFormat(cur));
+          
+          total_amount += parseFloat((amount).toFixed(2));
+          total_price += parseFloat((price).toFixed(2));
+          total_cur += parseFloat((cur).toFixed(2));
+        }  
+      });
+      $(".total_amount").text(self._convertCurrencyFormat(total_amount));
+      $(".total_price").text(self._convertCurrencyFormat(total_price));
+      $(".total_cur").text(self._convertCurrencyFormat(total_cur));
+    },
+  
+    _convertCurrencyFormat : function(value) { 	return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");},
 				
 		renderViewMode : function(){$('.viewModeHiddenPart').hide();},
 		onEditDocument : function(){this.render();},
