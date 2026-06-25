@@ -311,34 +311,20 @@ var Integration = Backbone.View.extend({
 
 	calAmount : function () {
 		var self = this;
-		var TotalAmount = 0;
+		// var TotalAmount = 0;
 
 		$("#dynamic_table1 tr").each(function(i, e){
        if ($(e).find('.Amount')[0]) {
 
         var amount = parseFloat($(e).find('.Amount input').val().replace(/\,/g,"")); if (isNaN(amount)) amount = 0; //수량
 
-        TotalAmount += parseFloat((amount).toFixed(2));
+        // TotalAmount += parseFloat((amount).toFixed(2));
         $(e).find(".TotalAmount input").val(GO.util.numberWithCommas(TotalAmount.toFixed(0)));  // 현재 행 합계
 			}
 		});
-		$(".TotalAmount input").val(GO.util.numberWithCommas(TotalAmount));
+		// $(".TotalAmount input").val(GO.util.numberWithCommas(TotalAmount));
 		
-	  },
-		
-	  // // 맨 마지막 행 합계 계산
-		// calSumAmount : function (priceEl, sumPriceEl) {
-		// 	var sum_price = 0;
-	
-	  //   $(priceEl).each(function () {
-	  //     var val = parseInt($(this).val().replace(/,/g, ""));
-	  //     if (!isNaN(val)) {
-	  //       sum_price += val;
-	  //     }
-	  //   });
-	
-	  //   $(sumPriceEl).text(GO.util.numberWithCommas(sum_price));
-		// },
+  	},
 
 	renderViewMode : function(){$('.viewModeHiddenPart').hide();},
 	onEditDocument : function(){this.render();},
