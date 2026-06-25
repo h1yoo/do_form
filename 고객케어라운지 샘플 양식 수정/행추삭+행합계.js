@@ -5,7 +5,6 @@ var _ = require('underscore');
 
 
 /* ------------------------------------------ PlusMinusRow.js Start ------------------------------------------ */
-
 var PlusMinusRow = function (options) {
   // 사용자가 정의하지 않은 일부 옵션 변수의 기본값
   var defaults = {
@@ -255,7 +254,7 @@ var PlusMinusRow = function (options) {
 
     return $tr;
   }
-
+/* ------------------------------------------ PlusMinusRow.js End ------------------------------------------ */
 
 
   function minusRow() {
@@ -323,9 +322,23 @@ var Integration = Backbone.View.extend({
         $(e).find(".TotalAmount input").val(GO.util.numberWithCommas(TotalAmount.toFixed(0)));  // 현재 행 합계
 			}
 		});
-		// $(".TotalAmount input").val(GO.util.numberWithCommas(TotalAmount));
+		$(".TotalAmount input").val(GO.util.numberWithCommas(TotalAmount));
+		
+	  },
+		
+	  // // 맨 마지막 행 합계 계산
+		// calSumAmount : function (priceEl, sumPriceEl) {
+		// 	var sum_price = 0;
 	
-  },
+	  //   $(priceEl).each(function () {
+	  //     var val = parseInt($(this).val().replace(/,/g, ""));
+	  //     if (!isNaN(val)) {
+	  //       sum_price += val;
+	  //     }
+	  //   });
+	
+	  //   $(sumPriceEl).text(GO.util.numberWithCommas(sum_price));
+		// },
 
 	renderViewMode : function(){$('.viewModeHiddenPart').hide();},
 	onEditDocument : function(){this.render();},
