@@ -311,14 +311,14 @@ var Integration = Backbone.View.extend({
 
 	calAmount : function () {
 		var self = this;
-		// var TotalAmount = 0;
+		var TotalAmount = 0;
 
 		$("#dynamic_table1 tr").each(function(i, e){
        if ($(e).find('.Amount')[0]) {
 
         var amount = parseFloat($(e).find('.Amount input').val().replace(/\,/g,"")); if (isNaN(amount)) amount = 0; //수량
 
-        // TotalAmount += parseFloat((amount).toFixed(2));
+        TotalAmount += parseFloat((amount).toFixed(2));
         $(e).find(".TotalAmount input").val(GO.util.numberWithCommas(TotalAmount.toFixed(0)));  // 현재 행 합계
 			}
 		});
