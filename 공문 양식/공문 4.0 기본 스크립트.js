@@ -43,8 +43,8 @@ var Integration = Backbone.View.extend({
 					html1 += `
 					<div style="display: flex; align-items: center; margin-right: 30px;">
 
-						<div style="width: 100px;"></div>
-						<div style="height: 40px; width: 100px;>
+						<div style="width: 40px;"></div>
+						<div style="height: 40px; width: 160px;">
 							${i5}
 						</div>
 
