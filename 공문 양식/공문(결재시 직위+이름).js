@@ -26,7 +26,7 @@ var Integration = Backbone.View.extend({
 					var date = $(item).find('.sign_date').text();
 					var displayContent = "<div></div>";
 	
-					if (date !== undefined) {	// 결재 완료시에만 표시되도록 제한
+					if (stamp !== undefined) {	// 결재 완료시에만 표시되도록 제한
 						displayContent = `
 								<div style="width: 100px;">
 									${rank}
@@ -39,9 +39,9 @@ var Integration = Backbone.View.extend({
 
 					// 결재자 표시
 					html1 += `
-					<div style="display: flex; align-items: center; padding-top: 20px;">
-              ${displayContent}
-					</div>
+						<div style="display: flex; align-items: center; padding-top: 20px;">
+								${displayContent}
+						</div>
 				 `;
 
 				} /* else {
