@@ -92,7 +92,7 @@ var PlusMinusRow = function (options) {
 
   function plusRow() {
     var $tr = $("#" + settings.tableId + " ." + settings.copyRowClass).clone(true); // 추가할 행 복사 (이벤트도)
-
+    
     // 자동 계산 부분 초기화
     $tr.find(".sub_total").text("");  // 초기 텍스트 제거
 
@@ -126,7 +126,8 @@ var PlusMinusRow = function (options) {
     //     $($tr.find("." + settings.copyRowNoClass)[i]).text("주요출장일정 " + newNo);
     //   }
     // }
-    // // ////////////// 순번처리 코드 수정 > 텍스트 제거 후 추가
+
+    // // 기존순번처리 코드 수정 > 텍스트 제거 후 추가
     if ($("#" + settings.tableId + " ." + settings.copyRowNoClass)[0] !== undefined) {
       var copyRowNoCnt = $tr.find("." + settings.copyRowNoClass).length; // 한 행에 존재하는 순번 클래스의 수
     
@@ -154,8 +155,28 @@ var PlusMinusRow = function (options) {
       $(v).removeClass(settings.copyRowClass);
       $(v).addClass('copiedRow');
 
+      ///////////////////////////////////////////////////
+      ///////// 자식 행 추가 삭제 내용 추가 (START) /////////
+      // 새로 복사된 예산항목 세트 안에 사용자가 추가했던 자식 행들(.childCopiedRow)이 있다면 전부 삭제
+      $(v).find(".childCopiedRow").remove(); 
+
+      // 만약 자식 행 템플릿 자체가 부모 복사본에 딸려왔다면 그것도 정리하고 원본 1개만 유지하도록 처리
+      // (만약 구조상 부모 tr과 자식 tr이 분리되어 있다면 아래와 같이 자식 영역을 초기화)
+      var $childTrs = $(v).find("." + settings.childCopyRowClass);
+      if ($childTrs.length > 1) {
+        $childTrs.not(':first').remove(); // 첫 번째 원본 1개만 남기고 나머지 자식 행은 다 날림
+      }
+
+      // 남아있는 첫 번째 자식 행의 입력값도 깨끗하게 초기화
+      $childTrs.first().find("input").val("");
+      $childTrs.first().find("textarea").val("");
+      $childTrs.first().find(".sub_total").text("");
+      ///////// 자식 행 추가 삭제 내용 추가 (END) /////////
+      /////////////////////////////////////////////////
+
       initComponent($(v), i++);
     });
+    
 
     // ④ 처리 완료된 복사행을 테이블에 추가 (마지막 행으로)
     if ($("#" + settings.tableId + " .copiedRow")[0] === undefined) {
@@ -173,7 +194,7 @@ var PlusMinusRow = function (options) {
 
   ///////////////////////////////////////////////////
   ///////// 자식 행 추가 삭제 내용 추가 (START) /////////
-  // 💡 [자식 행 추가 버튼 이벤트 - 독립 탐색 로직 적용]
+  // [자식 행 추가 버튼 이벤트 - 독립 탐색 로직 적용]
   if (settings.childPlusBtnClass) {
     $(document).off("click", "." + settings.childPlusBtnClass).on("click", "." + settings.childPlusBtnClass, function (e) {
       e.preventDefault();
@@ -182,7 +203,7 @@ var PlusMinusRow = function (options) {
     });
   }
 
-  // 💡 [자식 행 삭제 버튼 이벤트]
+  // [자식 행 삭제 버튼 이벤트]
   if (settings.childMinusBtnClass) {
     $(document).off("click", "." + settings.childMinusBtnClass).on("click", "." + settings.childMinusBtnClass, function (e) {
       e.preventDefault();
@@ -211,8 +232,8 @@ var PlusMinusRow = function (options) {
     var i = $allTrs.length;
     initComponent($newTr, i);
 
-    // 💡 5. [수정 완료] 클릭한 '그 단 하나의 행($tr)' 바로 뒤에만 복사본 추가!
-    $tr.after($newTr); // 👈 $allTrs 대신 $tr 로 변경!
+    // 5. '그 단 하나의 행($tr)' 바로 뒤에만 복사본 추가
+    $tr.after($newTr); // $allTrs 대신 $tr 로 변경
 
     // 6. 금액 계산 콜백 실행
     if (typeof settings.childPlusRowCallback == 'function') {
